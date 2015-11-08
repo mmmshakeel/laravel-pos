@@ -1,6 +1,8 @@
 <!-- resources/views/auth/register.blade.php -->
 @extends('layouts.master')
+
 @section('title', 'Regsiter Staff')
+
 @section('content')
 <div class="block-header">
     <h2>Add New Staff</h2>
@@ -200,56 +202,61 @@
                 </div>
                 <div class="pmbb-body p-l-30">
                     <div class="pmbb-view">
-                        
+                        <dl class="dl-horizontal">
+                            <dt class="p-t-10">Branch</dt>
+                            <dd>
+                            <div class="fg-line">
+                                <select class="selectpicker" name="branch_id">
+                                    <option>Branch 1</option>
+                                    <option>Branch 2</option>
+                                    <option>Branch 3</option>
+                                </select>
+                            </div>
+                            </dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt class="p-t-10">Username</dt>
+                            <dd>
+                            <div class="fg-line">
+                                <input type="text" class="form-control" placeholder="" name="login_name" />
+                            </div>
+                            </dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt class="p-t-10">Password</dt>
+                            <dd>
+                            <div class="fg-line">
+                                <input type="text" class="form-control" placeholder="" name="password" />
+                            </div>
+                            </dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt class="p-t-10">Confirm Password</dt>
+                            <dd>
+                            <div class="fg-line">
+                                <input type="text" class="form-control" placeholder="" name="confirm_password" />
+                            </div>
+                            </dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt class="p-t-10">Admin Access</dt>
+                            <dd>
+                            <div class="col-sm-4 m-b-20 m-t-10">
+                                    <div class="toggle-switch">
+                                        <input id="ts1" type="checkbox" hidden="hidden">
+                                        <label for="ts1" class="ts-helper"></label>
+                                    </div>
+                                </div>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="row">
+                        <button class="btn bgm-teal" type="submit">Save</button>
+                        <button class="btn bgm-gray" type="reset">Reset</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
 </form>
-<!-- <form method="POST" action="/auth/register">
-                                                                {!! csrf_field() !!}
-                                                                <div class="mdl-grid">
-        <style>
-                                                                                                                                            .demo-card-wide.mdl-card {
-                                                                                                                                                width: 512px;
-                                                                                                                                            }
-                                                                                                                                            .demo-card-wide > .mdl-card__title {
-                                                                                                                                            }
-        </style>
-        <div class="mdl-cell mdl-cell--12-col">
-            <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-                <div class="mdl-card__title">
-                    <h2 class="mdl-card__title-text">Staff Details</h2>
-                </div>
-                <div class="mdl-card__supporting-text">
-                    <div class="mdl-textfield mdl-js-textfield">
-                        <input class="mdl-textfield__input" type="text" id="code" name="code">
-                        <label class="mdl-textfield__label" for="code">Code</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div>
-        Name
-        <input type="text" name="name" value="{{ old('name') }}">
-    </div>
-    <div>
-        Email
-        <input type="email" name="email" value="{{ old('email') }}">
-    </div>
-    <div>
-        Password
-        <input type="password" name="password">
-    </div>
-    <div>
-        Confirm Password
-        <input type="password" name="password_confirmation">
-    </div>
-    <div>
-        <button type="submit">Register</button>
-    </div>
-</form> -->
 @endsection

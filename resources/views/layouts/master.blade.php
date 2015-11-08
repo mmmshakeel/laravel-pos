@@ -25,7 +25,8 @@
     </head>
     
     <body>
-       <header id="header">
+        @section('header')
+        <header id="header">
             <ul class="header-inner">
                 <li id="menu-trigger" data-trigger="#sidebar">
                     <div class="line-wrap">
@@ -47,9 +48,6 @@
                             <label for="tw-switch" class="ts-helper"></label>
                         </div>
                     </li>
-                    
-                    
-                    
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="tm-settings" href=""></a>
                         <ul class="dropdown-menu dm-icon pull-right">
@@ -70,11 +68,11 @@
                     
                 </li>
             </ul>
-            
-            
         </header>
-    
+        @show
+
         <section id="main">
+            @section('sidebar')
             <aside id="sidebar">
                 <div class="sidebar-inner c-overflow">
                     <div class="profile-menu">
@@ -84,9 +82,8 @@
                             </div>
 
                             <div class="profile-info">
-                                Malinda Hollaway
-
-                                <i class="zmdi zmdi-arrow-drop-down"></i>
+                                Shakeel Mohamed
+                                <i class="zmdi zmdi-caret-down"></i>
                             </div>
                         </a>
 
@@ -107,89 +104,19 @@
                     </div>
 
                     <ul class="main-menu">
-                        <li><a href="index.html"><i class="zmdi zmdi-home"></i> Home</a></li>
-                        <li><a href="typography.html"><i class="zmdi zmdi zmdi-format-underlined"></i> Typography</a></li>
+                        <li><a href="index.html"><i class="zmdi zmdi-view-dashboard"></i> Dashboard</a></li>
                         <li class="sub-menu">
-                            <a href=""><i class="zmdi zmdi-widgets"></i> Widgets</a>
+                            <a href=""><i class="zmdi zmdi-accounts"></i> Staff</a>
 
                             <ul>
-                                <li><a href="widget-templates.html">Templates</a></li>
-                                <li><a class="active" href="widgets.html">Widgets</a></li>
-                            </ul>
-                        </li>
-                        <li class="sub-menu">
-                            <a href=""><i class="zmdi zmdi-view-list"></i> Tables</a>
-
-                            <ul>
-                                <li><a href="tables.html">Normal Tables</a></li>
-                                <li><a href="data-tables.html">Data Tables</a></li>
-                            </ul>
-                        </li>
-                        <li class="sub-menu">
-                            <a href=""><i class="zmdi zmdi-collection-text"></i> Forms</a>
-
-                            <ul>
-                                <li><a href="form-elements.html">Basic Form Elements</a></li>
-                                <li><a href="form-components.html">Form Components</a></li>
-                                <li><a href="form-examples.html">Form Examples</a></li>
-                                <li><a href="form-validations.html">Form Validation</a></li>
-                            </ul>
-                        </li>
-                        <li class="sub-menu active toggled">
-                            <a href=""><i class="zmdi zmdi-swap-alt"></i>User Interface</a>
-                            <ul>
-                                <li><a href="colors.html">Colors</a></li>
-                                <li><a href="animations.html">Animations</a></li>
-                                <li><a href="box-shadow.html">Box Shadow</a></li>
-                                <li><a href="buttons.html">Buttons</a></li>
-                                <li><a href="icons.html">Icons</a></li>
-                                <li><a class="active" href="alerts.html">Alerts</a></li>
-                                <li><a href="notification-dialog.html">Notifications & Dialogs</a></li>
-                                <li><a href="media.html">Media</a></li>
-                                <li><a href="components.html">Components</a></li>
-                                <li><a href="other-components.html">Others</a></li>
-                            </ul>
-                        </li>
-                        <li class="sub-menu">
-                            <a href=""><i class="zmdi zmdi-trending-up"></i>Charts</a>
-                            <ul>
-                                <li><a href="flot-charts.html">Flot Charts</a></li>
-                                <li><a href="other-charts.html">Other Charts</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="calendar.html"><i class="zmdi zmdi-calendar"></i> Calendar</a></li>
-                        
-                        <li class="sub-menu">
-                            <a href=""><i class="zmdi zmdi-image"></i>Photo Gallery</a>
-                            <ul>
-                                <li><a href="photos.html">Default</a></li>
-                                <li><a href="photo-timeline.html">Timeline</a></li>
-                            </ul>
-                        </li>
-                        
-                        <li><a href="generic-classes.html"><i class="zmdi zmdi-layers"></i> Generic Classes</a></li>
-                        <li class="sub-menu">
-                            <a href=""><i class="zmdi zmdi-collection-item"></i> Sample Pages</a>
-                            <ul>
-                                
-                                <li><a href="profile-about.html">Profile</a></li>
-                                <li><a href="list-view.html">List View</a></li>
-                                <li><a href="messages.html">Messages</a></li>
-                                <li><a href="pricing-table.html">Pricing Table</a></li>
-                                <li><a href="contacts.html">Contacts</a></li>
-                                <li><a href="wall.html">Wall</a></li>
-                                <li><a href="invoice.html">Invoice</a></li>
-                                <li><a href="login.html">Login and Sign Up</a></li>
-                                <li><a href="lockscreen.html">Lockscreen</a></li>
-                                <li><a href="404.html">Error 404</a></li>
-                                
+                                <li><a href="/auth/register">Add New Staff</a></li>
+                                <li><a href="">All Staff</a></li>
                             </ul>
                         </li>
                     </ul>
                 </div>
             </aside>
-            
-            
+            @show
         
         
             <section id="content">
@@ -200,15 +127,7 @@
         </section>
         
         <footer id="footer">
-            Copyright &copy; 2015 Material Admin
             
-            <ul class="f-menu">
-                <li><a href="">Home</a></li>
-                <li><a href="">Dashboard</a></li>
-                <li><a href="">Reports</a></li>
-                <li><a href="">Support</a></li>
-                <li><a href="">Contact</a></li>
-            </ul>
         </footer>
     
         <!-- Older IE warning message -->
@@ -281,6 +200,18 @@
         <script src="/vendors/farbtastic/farbtastic.min.js"></script>
         
         <script src="/js/functions.js"></script>
-        <script src="/js/demo.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#l-login").addClass('hidden');
+                var a = location.pathname.split("/");
+
+                if (a[2] == 'login') {
+                    $('body').addClass('login-content');
+                    $("#l-login").removeClass('hidden');
+                }
+                
+            });
+        </script>
     </body>
 </html>
