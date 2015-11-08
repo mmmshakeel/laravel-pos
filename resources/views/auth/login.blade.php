@@ -1,11 +1,17 @@
 <!-- resources/views/auth/login.blade.php -->
+
 @extends('layouts.master')
+
 @section('title', 'Login')
-@section('header_title', 'Login')
+
+<!-- @section('header_title', 'Login')
+
 @section('bannerbar')
 @overwrite
+
 @section('sidebar')
-@overwrite
+@overwrite -->
+
 @section('content')
 <div class="center-login">
     <div class="center-login-title">
