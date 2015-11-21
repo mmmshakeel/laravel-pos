@@ -11,14 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'Dashboard@index');
 
-
-Route::get('home', function(){
-	echo 'Welcome Home';
-});
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
@@ -26,7 +20,11 @@ Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
 // Registration routes...
-Route::get('auth/register', 'Auth\AuthController@getRegister');
-Route::post('auth/register', 'Auth\AuthController@postRegister');
+// Route::get('auth/register', 'Auth\AuthController@getRegister');
+// Route::post('auth/register', 'Auth\AuthController@postRegister');
+Route::get('staff/create', 'StaffController@create');
+Route::post('staff/store', 'StaffController@store');
+Route::get('staff/show/{id}', 'StaffController@show');
 
 Route::get('dashboard', 'Dashboard@index');
+Route::get('home', 'Dashboard@index');

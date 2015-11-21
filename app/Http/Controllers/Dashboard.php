@@ -8,6 +8,11 @@ use App\Http\Controllers\Controller;
 
 class Dashboard extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +20,7 @@ class Dashboard extends Controller
      */
     public function index()
     {
-        echo 'You are in dashboard';
+        return view('dashboard.dashboard');
     }
 
     /**

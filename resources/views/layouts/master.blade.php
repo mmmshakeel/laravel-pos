@@ -22,6 +22,7 @@
         <!-- CSS -->
         <link href="/css/app.min.1.css" rel="stylesheet">
         <link href="/css/app.min.2.css" rel="stylesheet">
+        <link href="/css/custom-style.css" rel="stylesheet">
     </head>
     
     <body>
@@ -73,49 +74,7 @@
 
         <section id="main">
             @section('sidebar')
-            <aside id="sidebar">
-                <div class="sidebar-inner c-overflow">
-                    <div class="profile-menu">
-                        <a href="">
-                            <div class="profile-pic">
-                                <img src="/img/profile-pics/1.jpg" alt="">
-                            </div>
-
-                            <div class="profile-info">
-                                Shakeel Mohamed
-                                <i class="zmdi zmdi-caret-down"></i>
-                            </div>
-                        </a>
-
-                        <ul class="main-menu">
-                            <li>
-                                <a href="profile-about.html"><i class="zmdi zmdi-account"></i> View Profile</a>
-                            </li>
-                            <li>
-                                <a href=""><i class="zmdi zmdi-input-antenna"></i> Privacy Settings</a>
-                            </li>
-                            <li>
-                                <a href=""><i class="zmdi zmdi-settings"></i> Settings</a>
-                            </li>
-                            <li>
-                                <a href=""><i class="zmdi zmdi-time-restore"></i> Logout</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <ul class="main-menu">
-                        <li><a href="index.html"><i class="zmdi zmdi-view-dashboard"></i> Dashboard</a></li>
-                        <li class="sub-menu">
-                            <a href=""><i class="zmdi zmdi-accounts"></i> Staff</a>
-
-                            <ul>
-                                <li><a href="/auth/register">Add New Staff</a></li>
-                                <li><a href="">All Staff</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </aside>
+                @extends('layouts.mainnav')
             @show
         
         
@@ -182,9 +141,16 @@
         <script src="/vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
         <script src="/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.min.js"></script>
         
+        <script src="/vendors/bower_components/flot/jquery.flot.js"></script>
+        <script src="/vendors/bower_components/flot/jquery.flot.resize.js"></script>
+        <script src="/vendors/bower_components/flot.curvedlines/curvedLines.js"></script>
+        <script src="/vendors/sparklines/jquery.sparkline.min.js"></script>
+        <script src="/vendors/bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
+
         <script src="/vendors/bower_components/moment/min/moment.min.js"></script>
         <script src="/vendors/bower_components/bootstrap-select/dist/js/bootstrap-select.js"></script>
         <script src="/vendors/bower_components/nouislider/distribute/jquery.nouislider.all.min.js"></script>
+        <script src="vendors/bower_components/simpleWeather/jquery.simpleWeather.min.js"></script>
         <script src="/vendors/bower_components/summernote/dist/summernote.min.js"></script>
         <script src="/vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
         <script src="/vendors/bower_components/typeahead.js/dist/typeahead.bundle.min.js"></script>
@@ -199,6 +165,9 @@
         <script src="/vendors/input-mask/input-mask.min.js"></script>
         <script src="/vendors/farbtastic/farbtastic.min.js"></script>
         
+        <script src="/js/flot-charts/curved-line-chart.js"></script>
+        <script src="/js/flot-charts/line-chart.js"></script>
+
         <script src="/js/functions.js"></script>
 
         <script type="text/javascript">
@@ -209,8 +178,10 @@
                 if (a[2] == 'login') {
                     $('body').addClass('login-content');
                     $("#l-login").removeClass('hidden');
+
+                    $('body').removeClass('toggled sw-toggled');
                 }
-                
+
             });
         </script>
     </body>
