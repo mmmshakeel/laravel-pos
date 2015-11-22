@@ -1,26 +1,22 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Countries;
 
-class Dashboard extends Controller
+class BranchController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view('dashboard.dashboard');
+    public function index() {
+
+        $this->middleware('auth');
     }
 
     /**
@@ -28,9 +24,12 @@ class Dashboard extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create() {
+
+        // get all the countries for the countries dropdown
+        $countries = Countries::all();
+
+        return view('branch.addbranch', ['countries' => $countries]);
     }
 
     /**
@@ -39,9 +38,11 @@ class Dashboard extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
+
         //
+
+
     }
 
     /**
@@ -50,9 +51,11 @@ class Dashboard extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
+
         //
+
+
     }
 
     /**
@@ -61,9 +64,11 @@ class Dashboard extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
+
         //
+
+
     }
 
     /**
@@ -73,9 +78,11 @@ class Dashboard extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
+
         //
+
+
     }
 
     /**
@@ -84,8 +91,10 @@ class Dashboard extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
+
         //
+
+
     }
 }

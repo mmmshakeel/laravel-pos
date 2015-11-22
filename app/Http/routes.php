@@ -28,3 +28,7 @@ Route::get('staff/show/{id}', 'StaffController@show');
 
 Route::get('dashboard', 'Dashboard@index');
 Route::get('home', 'Dashboard@index');
+
+// routes for branches
+Route::get('branch/create', 'BranchController@create');
+Route::post('branch/store', 'BranchController@store');

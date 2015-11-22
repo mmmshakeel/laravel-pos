@@ -6,12 +6,14 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Inventory - @yield('title')</title>
-    
+
+        <script src="/vendors/bower_components/jquery/dist/jquery.min.js"></script>
+
         <!-- Vendor CSS -->
         <link href="/vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">
         <link href="/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.css" rel="stylesheet">
         <link href="/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet">
-        
+
         <link href="/vendors/bower_components/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet">
         <link href="/vendors/bower_components/nouislider/distribute/jquery.nouislider.min.css" rel="stylesheet">
         <link href="/vendors/bower_components/summernote/dist/summernote.css" rel="stylesheet">
@@ -24,7 +26,7 @@
         <link href="/css/app.min.2.css" rel="stylesheet">
         <link href="/css/custom-style.css" rel="stylesheet">
     </head>
-    
+
     <body>
         @section('header')
         <header id="header">
@@ -36,11 +38,11 @@
                         <div class="line bottom"></div>
                     </div>
                 </li>
-            
+
                 <li class="logo hidden-xs">
                     <a href="index.html">Inventory Admin</a>
                 </li>
-                
+
                 <li class="pull-right">
                 <ul class="top-menu">
                     <li id="toggle-width">
@@ -66,7 +68,7 @@
                             </li>
                         </ul>
                     </li>
-                    
+
                 </li>
             </ul>
         </header>
@@ -76,19 +78,19 @@
             @section('sidebar')
                 @extends('layouts.mainnav')
             @show
-        
-        
+
+
             <section id="content">
                 <div class="container">
                     @yield('content')
                 </div>
             </section>
         </section>
-        
+
         <footer id="footer">
-            
+
         </footer>
-    
+
         <!-- Older IE warning message -->
         <!--[if lt IE 9]>
             <div class="ie-warning">
@@ -129,18 +131,17 @@
                     </ul>
                 </div>
                 <p>Sorry for the inconvenience!</p>
-            </div>   
+            </div>
         <![endif]-->
 
         <!-- Javascript Libraries -->
-        <script src="/vendors/bower_components/jquery/dist/jquery.min.js"></script>
         <script src="/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        
+
         <script src="/vendors/bower_components/jquery.nicescroll/jquery.nicescroll.min.js"></script>
         <script src="/vendors/bower_components/Waves/dist/waves.min.js"></script>
         <script src="/vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
         <script src="/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.min.js"></script>
-        
+
         <script src="/vendors/bower_components/flot/jquery.flot.js"></script>
         <script src="/vendors/bower_components/flot/jquery.flot.resize.js"></script>
         <script src="/vendors/bower_components/flot.curvedlines/curvedLines.js"></script>
@@ -150,21 +151,21 @@
         <script src="/vendors/bower_components/moment/min/moment.min.js"></script>
         <script src="/vendors/bower_components/bootstrap-select/dist/js/bootstrap-select.js"></script>
         <script src="/vendors/bower_components/nouislider/distribute/jquery.nouislider.all.min.js"></script>
-        <script src="vendors/bower_components/simpleWeather/jquery.simpleWeather.min.js"></script>
+        <script src="/vendors/bower_components/simpleWeather/jquery.simpleWeather.min.js"></script>
         <script src="/vendors/bower_components/summernote/dist/summernote.min.js"></script>
         <script src="/vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
         <script src="/vendors/bower_components/typeahead.js/dist/typeahead.bundle.min.js"></script>
-        
+
         <!-- Placeholder for IE9 -->
         <!--[if IE 9 ]>
             <script src="/vendors/bower_components/jquery-placeholder/jquery.placeholder.min.js"></script>
         <![endif]-->
-        
+
         <script src="/vendors/chosen_v1.4.2/chosen.jquery.min.js"></script>
         <script src="/vendors/fileinput/fileinput.min.js"></script>
         <script src="/vendors/input-mask/input-mask.min.js"></script>
         <script src="/vendors/farbtastic/farbtastic.min.js"></script>
-        
+
         <script src="/js/flot-charts/curved-line-chart.js"></script>
         <script src="/js/flot-charts/line-chart.js"></script>
 
