@@ -22,6 +22,7 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 // Registration routes...
 // Route::get('auth/register', 'Auth\AuthController@getRegister');
 // Route::post('auth/register', 'Auth\AuthController@postRegister');
+
 Route::get('staff/create', 'StaffController@create');
 Route::post('staff/store', 'StaffController@store');
 Route::get('staff/show/{id}', 'StaffController@show');
@@ -30,5 +31,9 @@ Route::get('dashboard', 'Dashboard@index');
 Route::get('home', 'Dashboard@index');
 
 // routes for branches
+Route::get('branch', 'BranchController@index');
 Route::get('branch/create', 'BranchController@create');
 Route::post('branch/store', 'BranchController@store');
+Route::delete('branch/destroy/', 'BranchController@destroy');
+Route::get('branch/edit/{id}', 'BranchController@edit');
+Route::post('branch/update/', 'BranchController@update');

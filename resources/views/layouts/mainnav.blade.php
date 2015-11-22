@@ -39,7 +39,7 @@
                 <a href=""><i class="zmdi zmdi-city-alt"></i> Branches</a>
                 <ul>
                     <li><a class="sub-menu-branches-add" href="/branch/create">Add New Branch</a></li>
-                    <li><a href="">Branch List</a></li>
+                    <li><a class="sub-menu-branches-list" href="/branch">Branch List</a></li>
                 </ul>
             </li>
             <li class="sub-menu">

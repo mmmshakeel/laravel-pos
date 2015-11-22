@@ -39,7 +39,21 @@ class StaffController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        $this->validate($request, ['code' => 'required', 'title' => 'required', 'first_name' => 'required|max:120', 'gender' => 'required', 'email' => 'required|email', 'mobile' => 'required', 'address' => 'required', 'city' => 'required', 'contact_person_title' => 'required', 'scontact_person_first_name' => 'required', 'contact_person_relation' => 'required', 'contact_person_contact_no' => 'required', 'login_name' => 'required|max:100', 'password' => 'required|confirmed|min:6']);
+        $this->validate($request, [
+            'code' => 'required',
+            'title' => 'required',
+            'first_name' => 'required|max:120',
+            'gender' => 'required',
+            'email' => 'required|email',
+            'mobile' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'contact_person_title' => 'required',
+            'scontact_person_first_name' => 'required',
+            'contact_person_relation' => 'required',
+            'contact_person_contact_no' => 'required',
+            'login_name' => 'required|max:100',
+            'password' => 'required|confirmed|min:6']);
 
         try {
             DB::beginTransaction();

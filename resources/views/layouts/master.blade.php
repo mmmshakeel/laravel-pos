@@ -5,6 +5,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
         <title>Inventory - @yield('title')</title>
 
         <script src="/vendors/bower_components/jquery/dist/jquery.min.js"></script>
@@ -76,7 +77,7 @@
 
         <section id="main">
             @section('sidebar')
-                @extends('layouts.mainnav')
+                @include('layouts.mainnav')
             @show
 
 
@@ -165,6 +166,7 @@
         <script src="/vendors/fileinput/fileinput.min.js"></script>
         <script src="/vendors/input-mask/input-mask.min.js"></script>
         <script src="/vendors/farbtastic/farbtastic.min.js"></script>
+        <script src="/vendors/bootgrid/jquery.bootgrid.min.js"></script>
 
         <script src="/js/flot-charts/curved-line-chart.js"></script>
         <script src="/js/flot-charts/line-chart.js"></script>
@@ -183,6 +185,11 @@
                     $('body').removeClass('toggled sw-toggled');
                 }
 
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
             });
         </script>
     </body>
