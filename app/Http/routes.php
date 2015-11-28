@@ -37,3 +37,6 @@ Route::post('branch/store', 'BranchController@store');
 Route::delete('branch/destroy/', 'BranchController@destroy');
 Route::get('branch/edit/{id}', 'BranchController@edit');
 Route::post('branch/update/', 'BranchController@update');
+
+// rotes for supplier
+Route::get('supplier', 'SupplierController@index');
