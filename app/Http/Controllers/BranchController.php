@@ -50,7 +50,7 @@ class BranchController extends Controller
         $this->validate($request, [
             'code' => 'required',
             'description' => 'required',
-            'address' => 'required|max:120',
+            'address' => 'required',
             'city' => 'required',
             'contact_no' => 'required|min:10|max:13']);
 
@@ -116,7 +116,7 @@ class BranchController extends Controller
         $this->validate($request, [
             'code' => 'required',
             'description' => 'required',
-            'address' => 'required|max:120',
+            'address' => 'required',
             'city' => 'required',
             'contact_no' => 'required|min:10|max:13']);
 

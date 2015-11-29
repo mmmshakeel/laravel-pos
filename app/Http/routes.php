@@ -34,9 +34,14 @@ Route::get('home', 'Dashboard@index');
 Route::get('branch', 'BranchController@index');
 Route::get('branch/create', 'BranchController@create');
 Route::post('branch/store', 'BranchController@store');
-Route::delete('branch/destroy/', 'BranchController@destroy');
+Route::delete('branch/destroy', 'BranchController@destroy');
 Route::get('branch/edit/{id}', 'BranchController@edit');
-Route::post('branch/update/', 'BranchController@update');
+Route::post('branch/update', 'BranchController@update');
 
 // rotes for supplier
 Route::get('supplier', 'SupplierController@index');
+Route::get('supplier/create', 'SupplierController@create');
+Route::post('supplier/store', 'SupplierController@store');
+Route::get('supplier/edit/{id}', 'SupplierController@edit');
+Route::post('supplier/update/', 'SupplierController@update');
+Route::delete('supplier/destroy', 'SupplierController@destroy');

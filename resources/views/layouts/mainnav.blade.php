@@ -42,11 +42,11 @@
                     <li><a class="sub-menu-branches-list" href="/branch">Branch List</a></li>
                 </ul>
             </li>
-            <li class="sub-menu">
+            <li class="sub-menu sub-menu-supplier">
                 <a href=""><i class="zmdi zmdi-local-shipping"></i> Suppliers</a>
                 <ul>
-                    <li><a href="">Add New Supplier</a></li>
-                    <li><a href="">Supplier List</a></li>
+                    <li><a class="sub-menu-supplier-add" href="/supplier/create">Add New Supplier</a></li>
+                    <li><a class="sub-menu-supplier-list" href="/supplier">Supplier List</a></li>
                 </ul>
             </li>
 
@@ -56,6 +56,14 @@
                     <li><a href="">Categories</a></li>
                     <li><a href="">Brands</a></li>
                     <li><a href="">Models</a></li>
+                </ul>
+            </li>
+
+            <li class="sub-menu">
+                <a href=""><i class="zmdi zmdi-card-giftcard"></i> Inventory</a>
+                <ul>
+                    <li><a href="">Items</a></li>
+                    <li><a href="">Purchase</a></li>
                 </ul>
             </li>
 

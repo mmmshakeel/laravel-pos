@@ -41,9 +41,9 @@
                             <dd>
                             <div class="fg-line">
                                 <select class="selectpicker" name="title">
-                                    <option>Mr</option>
-                                    <option>Miss</option>
-                                    <option>Mrs</option>
+                                    <option value="Mr">Mr</option>
+                                    <option value="Miss">Miss</option>
+                                    <option value="Mrs">Mrs</option>
                                 </select>
                             </div>
                             </dd>
