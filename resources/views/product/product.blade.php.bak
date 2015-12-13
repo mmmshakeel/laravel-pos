@@ -1,0 +1,65 @@
+<!-- resources/views/branch/addsupplier.blade.php -->
+@extends('layouts.master')
+
+@section('title', 'Inventory')
+
+@section('content')
+<div class="block-header">
+    <h2>Inventory</h2>
+</div>
+
+<div class="card">
+
+    <div class="card-body card-padding">
+
+        <div role="tabpanel">
+            <ul class="tab-nav" role="tablist">
+                <li class="active"><a href="#findproduct" aria-controls="findproduct" role="tab" data-toggle="tab">Find Product</a></li>
+                <li><a href="#categories" aria-controls="categories" role="tab" data-toggle="tab">Categories</a></li>
+                <li><a href="#brands" aria-controls="brands" role="tab" data-toggle="tab">Brands</a></li>
+                <li><a href="#models" aria-controls="models" role="tab" data-toggle="tab">Models</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="findproduct">
+                    @include('product.product-finditem')
+                </div>
+                <div role="tabpanel" class="tab-pane" id="categories">
+                    @include('product.product-categories')
+                </div>
+                <div role="tabpanel" class="tab-pane" id="brands">
+                    @include('product.product-brands')
+                </div>
+                <div role="tabpanel" class="tab-pane" id="models">
+                    @include('product.product-models')
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".data-table-command").bootgrid({
+            css: {
+                icon: 'zmdi icon',
+                iconColumns: 'zmdi-view-module',
+                iconDown: 'zmdi-expand-more',
+                iconRefresh: 'zmdi-refresh',
+                iconUp: 'zmdi-expand-less'
+            },
+            formatters: {
+                "commands": function(column, row) {
+                    return '<a href="branch/edit/' + row.id + '"><button type="button" class="btn btn-icon command-edit m-r-5" data-row-id="' + row.id + '"><span class="zmdi zmdi-edit"></span></button></a>' +
+                        '<form style="display: inline-block" method="POST" action="branch/destroy">{!! csrf_field() !!}{{ method_field("DELETE") }}<input type="hidden" name="id" value="' + row.id + '"><button type="submit" class="btn btn-icon command-delete" data-row-id="' + row.id + '"><span class="zmdi zmdi-delete"></span></button></form>';
+                }
+            }
+        });
+
+        $(".sub-menu-inventory").addClass('active');
+        $(".sub-menu-inventory").addClass('toggled');
+        $(".sub-menu-find-product").addClass('active');
+    });
+</script>
+@endsection

@@ -28,50 +28,34 @@
         </div>
         <ul class="main-menu">
             <li><a href="/dashboard"><i class="zmdi zmdi-view-dashboard"></i> Dashboard</a></li>
-            <li class="sub-menu">
-                <a href=""><i class="zmdi zmdi-accounts"></i> Staff</a>
+            <li class="sub-menu sub-menu-company">
+                <a href=""><i class="zmdi zmdi-accounts"></i> Company</a>
                 <ul>
-                    <li><a href="/staff/create">Add New Staff</a></li>
+                    <li><a class="sub-menu-staff-add" href="/staff/create">Add New Staff</a></li>
                     <li><a href="">All Staff</a></li>
-                </ul>
-            </li>
-            <li class="sub-menu sub-menu-branches">
-                <a href=""><i class="zmdi zmdi-city-alt"></i> Branches</a>
-                <ul>
                     <li><a class="sub-menu-branches-add" href="/branch/create">Add New Branch</a></li>
                     <li><a class="sub-menu-branches-list" href="/branch">Branch List</a></li>
-                </ul>
-            </li>
-            <li class="sub-menu sub-menu-supplier">
-                <a href=""><i class="zmdi zmdi-local-shipping"></i> Suppliers</a>
-                <ul>
                     <li><a class="sub-menu-supplier-add" href="/supplier/create">Add New Supplier</a></li>
                     <li><a class="sub-menu-supplier-list" href="/supplier">Supplier List</a></li>
                 </ul>
             </li>
 
-            <li class="sub-menu">
-                <a href=""><i class="zmdi zmdi-layers"></i> Item Attributes</a>
-                <ul>
-                    <li><a href="">Categories</a></li>
-                    <li><a href="">Brands</a></li>
-                    <li><a href="">Models</a></li>
-                </ul>
-            </li>
-
-            <li class="sub-menu">
+            <li class="sub-menu sub-menu-inventory">
                 <a href=""><i class="zmdi zmdi-card-giftcard"></i> Inventory</a>
                 <ul>
-                    <li><a href="">Items</a></li>
-                    <li><a href="">Purchase</a></li>
+                    <li><a class="sub-menu-find-product" href="/product">Find Product</a></li>
+                    <li><a href="">Add New Product</a></li>
+                    <li><a class="sub-menu-product-category" href="/product/category">Categories</a></li>
+                    <li><a class="sub-menu-product-brand" href="/product/brand">Brands</a></li>
+                    <li><a class="sub-menu-product-model" href="/product/model">Models</a></li>
                 </ul>
             </li>
 
             <li class="sub-menu">
-                <a href=""><i class="zmdi zmdi-card-giftcard"></i> Items</a>
+                <a href=""><i class="zmdi zmdi-card-giftcard"></i> Purchase</a>
                 <ul>
-                    <li><a href="">Add New Item</a></li>
-                    <li><a href="">Find Item</a></li>
+                    <li><a href=""></a></li>
+                    <li><a href=""></a></li>
                 </ul>
             </li>
 

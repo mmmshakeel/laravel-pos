@@ -270,4 +270,11 @@
         </div>
     </div>
 </form>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".sub-menu-company").addClass('active');
+        $(".sub-menu-company").addClass('toggled');
+        $(".sub-menu-staff-add").addClass('active');
+    });
+</script>
 @endsection

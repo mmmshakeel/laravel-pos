@@ -45,3 +45,24 @@ Route::post('supplier/store', 'SupplierController@store');
 Route::get('supplier/edit/{id}', 'SupplierController@edit');
 Route::post('supplier/update/', 'SupplierController@update');
 Route::delete('supplier/destroy', 'SupplierController@destroy');
+
+// routes for items
+Route::get('product', 'ProductController@index');
+
+// routes for product category
+Route::get('product/category', 'CategoryController@index')->name('product_category');
+Route::post('category/store', 'CategoryController@store');
+Route::get('product/category/edit/{id}', 'CategoryController@edit');
+Route::post('category/update', 'CategoryController@update');
+Route::delete('category/destroy', 'CategoryController@destroy');
+
+//  routes for brands
+Route::get('product/brand', 'BrandController@index')->name('product_brand');
+Route::post('brand/store', 'BrandController@store');
+Route::get('product/brand/edit/{id}', 'BrandController@edit');
+Route::post('brand/update', 'BrandController@update');
+Route::delete('brand/destroy', 'BrandController@destroy');
+
+Route::get('product/model', 'ModelController@index');
+
+

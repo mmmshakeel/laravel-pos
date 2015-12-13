@@ -154,7 +154,7 @@ class BranchController extends Controller
 
             $request->session()->flash('success', 'Branch ' . $request->code . ' deleted!');
             return redirect()->action('BranchController@index');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $request->session()->flash('fail', 'An error occured while deleting branch ' . $request->code . '. Please try again!');
             return redirect()->action('BranchController@index');
         }

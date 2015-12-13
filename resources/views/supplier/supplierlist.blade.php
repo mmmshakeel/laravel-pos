@@ -78,8 +78,8 @@
         });
 
         // activate the sidebar menu
-        $(".sub-menu-supplier").addClass('active');
-        $(".sub-menu-supplier").addClass('toggled');
+        $(".sub-menu-company").addClass('active');
+        $(".sub-menu-company").addClass('toggled');
         $(".sub-menu-supplier-list").addClass('active');
     });
 </script>

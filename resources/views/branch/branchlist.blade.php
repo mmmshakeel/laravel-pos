@@ -72,18 +72,9 @@
         });
 
         // activate the sidebar menu
-        $(".sub-menu-branches").addClass('active');
-        $(".sub-menu-branches").addClass('toggled');
+        $(".sub-menu-company").addClass('active');
+        $(".sub-menu-company").addClass('toggled');
         $(".sub-menu-branches-list").addClass('active');
     });
-
-    function deleteBranch(id) {
-        $.post("/branch/destroy", {
-            id: id
-        },
-        function(data) {
-            console.log(data);
-        });
-    }
 </script>
 @endsection

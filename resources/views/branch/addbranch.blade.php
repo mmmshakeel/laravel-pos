@@ -117,8 +117,8 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $(".sub-menu-branches").addClass('active');
-        $(".sub-menu-branches").addClass('toggled');
+        $(".sub-menu-company").addClass('active');
+        $(".sub-menu-company").addClass('toggled');
         $(".sub-menu-branches-add").addClass('active');
     });
 </script>

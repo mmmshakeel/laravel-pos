@@ -5,8 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Category;
+use App\ProductModel;
+use App\Brand;
+use App\Product;
 
-class ItemController extends Controller {
+class ProductController extends Controller {
+
+    public function __construct() {
+        $this->middleware('auth');
+    }
 
     /**
      * Display a listing of the resource.
@@ -14,7 +22,24 @@ class ItemController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return view('item.items');
+        // get product categories
+        $categories = Category::all();
+
+        // get product models
+        $models = ProductModel::all();
+
+        // get product brands
+        $brands = Brand::all();
+
+        // get all products
+        $products = Product::all();
+
+        return view('product.product', [
+            'categories' => $categories,
+            'models' => $models,
+            'brands' => $brands,
+            'products' => $products
+            ]);
     }
 
     /**

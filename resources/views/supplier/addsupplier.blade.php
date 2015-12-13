@@ -165,8 +165,8 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $(".sub-menu-supplier").addClass('active');
-        $(".sub-menu-supplier").addClass('toggled');
+        $(".sub-menu-company").addClass('active');
+        $(".sub-menu-company").addClass('toggled');
         $(".sub-menu-supplier-add").addClass('active');
     });
 </script>
