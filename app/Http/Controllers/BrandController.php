@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Brand;
+use App\Category;
 
 class BrandController extends Controller
 {
@@ -20,8 +21,9 @@ class BrandController extends Controller
      */
     public function index() {
         $brands = Brand::all();
+        $categories = Category::all();
 
-        return view('product.product-brands', ['brands' => $brands]);
+        return view('product.product-brands', ['brands' => $brands, 'categories' => $categories]);
     }
 
     /**
@@ -42,13 +44,16 @@ class BrandController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        $this->validate($request, ['name' => 'required|unique:brand|max:255']);
+        $this->validate($request, [
+            'name' => 'required|unique:brand|max:255',
+            'category_id' => 'required']);
 
         try {
             $brand = new Brand();
 
             $brand->name = $request->name;
             $brand->description = $request->description;
+            $brand->category_id = $request->category_id;
             $brand->save();
 
             $request->session()->flash('success', 'Brand ' . $request->name . ' saved!');
@@ -79,8 +84,9 @@ class BrandController extends Controller
      */
     public function edit($id) {
         $brand = Brand::find($id);
+        $categories = Category::all();
 
-        return view('product.product-brand-edit', ['brand' => $brand]);
+        return view('product.product-brand-edit', ['brand' => $brand, 'categories' => $categories]);
     }
 
     /**
@@ -90,13 +96,16 @@ class BrandController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request) {
-        $this->validate($request, ['name' => 'required|unique:brand,name,'. $request->id .'|max:255']);
+        $this->validate($request, [
+            'name' => 'required|unique:brand,name,'. $request->id .'|max:255',
+            'category_id' => 'required']);
 
         try {
             $brand = Brand::find($request->id);
 
             $brand->name = $request->name;
             $brand->description = $request->description;
+            $brand->category_id = $request->category_id;
             $brand->save();
 
             $request->session()->flash('success', 'Brand ' . $request->name . ' updated!');
@@ -115,12 +124,13 @@ class BrandController extends Controller
      */
     public function destroy(Request $request) {
         try {
+            $brand = Brand::find($request->id);
             Brand::destroy($request->id);
 
-            $request->session()->flash('success', 'Brand ' . $request->name . ' deleted!');
+            $request->session()->flash('success', 'Brand ' . $brand->name . ' deleted!');
             return redirect()->route('product_brand');
         } catch (\Exception $e) {
-            $request->session()->flash('fail', 'An error occured while deleting brand ' . $request->name . '. Please try again!');
+            $request->session()->flash('fail', 'An error occured while deleting brand ' . $brand->name . '. Please try again!');
             return redirect()->route('product_brand');
         }
     }

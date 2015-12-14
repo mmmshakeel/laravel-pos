@@ -45,8 +45,24 @@ class ModelController extends Controller
      */
     public function store(Request $request) {
 
-        //
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            'brand_id' => 'required']);
 
+        try {
+            $product_model = new ProductModel();
+
+            $product_model->name = $request->name;
+            $product_model->description = $request->description;
+            $product_model->brand_id = $request->brand_id;
+            $product_model->save();
+
+            $request->session()->flash('success', 'Model ' . $request->name . ' saved!');
+            return redirect()->route('product_model');
+        } catch (\Exception $e) {
+            $request->session()->flash('fail', 'An error occured while saving model ' . $request->name . '. Please try again!');
+            return back()->withInput();
+        }
     }
 
     /**
@@ -68,33 +84,58 @@ class ModelController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
+        $brands = Brand::all();
+        $model = ProductModel::find($id);
 
-        //
-
+        return view('product.product-model-edit', ['model' => $model, 'brands' => $brands]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
+    public function update(Request $request) {
 
-        //
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            'brand_id' => 'required']);
 
+        try {
+            $product_model = ProductModel::find($request->id);
+
+            $product_model->name = $request->name;
+            $product_model->description = $request->description;
+            $product_model->brand_id = $request->brand_id;
+            $product_model->save();
+
+            $request->session()->flash('success', 'Model ' . $request->name . ' updated!');
+            return redirect()->route('product_model');
+        } catch (\Exception $e) {
+            $request->session()->flash('fail', 'An error occured while updating model ' . $request->name . '. Please try again!');
+            return back()->withInput();
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
+    public function destroy(Request $request) {
 
-        //
+        try {
+            $product_model = ProductModel::find($request->id);
+            ProductModel::destroy($request->id);
+
+            $request->session()->flash('success', 'Model ' . $product_model->name . ' deleted!');
+            return redirect()->route('product_model');
+        } catch (\Exception $e) {
+            $request->session()->flash('fail', 'An error occured while deleting model ' . $product_model->name . '. Please try again!');
+            return redirect()->route('product_model');
+        }
 
     }
 }

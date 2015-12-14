@@ -13,6 +13,10 @@ class Brand extends Model
     protected $dates = ['deleted_at'];
 
     public function models() {
-        return $this->hasMany('App\ProductModel');
+        return $this->hasMany('App\ProductModel', 'brand_id', 'id');
+    }
+
+    public function category() {
+        return $this->belongsTo('App\Category', 'category_id');
     }
 }

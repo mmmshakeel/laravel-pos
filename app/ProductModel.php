@@ -11,4 +11,8 @@ class ProductModel extends Model
 
     protected $table = 'model';
     protected $dates = ['deleted_at'];
+
+    public function brand() {
+        return $this->belongsTo('App\Brand', 'brand_id');
+    }
 }

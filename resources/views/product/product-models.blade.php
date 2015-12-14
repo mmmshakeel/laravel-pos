@@ -15,6 +15,16 @@
 
     <div class="card-body card-padding">
 
+        @if (count($errors) > 0)
+            <div class="alert alert-danger" role="alert">
+                <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+                </ul>
+            </div>
+        @endif
+
         @if(Session::has('success'))
             <div class="alert alert-success" role="alert">
                 {{ Session::get('success') }}
@@ -25,41 +35,48 @@
             </div>
         @endif
 
-        <p class="f-500 m-b-20 c-black">Add New Model: </p>
-        <div class="row">
-            <form>
-                <div class="col-sm-3 m-b-20">
-                    <div class="form-group fg-line">
-                        <label>Name</label>
-                        <input type="text" name="name" class="form-control input-mask" placeholder="Model name...">
+        <form method="POST" action="/model/store">
+        {!! csrf_field() !!}
+            <p class="f-500 m-b-20 c-black">Add New Model: </p>
+            <div class="row">
+                <form>
+                    <div class="col-sm-3 m-b-20">
+                        <div class="form-group fg-line">
+                            <label>Name</label>
+                            <input type="text" name="name" class="form-control input-mask" placeholder="Model name..." value="{{ old('name') }}">
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-sm-3 m-b-20">
-                    <div class="form-group fg-line">
-                        <label>Description</label>
-                        <input type="text" name="description" class="form-control input-mask" placeholder="Model description...">
+                    <div class="col-sm-3 m-b-20">
+                        <div class="form-group fg-line">
+                            <label>Description</label>
+                            <input type="text" name="description" class="form-control input-mask" placeholder="Model description..." value="{{ old('description') }}">
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-sm-3 m-b-20">
-                    <div class="form-group fg-line">
-                        <label>Brand</label>
-                        <select class="selectpicker" name="model" data-live-search="true">
-                            @foreach ($brands as $brand)
-                            <option value="{{ $brand->id }}">{{ $brand->name }}</option>
-                            @endforeach
-                        </select>
+                    <div class="col-sm-3 m-b-20">
+                        <div class="form-group fg-line">
+                            <label>Brand</label>
+                            <select class="selectpicker" name="brand_id" data-live-search="true">
+                                @foreach ($brands as $brand)
+                                <option value="{{ $brand->id }}"
+                                @if ($brand->id == old('brand_id'))
+                                    selected="selected"
+                                @endif
+                                >{{ $brand->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-sm-3 m-b-20">
-                    <div class="form-group fg-line">
-                    <button class="btn bgm-teal m-r-10 m-t-15 waves-effect" type="submit">Save</button>
+                    <div class="col-sm-3 m-b-20">
+                        <div class="form-group fg-line">
+                        <button class="btn bgm-teal m-r-10 m-t-15 waves-effect" type="submit">Save</button>
+                        </div>
                     </div>
-                </div>
-            </form>
-        </div>
+                </form>
+            </div>
+        </form>
 
         <p class="f-500 m-b-20 c-black">List of Models: </p>
 
@@ -70,15 +87,17 @@
                         <th data-column-id="id" data-type="numeric">ID</th>
                         <th data-column-id="code" data-order="desc">Name</th>
                         <th data-column-id="description">Description</th>
+                        <th data-column-id="brand">Brand</th>
                         <th data-column-id="commands" data-formatter="commands" data-sortable="false">Commands</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($brands as $brand)
+                    @foreach ($models as $model)
                         <tr>
-                            <td>{{ $brand->id }}</td>
-                            <td>{{ $brand->name }}</td>
-                            <td>{{ $brand->description }}</td>
+                            <td>{{ $model->id }}</td>
+                            <td>{{ $model->name }}</td>
+                            <td>{{ $model->description }}</td>
+                            <td>{{ $model->brand->name }}</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -98,8 +117,8 @@
             },
             formatters: {
                 "commands": function(column, row) {
-                    return '<a href="branch/edit/' + row.id + '"><button type="button" class="btn btn-icon command-edit m-r-5" data-row-id="' + row.id + '"><span class="zmdi zmdi-edit"></span></button></a>' +
-                        '<form style="display: inline-block" method="POST" action="branch/destroy">{!! csrf_field() !!}{{ method_field("DELETE") }}<input type="hidden" name="id" value="' + row.id + '"><button type="submit" class="btn btn-icon command-delete" data-row-id="' + row.id + '"><span class="zmdi zmdi-delete"></span></button></form>';
+                    return '<a href="/product/model/edit/' + row.id + '"><button type="button" class="btn btn-icon command-edit m-r-5" data-row-id="' + row.id + '"><span class="zmdi zmdi-edit"></span></button></a>' +
+                        '<form style="display: inline-block" method="POST" action="/model/destroy">{!! csrf_field() !!}{{ method_field("DELETE") }}<input type="hidden" name="id" value="' + row.id + '"><button type="submit" class="btn btn-icon command-delete" data-row-id="' + row.id + '"><span class="zmdi zmdi-delete"></span></button></form>';
                 }
             }
         });

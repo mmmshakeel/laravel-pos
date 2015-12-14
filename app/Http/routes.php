@@ -63,6 +63,9 @@ Route::get('product/brand/edit/{id}', 'BrandController@edit');
 Route::post('brand/update', 'BrandController@update');
 Route::delete('brand/destroy', 'BrandController@destroy');
 
-Route::get('product/model', 'ModelController@index');
-
-
+// routes for models
+Route::get('product/model', 'ModelController@index')->name('product_model');
+Route::post('model/store', 'ModelController@store');
+Route::post('model/update', 'ModelController@update');
+Route::get('product/model/edit/{id}', 'ModelController@edit');
+Route::delete('model/destroy', 'ModelController@destroy');

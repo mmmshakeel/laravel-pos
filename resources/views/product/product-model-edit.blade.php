@@ -1,7 +1,7 @@
-<!-- resources/views/product/product-brand-edit.blade.php -->
+<!-- resources/views/product/product-model-edit.blade.php -->
 @extends('layouts.master')
 
-@section('title', 'Product Brand')
+@section('title', 'Product Model')
 
 @section('content')
 <div class="block-header">
@@ -10,7 +10,7 @@
 
 <div class="card" id="profile-main">
     <div class="card-header">
-        <h2>Edit Brand</h2>
+        <h2>Edit Model</h2>
     </div>
 
     <div class="card-body card-padding">
@@ -35,11 +35,11 @@
             </div>
         @endif
 
-        <form method="POST" action="/brand/update">
+        <form method="POST" action="/model/update">
         {!! csrf_field() !!}
             <div class="pmb-block">
                 <div class="pmbb-header">
-                    <h2><i class="zmdi zmdi-city-alt m-r-5"></i> Edit Brand Details - {{ $brand->name }}</h2>
+                    <h2><i class="zmdi zmdi-city-alt m-r-5"></i> Edit Model Details - {{ $model->name }}</h2>
                 </div>
                 <div class="pmbb-body p-l-30">
                     <div class="pmbb-view">
@@ -47,7 +47,7 @@
                             <dt class="p-t-10">Name</dt>
                             <dd>
                             <div class="fg-line">
-                                <input type="text" class="form-control" placeholder="" name="name" value="{{ $brand->name }}" />
+                                <input type="text" class="form-control" placeholder="" name="name" value="{{ $model->name }}" />
                             </div>
                             </dd>
                         </dl>
@@ -55,29 +55,29 @@
                             <dt class="p-t-10">Description</dt>
                             <dd>
                             <div class="fg-line">
-                                <input type="text" class="form-control" placeholder="" name="description" value="{{ $brand->description }}" />
+                                <input type="text" class="form-control" placeholder="" name="description" value="{{ $model->description }}" />
                             </div>
                             </dd>
                         </dl>
                         <dl class="dl-horizontal">
-                            <dt class="p-t-10">Category</dt>
+                            <dt class="p-t-10">Brand</dt>
                             <dd>
                             <div class="fg-line">
-                                <select class="selectpicker" name="category_id" data-live-search="true">
-                                    @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}"
-                                    @if ($category->id == $brand->category_id)
-                                        selected="selected"
-                                    @endif
-                                    >{{ $category->name }}</option>
-                                    @endforeach
-                                </select>
+                                <select class="selectpicker" name="brand_id" data-live-search="true">
+                                @foreach ($brands as $brand)
+                                <option value="{{ $brand->id }}"
+                                @if ($brand->id == $model->brand_id)
+                                    selected="selected"
+                                @endif
+                                >{{ $brand->name }}</option>
+                                @endforeach
+                            </select>
                             </div>
                             </dd>
                         </dl>
                     </div>
                     <div class="row pull-right">
-                        <input type="hidden" name="id" value="{{ $brand->id }}">
+                        <input type="hidden" name="id" value="{{ $model->id }}">
                         <button class="btn bgm-teal m-r-10" type="submit">Update</button>
                         <button class="btn bgm-gray" type="reset">Reset</button>
                     </div>
@@ -90,7 +90,7 @@
     $(document).ready(function() {
         $(".sub-menu-inventory").addClass('active');
         $(".sub-menu-inventory").addClass('toggled');
-        $(".sub-menu-product-brand").addClass('active');
+        $(".sub-menu-product-model").addClass('active');
     });
 </script>
 @endsection

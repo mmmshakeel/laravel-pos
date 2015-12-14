@@ -15,6 +15,16 @@
 
     <div class="card-body card-padding">
 
+        @if (count($errors) > 0)
+            <div class="alert alert-danger" role="alert">
+                <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+                </ul>
+            </div>
+        @endif
+
         @if(Session::has('success'))
             <div class="alert alert-success" role="alert">
                 {{ Session::get('success') }}
@@ -32,14 +42,29 @@
                 <div class="col-sm-3 m-b-20">
                     <div class="form-group fg-line">
                         <label>Name</label>
-                        <input type="text" name="name" class="form-control input-mask" placeholder="Brand name...">
+                        <input type="text" name="name" class="form-control input-mask" placeholder="Brand name..." value="{{ old('name') }}">
                     </div>
                 </div>
 
                 <div class="col-sm-3 m-b-20">
                     <div class="form-group fg-line">
                         <label>Description</label>
-                        <input type="text" name="description" class="form-control input-mask" placeholder="Brand description...">
+                        <input type="text" name="description" class="form-control input-mask" placeholder="Brand description..." value="{{ old('description') }}">
+                    </div>
+                </div>
+
+                <div class="col-sm-3 m-b-20">
+                    <div class="form-group fg-line">
+                        <label>Category</label>
+                        <select class="selectpicker" name="category_id" data-live-search="true">
+                            @foreach ($categories as $category)
+                            <option value="{{ $category->id }}"
+                            @if ($category->id == old('category_id'))
+                                selected="selected"
+                            @endif
+                            >{{ $category->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
 
@@ -60,6 +85,7 @@
                         <th data-column-id="id" data-type="numeric">ID</th>
                         <th data-column-id="code" data-order="desc">Name</th>
                         <th data-column-id="description">Description</th>
+                        <th data-column-id="category">Category</th>
                         <th data-column-id="commands" data-formatter="commands" data-sortable="false">Commands</th>
                     </tr>
                 </thead>
@@ -69,6 +95,7 @@
                             <td>{{ $brand->id }}</td>
                             <td>{{ $brand->name }}</td>
                             <td>{{ $brand->description }}</td>
+                            <td>{{ $brand->category->name }}</td>
                         </tr>
                     @endforeach
                 </tbody>
