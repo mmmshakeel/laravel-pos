@@ -5,13 +5,10 @@
 
 @section('content')
 <div class="block-header">
-    <h2>Inventory</h2>
+    <h2>Product Model</h2>
 </div>
 
 <div class="card" id="profile-main">
-    <div class="card-header">
-        <h2>Product Model</h2>
-    </div>
 
     <div class="card-body card-padding">
 
@@ -42,8 +39,8 @@
                 <form>
                     <div class="col-sm-3 m-b-20">
                         <div class="form-group fg-line">
-                            <label>Name</label>
-                            <input type="text" name="name" class="form-control input-mask" placeholder="Model name..." value="{{ old('name') }}">
+                            <label>Code</label>
+                            <input type="text" name="name" class="form-control input-mask" placeholder="Model code..." value="{{ old('name') }}">
                         </div>
                     </div>
 
@@ -85,7 +82,7 @@
                 <thead>
                     <tr>
                         <th data-column-id="id" data-type="numeric">ID</th>
-                        <th data-column-id="code" data-order="desc">Name</th>
+                        <th data-column-id="code" data-order="desc">Code</th>
                         <th data-column-id="description">Description</th>
                         <th data-column-id="brand">Brand</th>
                         <th data-column-id="commands" data-formatter="commands" data-sortable="false">Commands</th>

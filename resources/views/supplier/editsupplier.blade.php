@@ -1,11 +1,11 @@
 <!-- resources/views/branch/editsupplier.blade.php -->
 @extends('layouts.master')
 
-@section('title', 'Edit Supplier')
+@section('title', 'Edit Vendor')
 
 @section('content')
 <div class="block-header">
-    <h2>Edit Supplier Details - {{ $supplier->code }}</h2>
+    <h2>Edit Vendor Details - {{ $supplier->code }}</h2>
 </div>
 
 <form method="POST" action="/supplier/update">
@@ -25,7 +25,7 @@
 
             <div class="pmb-block">
                 <div class="pmbb-header">
-                    <h2><i class="zmdi zmdi-city-alt m-r-5"></i>Supplier Details</h2>
+                    <h2><i class="zmdi zmdi-city-alt m-r-5"></i>Vendor Details</h2>
                 </div>
                 <div class="pmbb-body p-l-30">
                     <div class="pmbb-view">
@@ -156,8 +156,8 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $(".sub-menu-company").addClass('active');
-        $(".sub-menu-company").addClass('toggled');
+        $(".sub-menu-purchase").addClass('active');
+        $(".sub-menu-purchase").addClass('toggled');
     });
 </script>
 @endsection

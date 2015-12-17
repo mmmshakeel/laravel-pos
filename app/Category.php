@@ -11,7 +11,5 @@ class Category extends Model {
     protected $table = 'category';
     protected $dates = ['deleted_at'];
 
-    public function brands() {
-        return $this->hasMany('App\Brand', 'category_id', 'id');
-    }
+
 }

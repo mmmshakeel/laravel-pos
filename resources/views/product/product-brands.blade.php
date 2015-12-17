@@ -5,13 +5,10 @@
 
 @section('content')
 <div class="block-header">
-    <h2>Inventory</h2>
+    <h2>Product Brand</h2>
 </div>
 
 <div class="card" id="profile-main">
-    <div class="card-header">
-        <h2>Product Brand</h2>
-    </div>
 
     <div class="card-body card-padding">
 
@@ -41,8 +38,8 @@
             {!! csrf_field() !!}
                 <div class="col-sm-3 m-b-20">
                     <div class="form-group fg-line">
-                        <label>Name</label>
-                        <input type="text" name="name" class="form-control input-mask" placeholder="Brand name..." value="{{ old('name') }}">
+                        <label>Code</label>
+                        <input type="text" name="name" class="form-control input-mask" placeholder="Brand code..." value="{{ old('name') }}">
                     </div>
                 </div>
 
@@ -50,21 +47,6 @@
                     <div class="form-group fg-line">
                         <label>Description</label>
                         <input type="text" name="description" class="form-control input-mask" placeholder="Brand description..." value="{{ old('description') }}">
-                    </div>
-                </div>
-
-                <div class="col-sm-3 m-b-20">
-                    <div class="form-group fg-line">
-                        <label>Category</label>
-                        <select class="selectpicker" name="category_id" data-live-search="true">
-                            @foreach ($categories as $category)
-                            <option value="{{ $category->id }}"
-                            @if ($category->id == old('category_id'))
-                                selected="selected"
-                            @endif
-                            >{{ $category->name }}</option>
-                            @endforeach
-                        </select>
                     </div>
                 </div>
 
@@ -83,9 +65,8 @@
                 <thead>
                     <tr>
                         <th data-column-id="id" data-type="numeric">ID</th>
-                        <th data-column-id="code" data-order="desc">Name</th>
+                        <th data-column-id="code" data-order="desc">Code</th>
                         <th data-column-id="description">Description</th>
-                        <th data-column-id="category">Category</th>
                         <th data-column-id="commands" data-formatter="commands" data-sortable="false">Commands</th>
                     </tr>
                 </thead>
@@ -95,7 +76,6 @@
                             <td>{{ $brand->id }}</td>
                             <td>{{ $brand->name }}</td>
                             <td>{{ $brand->description }}</td>
-                            <td>{{ $brand->category->name }}</td>
                         </tr>
                     @endforeach
                 </tbody>

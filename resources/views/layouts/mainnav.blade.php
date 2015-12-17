@@ -35,8 +35,6 @@
                     <li><a href="">All Staff</a></li>
                     <li><a class="sub-menu-branches-add" href="/branch/create">Add New Branch</a></li>
                     <li><a class="sub-menu-branches-list" href="/branch">Branch List</a></li>
-                    <li><a class="sub-menu-supplier-add" href="/supplier/create">Add New Supplier</a></li>
-                    <li><a class="sub-menu-supplier-list" href="/supplier">Supplier List</a></li>
                 </ul>
             </li>
 
@@ -51,11 +49,11 @@
                 </ul>
             </li>
 
-            <li class="sub-menu">
+            <li class="sub-menu sub-menu-purchase">
                 <a href=""><i class="zmdi zmdi-card-giftcard"></i> Purchase</a>
                 <ul>
-                    <li><a href=""></a></li>
-                    <li><a href=""></a></li>
+                    <li><a class="sub-menu-supplier-add" href="/supplier/create">Add New Vendor</a></li>
+                    <li><a class="sub-menu-supplier-list" href="/supplier">Vendor List</a></li>
                 </ul>
             </li>
 

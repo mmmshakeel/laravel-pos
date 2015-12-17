@@ -5,13 +5,10 @@
 
 @section('content')
 <div class="block-header">
-    <h2>Inventory</h2>
+    <h2>Edit Brand</h2>
 </div>
 
 <div class="card" id="profile-main">
-    <div class="card-header">
-        <h2>Edit Brand</h2>
-    </div>
 
     <div class="card-body card-padding">
 
@@ -44,7 +41,7 @@
                 <div class="pmbb-body p-l-30">
                     <div class="pmbb-view">
                         <dl class="dl-horizontal">
-                            <dt class="p-t-10">Name</dt>
+                            <dt class="p-t-10">Code</dt>
                             <dd>
                             <div class="fg-line">
                                 <input type="text" class="form-control" placeholder="" name="name" value="{{ $brand->name }}" />
@@ -56,22 +53,6 @@
                             <dd>
                             <div class="fg-line">
                                 <input type="text" class="form-control" placeholder="" name="description" value="{{ $brand->description }}" />
-                            </div>
-                            </dd>
-                        </dl>
-                        <dl class="dl-horizontal">
-                            <dt class="p-t-10">Category</dt>
-                            <dd>
-                            <div class="fg-line">
-                                <select class="selectpicker" name="category_id" data-live-search="true">
-                                    @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}"
-                                    @if ($category->id == $brand->category_id)
-                                        selected="selected"
-                                    @endif
-                                    >{{ $category->name }}</option>
-                                    @endforeach
-                                </select>
                             </div>
                             </dd>
                         </dl>

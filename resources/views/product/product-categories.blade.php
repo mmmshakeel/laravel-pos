@@ -5,13 +5,10 @@
 
 @section('content')
 <div class="block-header">
-    <h2>Inventory</h2>
+    <h2>Product Category</h2>
 </div>
 
 <div class="card" id="profile-main">
-    <div class="card-header">
-        <h2>Product Category</h2>
-    </div>
 
     <div class="card-body card-padding">
 

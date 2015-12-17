@@ -5,7 +5,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Brand;
-use App\Category;
 
 class BrandController extends Controller
 {
@@ -21,9 +20,8 @@ class BrandController extends Controller
      */
     public function index() {
         $brands = Brand::all();
-        $categories = Category::all();
 
-        return view('product.product-brands', ['brands' => $brands, 'categories' => $categories]);
+        return view('product.product-brands', ['brands' => $brands]);
     }
 
     /**
@@ -45,15 +43,13 @@ class BrandController extends Controller
      */
     public function store(Request $request) {
         $this->validate($request, [
-            'name' => 'required|unique:brand|max:255',
-            'category_id' => 'required']);
+            'name' => 'required|unique:brand|max:255']);
 
         try {
             $brand = new Brand();
 
             $brand->name = $request->name;
             $brand->description = $request->description;
-            $brand->category_id = $request->category_id;
             $brand->save();
 
             $request->session()->flash('success', 'Brand ' . $request->name . ' saved!');
@@ -84,9 +80,8 @@ class BrandController extends Controller
      */
     public function edit($id) {
         $brand = Brand::find($id);
-        $categories = Category::all();
 
-        return view('product.product-brand-edit', ['brand' => $brand, 'categories' => $categories]);
+        return view('product.product-brand-edit', ['brand' => $brand]);
     }
 
     /**
@@ -97,15 +92,13 @@ class BrandController extends Controller
      */
     public function update(Request $request) {
         $this->validate($request, [
-            'name' => 'required|unique:brand,name,'. $request->id .'|max:255',
-            'category_id' => 'required']);
+            'name' => 'required|unique:brand,name,'. $request->id .'|max:255']);
 
         try {
             $brand = Brand::find($request->id);
 
             $brand->name = $request->name;
             $brand->description = $request->description;
-            $brand->category_id = $request->category_id;
             $brand->save();
 
             $request->session()->flash('success', 'Brand ' . $request->name . ' updated!');

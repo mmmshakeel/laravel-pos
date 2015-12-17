@@ -1,15 +1,15 @@
 <!-- resources/views/branch/supplierlist.blade.php -->
 @extends('layouts.master')
 
-@section('title', 'Suppliers')
+@section('title', 'Vendor')
 
 @section('content')
 <div class="block-header">
-    <h2>Branches</h2>
+    <h2>Vendor</h2>
 </div>
 <div class="card">
     <div class="card-header">
-        <h2>List of All Suppliers</h2>
+        <h2>List of All Vendors</h2>
     </div>
 
     <div class="card-body card-padding">
@@ -78,8 +78,8 @@
         });
 
         // activate the sidebar menu
-        $(".sub-menu-company").addClass('active');
-        $(".sub-menu-company").addClass('toggled');
+        $(".sub-menu-purchase").addClass('active');
+        $(".sub-menu-purchase").addClass('toggled');
         $(".sub-menu-supplier-list").addClass('active');
     });
 </script>

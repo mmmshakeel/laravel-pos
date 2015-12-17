@@ -1,11 +1,11 @@
 <!-- resources/views/branch/addsupplier.blade.php -->
 @extends('layouts.master')
 
-@section('title', 'Add Supplier')
+@section('title', 'Add Vendor')
 
 @section('content')
 <div class="block-header">
-    <h2>Add New Supplier</h2>
+    <h2>Add New Vendor</h2>
 </div>
 
 <form method="POST" action="/supplier/store">
@@ -35,7 +35,7 @@
 
             <div class="pmb-block">
                 <div class="pmbb-header">
-                    <h2><i class="zmdi zmdi-city-alt m-r-5"></i> Supplier Details</h2>
+                    <h2><i class="zmdi zmdi-city-alt m-r-5"></i> Vendor Details</h2>
                 </div>
                 <div class="pmbb-body p-l-30">
                     <div class="pmbb-view">
@@ -165,8 +165,8 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $(".sub-menu-company").addClass('active');
-        $(".sub-menu-company").addClass('toggled');
+        $(".sub-menu-purchase").addClass('active');
+        $(".sub-menu-purchase").addClass('toggled');
         $(".sub-menu-supplier-add").addClass('active');
     });
 </script>
