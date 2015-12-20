@@ -9,6 +9,8 @@ use App\Category;
 use App\ProductModel;
 use App\Brand;
 use App\Product;
+use App\Branch;
+use App\ProductType;
 
 class ProductController extends Controller {
 
@@ -48,7 +50,21 @@ class ProductController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        //
+        $branches = Branch::all();
+        $categories = Category::all();
+        $models = ProductModel::all();
+        $brands = Brand::all();
+        $product_types = ProductType::all();
+
+        $params = [
+            'branches' => $branches,
+            'categories' => $categories,
+            'models' => $models,
+            'brands' => $brands,
+            'product_types' => $product_types
+        ];
+
+        return view('product.product-addproduct', $params);
     }
 
     /**
@@ -58,7 +74,17 @@ class ProductController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        //
+        $this->validate($request, [
+            'code' => 'required|unique:product',
+            'branch_id' => 'required',
+            'category_id' => 'required',
+            'brand_id' => 'required',
+            'model_id' => 'required',
+            'cost' => 'required',
+            'price_level1' => 'required',
+            'product_type_id' => 'required',
+            'active_status' => 'required',
+            ]);
     }
 
     /**

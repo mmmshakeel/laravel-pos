@@ -42,7 +42,7 @@
                 <a href=""><i class="zmdi zmdi-card-giftcard"></i> Inventory</a>
                 <ul>
                     <li><a class="sub-menu-find-product" href="/product">Find Product</a></li>
-                    <li><a href="">Add New Product</a></li>
+                    <li><a class="sub-menu-product-addproduct" href="/product/create">Add New Product</a></li>
                     <li><a class="sub-menu-product-category" href="/product/category">Categories</a></li>
                     <li><a class="sub-menu-product-brand" href="/product/brand">Brands</a></li>
                     <li><a class="sub-menu-product-model" href="/product/model">Models</a></li>

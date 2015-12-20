@@ -46,8 +46,10 @@ Route::get('supplier/edit/{id}', 'SupplierController@edit');
 Route::post('supplier/update/', 'SupplierController@update');
 Route::delete('supplier/destroy', 'SupplierController@destroy');
 
-// routes for items
+// routes for products
 Route::get('product', 'ProductController@index');
+Route::get('product/create', 'ProductController@create');
+Route::post('product/store', 'ProductController@store');
 
 // routes for product category
 Route::get('product/category', 'CategoryController@index')->name('product_category');
