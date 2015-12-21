@@ -123,28 +123,28 @@
                 <div class="col-sm-3 m-b-20">
                     <div class="form-group fg-line">
                         <label>Cost <sup class="req-star">*</sup></label>
-                        <input type="text" name="cost" class="form-control input-mask" data-mask="00.00" placeholder="eg. 00.00" value="{{ old('code') }}">
+                        <input type="text" name="cost" class="form-control input-mask" placeholder="eg. 00.00" value="{{ old('cost') }}">
                     </div>
                 </div>
 
                 <div class="col-sm-3 m-b-20">
                     <div class="form-group fg-line">
                         <label>Price Level 1 <sup class="req-star">*</sup></label>
-                        <input type="text" name="price_level1" class="form-control input-mask" data-mask="00.00" placeholder="eg. 00.00" value="{{ old('price_level1') }}">
+                        <input type="text" name="price_level1" class="form-control input-mask" placeholder="eg. 00.00" value="{{ old('price_level1') }}">
                     </div>
                 </div>
 
                 <div class="col-sm-3 m-b-20">
                     <div class="form-group fg-line">
                         <label>Price Level 2</label>
-                        <input type="text" name="price_level2" class="form-control input-mask" data-mask="00.00" placeholder="eg. 00.00" value="{{ old('price_level2') }}">
+                        <input type="text" name="price_level2" class="form-control input-mask" placeholder="eg. 00.00" value="{{ old('price_level2') }}">
                     </div>
                 </div>
 
                 <div class="col-sm-3 m-b-20">
                     <div class="form-group fg-line">
                         <label>Price Level 3</label>
-                        <input type="text" name="price_level3" class="form-control input-mask" data-mask="00.00" placeholder="eg. 00.00" value="{{ old('price_level3') }}">
+                        <input type="text" name="price_level3" class="form-control input-mask" placeholder="eg. 00.00" value="{{ old('price_level3') }}">
                     </div>
                 </div>
             </div>

@@ -47,7 +47,7 @@ Route::post('supplier/update/', 'SupplierController@update');
 Route::delete('supplier/destroy', 'SupplierController@destroy');
 
 // routes for products
-Route::get('product', 'ProductController@index');
+Route::get('product', 'ProductController@index')->name('product_list');
 Route::get('product/create', 'ProductController@create');
 Route::post('product/store', 'ProductController@store');
 

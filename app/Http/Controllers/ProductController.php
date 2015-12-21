@@ -85,6 +85,35 @@ class ProductController extends Controller {
             'product_type_id' => 'required',
             'active_status' => 'required',
             ]);
+
+        try {
+            $product = new Product();
+
+            $product->code            = $request->code;
+            $product->description     = $request->description;
+            $product->category_id     = $request->category_id;
+            $product->brand_id        = $request->brand_id;
+            $product->model_id        = $request->model_id;
+            $product->branch_id       = $request->branch_id;
+            $product->cost            = $request->cost;
+            $product->average_cost    = $request->average_cost;
+            $product->price_level1    = $request->price_level1;
+            $product->price_level2    = $request->price_level2;
+            $product->price_level3    = $request->price_level3;
+            $product->price_level4    = $request->price_level4;
+            $product->total_stock     = $request->total_stock;
+            $product->rack_id         = $request->rack_id;
+            $product->product_type_id = $request->product_type_id;
+            $product->active_status   = $request->active_status;
+
+            $product->save();
+
+            $request->session()->flash('success', 'Product ' . $request->code . ' saved!');
+            return redirect()->route('product_list');
+        } catch (\Exception $e) {
+            $request->session()->flash('fail', 'An error occured while saving product ' . $request->code . '. Please try again!');
+            return back()->withInput();
+        }
     }
 
     /**

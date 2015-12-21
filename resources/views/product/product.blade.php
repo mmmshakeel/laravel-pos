@@ -104,12 +104,12 @@
                         <th data-column-id="id" data-type="numeric">ID</th>
                         <th data-column-id="code" data-order="desc">Code</th>
                         <th data-column-id="description">Description</th>
-                        <th data-column-id="address">Cost</th>
-                        <th data-column-id="city">Price Level1</th>
-                        <th data-column-id="contact_no">Price Level2</th>
-                        <th data-column-id="contact_email">Price Level3</th>
-                        <th data-column-id="contact_email">Total Stock</th>
-                        <th data-column-id="contact_email">Available Stock</th>
+                        <th data-column-id="cost">Cost</th>
+                        <th data-column-id="price_level1">Price Level1</th>
+                        <th data-column-id="price_level2">Price Level2</th>
+                        <th data-column-id="price_level3">Price Level3</th>
+                        <th data-column-id="total_stock">Total Stock</th>
+                        <th data-column-id="available_stock">Available Stock</th>
                         <th data-column-id="commands" data-formatter="commands" data-sortable="false">Commands</th>
                     </tr>
                 </thead>
@@ -119,9 +119,10 @@
                             <td>{{ $product->id }}</td>
                             <td>{{ $product->code }}</td>
                             <td>{{ $product->description }}</td>
-                            <td>{{ $product->price_level1 }}</td>
-                            <td>{{ $product->price_level2 }}</td>
-                            <td>{{ $product->price_level3 }}</td>
+                            <td align="right">{{ $product->cost }}</td>
+                            <td align="right">{{ $product->price_level1 }}</td>
+                            <td align="right">{{ $product->price_level2 }}</td>
+                            <td align="right">{{ $product->price_level3 }}</td>
                             <td></td>
                             <td></td>
                         </tr>
