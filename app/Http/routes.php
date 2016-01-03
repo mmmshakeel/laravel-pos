@@ -50,6 +50,10 @@ Route::delete('supplier/destroy', 'SupplierController@destroy');
 Route::get('product', 'ProductController@index')->name('product_list');
 Route::get('product/create', 'ProductController@create');
 Route::post('product/store', 'ProductController@store');
+Route::get('product/edit/{id}', 'ProductController@edit');
+Route::post('product/update/', 'ProductController@update');
+Route::delete('product/destroy', 'ProductController@destroy');
+Route::get('product/show/{id}', 'ProductController@show');
 
 // routes for product category
 Route::get('product/category', 'CategoryController@index')->name('product_category');
