@@ -97,26 +97,53 @@
         </div>
     </div>
 
-    <div class="card">
-        <div class="card-body card-padding">
-            <div class="row">
-                <p class="f-500 m-b-20 c-black">Product Other Details: </p>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body card-padding">
+                    <div class="row">
+                        <p class="f-500 m-b-20 c-black">Product Other Details: </p>
 
-                <div class="col-sm-4 m-b-20">
-                    <div class="form-group fg-line">
-                        <label>Inventory Type</label>
-                        <p>{{ $product->product_type->type }}</p>
+                        <div class="col-sm-4 m-b-20">
+                            <div class="form-group fg-line">
+                                <label>Inventory Type</label>
+                                <p>{{ $product->product_type->type }}</p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3 m-b-20">
+                            <div class="form-group fg-line">
+                                <label>Product Status</label>
+                                @if ($product->active_status == 'A')
+                                    <p>Active</p>
+                                @elseif ($product->active_status == 'I')
+                                    <p>Inactive</p>
+                                @endif
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body card-padding">
+                    <div class="row">
+                        <p class="f-500 m-b-20 c-black">Stock Details: </p>
 
-                <div class="col-sm-3 m-b-20">
-                    <div class="form-group fg-line">
-                        <label>Product Status</label>
-                        @if ($product->active_status == 'A')
-                            <p>Active</p>
-                        @elseif ($product->active_status == 'I')
-                            <p>Inactive</p>
-                        @endif
+                        <div class="col-sm-4 m-b-20">
+                            <div class="form-group fg-line">
+                                <label>Total Stock</label>
+                                <p>{{ $product->total_stock }}</p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3 m-b-20">
+                            <div class="form-group fg-line">
+                                <label>Available Stock</label>
+                                <p>10</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

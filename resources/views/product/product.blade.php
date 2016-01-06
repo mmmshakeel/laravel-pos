@@ -1,17 +1,14 @@
 <!-- resources/views/branch/branchlist.blade.php -->
 @extends('layouts.master')
 
-@section('title', 'Inventory - Find Product')
+@section('title', 'Find Product')
 
 @section('content')
 <div class="block-header">
     <h2>Find Products</h2>
 </div>
 <div class="card">
-
-
     <div class="card-body card-padding">
-
         @if(Session::has('success'))
             <div class="alert alert-success" role="alert">
                 {{ Session::get('success') }}
@@ -71,44 +68,84 @@
                 </tbody>
             </table>
         </div>
+    </div>
+</div>
 
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $(".data-table-command").bootgrid({
-                    css: {
-                        icon: 'zmdi icon',
-                        iconColumns: 'zmdi-view-module',
-                        iconDown: 'zmdi-expand-more',
-                        iconRefresh: 'zmdi-refresh',
-                        iconUp: 'zmdi-expand-less'
-                    },
-                    formatters: {
-                        "commands": function(column, row) {
-                            return'<a href="product/show/' + row.id + '"><button title="View Product" type="button" class="btn btn-icon command-show m-r-5" data-row-id="' + row.id + '"><span class="zmdi zmdi-view-compact"></span></button></a>' +
-                                '<a href="product/edit/' + row.id + '"><button title="Edit" type="button" class="btn btn-icon command-edit m-r-5" data-row-id="' + row.id + '"><span class="zmdi zmdi-edit"></span></button></a>' +
-                                '<form style="display: inline-block" method="POST" action="product/destroy">{!! csrf_field() !!}{{ method_field("DELETE") }}<input type="hidden" name="id" value="' + row.id + '"><button title="Delete" type="button" class="btn btn-icon command-delete" data-row-id="' + row.id + '" onclick="confirmDelete(this.form)"><span class="zmdi zmdi-delete"></span></button></form>';
-                        }
-                    }
-                });
+<div class="modal fade" id="preventClick" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Items: <span id="addItemCode"></span></h4>
+            </div>
+            <div class="modal-body">
+                <form name="add_product_items" method="post" action="">
+                    <p class="f-500 m-b-20 c-black">
+                        Select purchase order:
+                        <select name="purchase_order" class="selectpicker" data-live-search="true">
+                            <option>PO-10449 (20 Items)</option>
+                            <option>PO-10200 (55 Items)</option>
+                            <option>PO-16555 (100 Items)</option>
+                        </select>
+                    </p>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link">Save changes</button>
+                <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-                $(".sub-menu-inventory").addClass('active');
-                $(".sub-menu-inventory").addClass('toggled');
-                $(".sub-menu-find-product").addClass('active');
-
-            });
-
-            function confirmDelete(form) {
-                swal({
-                    title: "Are you sure?",
-                    text: "You will not be able to recover this record!",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Delete!",
-                    closeOnConfirm: true
-                }, function(){
-                    form.submit();
-                });
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".data-table-command").bootgrid({
+            css: {
+                icon: 'zmdi icon',
+                iconColumns: 'zmdi-view-module',
+                iconDown: 'zmdi-expand-more',
+                iconRefresh: 'zmdi-refresh',
+                iconUp: 'zmdi-expand-less'
+            },
+            formatters: {
+                "commands": function(column, row) {
+                    return'<a href="product/show/' + row.id + '"><button title="View Product" type="button" class="btn btn-icon command-show m-r-5" data-row-id="' + row.id + '"><span class="zmdi zmdi-view-compact"></span></button></a>' +
+                        '<a href="#" onclick="launchModel('+ row.id +', \''+ row.code +'\')"><button title="Add Items" type="button" class="btn btn-icon command-add m-r-5"><span class="zmdi zmdi-plus-square"></span></button></a>' +
+                        '<a href="product/edit/' + row.id + '"><button title="Edit" type="button" class="btn btn-icon command-edit m-r-5" data-row-id="' + row.id + '"><span class="zmdi zmdi-edit"></span></button></a>' +
+                        '<form style="display: inline-block" method="POST" action="product/destroy">{!! csrf_field() !!}{{ method_field("DELETE") }}<input type="hidden" name="id" value="' + row.id + '"><button title="Delete" type="button" class="btn btn-icon command-delete" data-row-id="' + row.id + '" onclick="confirmDelete(this.form)"><span class="zmdi zmdi-delete"></span></button></form>';
+                }
             }
-        </script>
+        });
+
+        $(".sub-menu-inventory").addClass('active');
+        $(".sub-menu-inventory").addClass('toggled');
+        $(".sub-menu-find-product").addClass('active');
+
+    });
+
+    function confirmDelete(form) {
+        swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover this record!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Delete!",
+            closeOnConfirm: true
+        }, function(){
+            form.submit();
+        });
+    }
+
+    function launchModel(id, code) {
+        console.log(id);
+        console.log(code);
+
+        $("#addItemCode").text(code);
+
+        $('#preventClick').modal({
+            keyboard: false
+        });
+    }
+</script>
 @endsection
