@@ -80,17 +80,22 @@
             <div class="modal-body">
                 <form name="add_product_items" method="post" action="">
                     <p class="f-500 m-b-20 c-black">
-                        Select purchase order:
+                        <label>Select purchase order:</label>
                         <select name="purchase_order" class="selectpicker" data-live-search="true">
+                            <option>Add without purchase order</option>
                             <option>PO-10449 (20 Items)</option>
                             <option>PO-10200 (55 Items)</option>
                             <option>PO-16555 (100 Items)</option>
                         </select>
                     </p>
+                    <p class="f-500 m-b-20 c-black">
+                        <label>Number of Items:</label>
+                        <input type="number" name="number_of_items" class="form-control" />
+                    </p>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-link">Save changes</button>
+                <button type="button" class="btn bgm-teal btn-link waves-effect">Save changes</button>
                 <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -136,6 +141,7 @@
             form.submit();
         });
     }
+
 
     function launchModel(id, code) {
         console.log(id);

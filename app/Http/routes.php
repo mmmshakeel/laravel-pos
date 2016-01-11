@@ -75,3 +75,8 @@ Route::post('model/store', 'ModelController@store');
 Route::post('model/update', 'ModelController@update');
 Route::get('product/model/edit/{id}', 'ModelController@edit');
 Route::delete('model/destroy', 'ModelController@destroy');
+
+// routes for purchase orders
+Route::get('purchase-orders/create', 'PurchaseOrderController@create');
+Route::get('purchase-orders/getsupplier/{id}', 'PurchaseOrderController@getSupplierDetailsById');
+Route::get('purchase-orders/getbranch/{id}', 'PurchaseOrderController@getBranchDetailsById');

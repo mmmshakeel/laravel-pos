@@ -54,6 +54,8 @@
                 <ul>
                     <li><a class="sub-menu-supplier-add" href="/supplier/create">Add New Vendor</a></li>
                     <li><a class="sub-menu-supplier-list" href="/supplier">Vendor List</a></li>
+                    <li><a class="sub-menu-purchase-order" href="#">Purchase Orders</a></li>
+                    <li><a class="sub-menu-new-purchase-order" href="/purchase-orders/create">New Purchase Order</a></li>
                 </ul>
             </li>
 
