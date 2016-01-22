@@ -80,3 +80,5 @@ Route::delete('model/destroy', 'ModelController@destroy');
 Route::get('purchase-orders/create', 'PurchaseOrderController@create');
 Route::get('purchase-orders/getsupplier/{id}', 'PurchaseOrderController@getSupplierDetailsById');
 Route::get('purchase-orders/getbranch/{id}', 'PurchaseOrderController@getBranchDetailsById');
+Route::get('purchase-orders/getproducts/{id}', 'PurchaseOrderController@getProducts');
+Route::get('purchase-orders/get-product-description/{id}', 'PurchaseOrderController@getProductDescription');

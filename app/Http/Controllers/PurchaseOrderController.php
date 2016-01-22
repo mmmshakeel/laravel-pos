@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Supplier;
 use App\Branch;
+use App\Product;
 
 class PurchaseOrderController extends Controller
 {
@@ -23,10 +24,12 @@ class PurchaseOrderController extends Controller
     public function create() {
         $suppliers = Supplier::all();
         $branches = Branch::all();
+        $products = Product::all();
 
         return view('purchaseorder.new-po', [
             'suppliers' => $suppliers,
-            'branches' => $branches
+            'branches' => $branches,
+            'products' => $products
         ]);
     }
 
@@ -53,4 +56,11 @@ class PurchaseOrderController extends Controller
 //            'country' => $supplier->country->country_name
         ]);
     }
+
+    public function getProductDescription($id) {
+        $product = Product::find($id);
+
+        echo $product->description;
+    }
+
 }

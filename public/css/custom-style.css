@@ -3,7 +3,7 @@
     font-size: 11px;
 }
 .po-contact-details-box {
-    height: 150px;
+    min-height: 150px;
     padding: 10px;
 }
 .po-contact-details-box-bg {
@@ -11,4 +11,26 @@
 }
 .loader {
     background: url("/img/loader.gif") no-repeat center;
+}
+.w150 {
+    width: 150px;
+}
+.align-right {
+    text-align: right;
+}
+.align-center {
+    text-align: center;
+}
+.purchase-order-table,
+.purchase-order-table > thead > tr > th,
+.purchase-order-table.table-bordered > tbody > tr > td {
+    border: 1px solid #ADADAD;
+}
+.purchase-order-table > thead > tr > th {
+    background-color: #F7F7F7;
+}
+.po-big-box {
+    padding: 10px;
+    min-height: 150px;
+    border: 1px solid #ADADAD;
 }
