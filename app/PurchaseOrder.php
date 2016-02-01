@@ -15,4 +15,12 @@ class PurchaseOrder extends Model
     public function supplier() {
         return $this->belongsTo('App\Supplier', 'supplier_id');
     }
+
+    public function productItems() {
+        return $this->hasMany('App\ProductItems', 'purchase_order_id');
+    }
+
+    public function currency() {
+        return $this->belongsTo('App\Currency', 'currency_id');
+    }
 }

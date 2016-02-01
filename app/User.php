@@ -10,11 +10,11 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Model implements AuthenticatableContract,
-                                    AuthorizableContract,
-                                    CanResetPasswordContract
-{
-    use Authenticatable, Authorizable, CanResetPassword;
+class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract {
+
+    use Authenticatable,
+        Authorizable,
+        CanResetPassword;
 
     /**
      * The database table used by the model.
@@ -37,8 +37,12 @@ class User extends Model implements AuthenticatableContract,
      */
     protected $hidden = ['password', 'remember_token'];
 
-
     public function staff() {
-        return $this->belongsTo('App\Staff', 'staff_id');
+        return $this->hasOne('App\Staff', 'user_id');
     }
+
+    public function branch() {
+        return $this->belongsTo('App\Branch', 'branch_id');
+    }
+
 }

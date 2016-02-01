@@ -77,8 +77,14 @@ Route::get('product/model/edit/{id}', 'ModelController@edit');
 Route::delete('model/destroy', 'ModelController@destroy');
 
 // routes for purchase orders
-Route::get('purchase-orders/create', 'PurchaseOrderController@create');
+Route::get('purchase-orders', 'PurchaseOrderController@index')->name('purchase_order_list');
+Route::get('purchase-orders/create', 'PurchaseOrderController@create')->name('create_purchase_order');
 Route::get('purchase-orders/getsupplier/{id}', 'PurchaseOrderController@getSupplierDetailsById');
 Route::get('purchase-orders/getbranch/{id}', 'PurchaseOrderController@getBranchDetailsById');
 Route::get('purchase-orders/getproducts/{id}', 'PurchaseOrderController@getProducts');
 Route::get('purchase-orders/get-product-description/{id}', 'PurchaseOrderController@getProductDescription');
+Route::get('purchase-orders/get-term-due-date/{id}', 'PurchaseOrderController@getTermDueDate');
+Route::get('purchase-orders/get-product-items/{id}', 'PurchaseOrderController@getProductItems');
+Route::post('purchase-orders/save-po-product', 'PurchaseOrderController@savePoProduct');
+Route::post('purchase-orders/delete-po-product', 'PurchaseOrderController@deletePoProduct');
+Route::post('purchase-orders/update', 'PurchaseOrderController@update');

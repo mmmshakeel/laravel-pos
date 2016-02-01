@@ -34,4 +34,8 @@ class Product extends Model
     public function branch() {
         return $this->belongsTo('App\Branch', 'branch_id');
     }
+
+    public function productItems() {
+        return $this->hasMany('App\ProductItems', 'product_id');
+    }
 }
