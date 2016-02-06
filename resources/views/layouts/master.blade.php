@@ -185,6 +185,10 @@
                     $('body').removeClass('toggled sw-toggled');
                 }
 
+                if (a[2] == 'print') {
+                    $('body').removeClass('toggled sw-toggled');
+                }
+
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

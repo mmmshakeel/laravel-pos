@@ -12,6 +12,10 @@ class Supplier extends Model
     protected $dates = ['deleted_at'];
 
     public function country() {
-        return $this->belongsTo('App\Countries', 'country');
+        return $this->belongsTo('App\Countries', 'country_id');
+    }
+
+    public function purchase_orders() {
+        return $this->hasMany('App\PurchaseOrder', 'supplier_id');
     }
 }

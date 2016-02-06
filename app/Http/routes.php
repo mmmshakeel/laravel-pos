@@ -88,3 +88,4 @@ Route::get('purchase-orders/get-product-items/{id}', 'PurchaseOrderController@ge
 Route::post('purchase-orders/save-po-product', 'PurchaseOrderController@savePoProduct');
 Route::post('purchase-orders/delete-po-product', 'PurchaseOrderController@deletePoProduct');
 Route::post('purchase-orders/update', 'PurchaseOrderController@update');
+Route::get('purchase-orders/print/{id}', 'PurchaseOrderController@printPurchaseOrder');

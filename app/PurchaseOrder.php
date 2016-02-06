@@ -23,4 +23,21 @@ class PurchaseOrder extends Model
     public function currency() {
         return $this->belongsTo('App\Currency', 'currency_id');
     }
+
+    public function shipToBranch() {
+        return $this->belongsTo('App\Branch', 'ship_to_branch_id');
+    }
+
+    public function term() {
+        return $this->belongsTo('App\Term', 'terms_id');
+    }
+
+    public function location() {
+        return $this->belongsTo('App\Branch', 'location_id');
+    }
+
+    public function purchaseRep() {
+        return $this->belongsTo('App\Staff', 'purchase_rep');
+    }
+
 }

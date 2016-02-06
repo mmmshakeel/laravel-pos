@@ -12,5 +12,7 @@ class Branch extends Model {
     protected $table = 'branch';
     protected $dates = ['deleted_at'];
 
-
+    public function country() {
+        return $this->belongsTo('App\Countries', 'country_id');
+    }
 }

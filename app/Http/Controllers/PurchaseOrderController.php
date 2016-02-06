@@ -14,6 +14,7 @@ use App\ShippingServiceProvider;
 use App\PurchaseOrder;
 use App\ProductItems;
 use App\Currency;
+use App\Company;
 use Illuminate\Support\Facades\Auth;
 
 class PurchaseOrderController extends Controller {
@@ -23,7 +24,32 @@ class PurchaseOrderController extends Controller {
     }
 
     public function index() {
-        echo 'Purchase order list';
+
+        $purchase_orders = PurchaseOrder::all();
+
+        $po_amount_array = [];
+        // calculate total for each po
+        foreach ($purchase_orders as $po) {
+            $amount = 0;
+
+            $tmp_array = [];
+
+            foreach ($po->productItems as $item) {
+                $amount = $amount + ($item->item_count * $item->unit_cost);
+            }
+
+            $tmp_array = [
+                'po_id' => $po->id,
+                'po_amount' => $amount
+            ];
+
+            array_push($po_amount_array, $tmp_array);
+        }
+
+        return view('purchaseorder.polist', [
+            'purchase_orders' => $purchase_orders,
+            'po_amounts' => $po_amount_array
+        ]);
     }
 
     /**
@@ -252,6 +278,43 @@ class PurchaseOrderController extends Controller {
         } catch (\Exception $e) {
             echo 0;
         }
+    }
+
+    public function printPurchaseOrder($id) {
+        $company = Company::find(1);
+
+        $purchase_order = PurchaseOrder::find($id);
+
+        $product_items = $purchase_order->productItems;
+
+        $product_items_array = [];
+
+        $i = 1;
+        $po_total = 0;
+
+        foreach ($product_items as $item) {
+            $amount = $item->item_count * $item->unit_cost;
+            $po_total += $amount;
+
+            $tmp = [
+                'no' => $i,
+                'product_code' => $item->product->code,
+                'product_desc' => $item->product->description,
+                'product_count' => $item->item_count,
+                'product_unit_cost' => $item->unit_cost,
+                'product_amount' => number_format($amount, 2)
+            ];
+
+            $i++;
+            array_push($product_items_array, $tmp);
+        }
+
+        return view('purchaseorder.po-print', [
+            'purchase_order' => $purchase_order,
+            'product_items' => $product_items_array,
+            'company' => $company,
+            'po_total' => number_format($po_total, 2)
+        ]);
     }
 
 }
