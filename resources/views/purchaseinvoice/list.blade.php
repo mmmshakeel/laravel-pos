@@ -1,15 +1,15 @@
 <!-- resources/views/purchaseorder/polist.blade.php -->
 @extends('layouts.master')
 
-@section('title', 'Purchase Orders')
+@section('title', 'Purchase Invoices')
 
 @section('content')
 <div class="block-header">
-    <h2>Purchase Orders</h2>
+    <h2>Purchase Invoices</h2>
 </div>
 <div class="card">
     <div class="card-header">
-        <h2>Purchase Orders</h2>
+        <h2>Purchase Invoices</h2>
     </div>
 
     <div class="card-body card-padding">
@@ -27,13 +27,11 @@
         <table id="data-table-command" class="table table-striped table-vmiddle">
             <thead>
                 <tr>
-                    <th data-column-id="id" data-type="numeric">PO #</th>
+                    <th data-column-id="id" data-type="numeric">PI #</th>
                     <th data-column-id="po_date">Date</th>
                     <th data-column-id="supplier">Supplier</th>
                     <th data-column-id="account">Account</th>
                     <th data-column-id="ship_to_branch">Ship to Branch</th>
-                    <th data-column-id="received_status">Received Status</th>
-                    <th data-column-id="invoiced_status">Invoiced Status</th>
                     <th data-column-id="terms">Terms</th>
                     <th data-column-id="loc_sub_loc">Loc/Sub-Loc</th>
                     <th data-column-id="currency">Currency</th>
@@ -42,34 +40,20 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($purchase_orders as $po)
+                @foreach ($purchase_invoices as $pi)
                     <tr>
-                        <td>{{ $po->id }}</td>
-                        <td>{{ date('Y-m-d', strtotime($po->created_at)) }}</td>
-                        <td>{{ $po->supplier->code }}</td>
+                        <td>{{ $pi->id }}</td>
+                        <td>{{ date('Y-m-d', strtotime($pi->created_at)) }}</td>
+                        <td>{{ ($pi->supplier) ? $pi->supplier->code : '' }}</td>
                         <td></td>
-                        <td>{{ $po->shipToBranch->code }}</td>
+                        <td>{{ ($pi->shipToBranch) ? $pi->shipToBranch->code : '' }}</td>
+                        <td>{{ ($pi->term) ? $pi->term->description : '' }}</td>
+                        <td>{{ ($pi->location) ? $pi->location->code : '' }}</td>
+                        <td>{{ ($pi->currency) ? $pi->currency->currency_code : '' }}</td>
                         <td>
-                            @if ($po->is_received == 'f')
-                                <span>Not Received</span>
-                            @else
-                                <span>Received</span>
-                            @endif
-                        </td>
-                        <td>
-                            @if ($po->is_invoiced == 'f')
-                                <span>Not Invoiced</span>
-                            @else
-                                <span>Invoiced</span>
-                            @endif
-                        </td>
-                        <td>{{ $po->term->description }}</td>
-                        <td>{{ $po->location->code }}</td>
-                        <td>{{ $po->currency->currency_code }}</td>
-                        <td>
-                            @foreach($po_amounts as $po_amount)
-                                @if ($po->id == $po_amount['po_id'])
-                                    {{ number_format($po_amount['po_amount'], 2) }}
+                            @foreach($pi_amounts as $pi_amount)
+                                @if ($pi->id == $pi_amount['pi_id'])
+                                    {{ number_format($pi_amount['pi_amount'], 2) }}
                                 @endif
                             @endforeach
                         </td>
@@ -91,9 +75,8 @@
             },
             formatters: {
                 "commands": function(column, row) {
-                    return'<a href="purchase-orders/print/' + row.id + '" title="Print PO"><button type="button" class="btn btn-icon command-print m-r-5" data-row-id="' + row.id + '"><span class="zmdi zmdi-print"></span></button></a>' +
-                        '<a href="purchase-orders/edit/' + row.id + '" title="Edit PO"><button type="button" class="btn btn-icon command-edit m-r-5" data-row-id="' + row.id + '"><span class="zmdi zmdi-edit"></span></button></a>' +
-                        '<a href="purchase-orders/makeinvoice/' + row.id + '" title="Inovoice PO"><button type="button" class="btn btn-icon command-makeinvoice m-r-5" data-row-id="' + row.id + '"><span class="zmdi zmdi-upload"></span></button></a>' +
+                    return'<a href="purchase-invoice/print/' + row.id + '" title="Print PO"><button type="button" class="btn btn-icon command-print m-r-5" data-row-id="' + row.id + '"><span class="zmdi zmdi-print"></span></button></a>' +
+                        '<a href="purchase-invoice/edit/' + row.id + '" title="Edit PO"><button type="button" class="btn btn-icon command-edit m-r-5" data-row-id="' + row.id + '"><span class="zmdi zmdi-edit"></span></button></a>' +
                         '<form style="display: inline-block" method="POST" action="#">{!! csrf_field() !!}{{ method_field("DELETE") }}<input type="hidden" name="id" value="' + row.id + '"><button type="submit" class="btn btn-icon command-delete" data-row-id="' + row.id + '" title="Delete PO"><span class="zmdi zmdi-delete"></span></button></form>';
                 }
             }
@@ -102,7 +85,7 @@
         // activate the sidebar menu
         $(".sub-menu-purchase").addClass('active');
         $(".sub-menu-purchase").addClass('toggled');
-        $(".sub-menu-purchase-order").addClass('active');
+        $(".sub-menu-purchase-invoice").addClass('active');
     });
 </script>
 @endsection

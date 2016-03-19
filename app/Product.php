@@ -28,7 +28,7 @@ class Product extends Model
     }
 
     public function inventory() {
-        return $this->hasMany('App\Inventory', 'product_id');
+        return $this->hasOne('App\Inventory', 'product_id');
     }
 
     public function branch() {

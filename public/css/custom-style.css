@@ -69,5 +69,12 @@
 .po-print-page .table > thead:first-child > tr:first-child > th,
 .po-print-page .table-bordered td {
     border: 1px solid #C9C9C9;
-
+}
+.draft-notice {
+    background-color: #d9534f;
+    padding: 3px;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
 }

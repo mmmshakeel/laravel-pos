@@ -12,6 +12,7 @@ use App\Brand;
 use App\Product;
 use App\Branch;
 use App\ProductType;
+use App\Inventory;
 
 class ProductController extends Controller {
 
@@ -89,6 +90,8 @@ class ProductController extends Controller {
             ]);
 
         try {
+            DB::beginTransaction();
+
             $product = new Product();
 
             $product->code            = $request->code;
@@ -110,9 +113,19 @@ class ProductController extends Controller {
 
             $product->save();
 
+            // now populate the inventory
+            $inventory = new Inventory();
+            $inventory->product_id = $product->id;
+            $inventory->minimum_stock = $request->minimum_stock;
+            $inventory->save();
+
+            DB::commit();
+
             $request->session()->flash('success', 'Product ' . $request->code . ' saved!');
             return redirect()->route('product_list');
         } catch (\Exception $e) {
+            DB::rollback();
+
             $request->session()->flash('fail', 'An error occured while saving product ' . $request->code . '. Please try again!');
             return back()->withInput();
         }
@@ -178,6 +191,8 @@ class ProductController extends Controller {
             ]);
 
         try {
+            DB::beginTransaction();
+
             $product = Product::find($request->id);
 
             $product->code            = $request->code;
@@ -199,9 +214,23 @@ class ProductController extends Controller {
 
             $product->save();
 
+            // now populate the inventory
+            // find the product from inventory
+            $inventory = Inventory::where('product_id', $product->id)->first();
+            if (!$inventory) {
+                $inventory = new Inventory();
+            }
+            $inventory->product_id = $product->id;
+            $inventory->minimum_stock = $request->minimum_stock;
+            $inventory->save();
+
+            DB::commit();
+
             $request->session()->flash('success', 'Product ' . $request->code . ' updated!');
             return redirect()->route('product_list');
         } catch (\Exception $e) {
+            DB::rollback();
+
             $request->session()->flash('fail', 'An error occured while updating product ' . $request->code . '. Please try again!');
             return back()->withInput();
         }

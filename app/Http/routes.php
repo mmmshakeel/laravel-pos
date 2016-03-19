@@ -88,4 +88,17 @@ Route::get('purchase-orders/get-product-items/{id}', 'PurchaseOrderController@ge
 Route::post('purchase-orders/save-po-product', 'PurchaseOrderController@savePoProduct');
 Route::post('purchase-orders/delete-po-product', 'PurchaseOrderController@deletePoProduct');
 Route::post('purchase-orders/update', 'PurchaseOrderController@update');
+Route::get('purchase-orders/edit/{id}', 'PurchaseOrderController@edit');
 Route::get('purchase-orders/print/{id}', 'PurchaseOrderController@printPurchaseOrder');
+Route::get('purchase-orders/makeinvoice/{id}', 'PurchaseOrderController@invoicePoView');
+Route::get('purchase-orders/doinvoice/{id}', 'PurchaseOrderController@doInvoicePurchaseOrder');
+
+// routes for purchase invoices
+Route::get('purchase-invoices', 'PurchaseInvoiceController@index')->name('purchase_invoice_list');
+Route::get('purchase-invoice/edit/{id}', 'PurchaseInvoiceController@edit')->name('purchase_invoice_edit');
+Route::get('purchase-invoice/get-product-items/{id}', 'PurchaseInvoiceController@getProductItems');
+Route::post('purchase-invoice/save-invoice-product', 'PurchaseInvoiceController@savePiProduct');
+Route::post('purchase-invoice/update', 'PurchaseInvoiceController@update');
+Route::post('purchase-invoice/delete-pi-product', 'PurchaseInvoiceController@deletePiProduct');
+Route::get('purchase-invoice/print/{id}', 'PurchaseInvoiceController@printPurchaseInvoice');
+Route::get('purchase-invoice/create', 'PurchaseInvoiceController@create')->name('create_purchase_invoice');

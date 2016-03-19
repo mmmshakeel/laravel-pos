@@ -156,6 +156,13 @@
             <div class="row">
                 <p class="f-500 m-b-20 c-black">Product Other Details: </p>
 
+                <div class="col-sm-3 m-b-20">
+                    <div class="form-group fg-line">
+                        <label>Minimum Stock</label>
+                        <input type="number" name="minimum_stock" class="form-control" value="{{ old('minimum_stock') }}">
+                    </div>
+                </div>
+
                 <div class="col-sm-4 m-b-20">
                     <div class="form-group fg-line">
                         <label>Inventory Type <sup class="req-star">*</sup></label>
