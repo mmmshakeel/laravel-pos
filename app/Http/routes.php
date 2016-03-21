@@ -102,3 +102,12 @@ Route::post('purchase-invoice/update', 'PurchaseInvoiceController@update');
 Route::post('purchase-invoice/delete-pi-product', 'PurchaseInvoiceController@deletePiProduct');
 Route::get('purchase-invoice/print/{id}', 'PurchaseInvoiceController@printPurchaseInvoice');
 Route::get('purchase-invoice/create', 'PurchaseInvoiceController@create')->name('create_purchase_invoice');
+
+// routes for quotations
+Route::get('quotation/create', 'QuotationController@create');
+Route::get('quotation/edit/{id}', 'QuotationController@edit')->name('edit_quotation');
+
+// routes for customers
+Route::post('customer/store', 'CustomerController@store');
+Route::post('customer/ajaxStore', 'CustomerController@ajaxStore');
+Route::get('customer/getcustomer/{id}', 'CustomerController@getCustomerDetailsById');

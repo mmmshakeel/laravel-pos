@@ -62,6 +62,14 @@
                 </ul>
             </li>
 
+            <li class="sub-menu sub-menu-quotation">
+                <a href=""><i class="zmdi zmdi-card-giftcard"></i> Sales</a>
+                <ul>
+                    <li><a class="sub-menu-quotation-add" href="/quotation/create">Add New Quotation</a></li>
+                    <li><a class="sub-menu-quotation-list" href="/supplier">Quotations List</a></li>
+                </ul>
+            </li>
+
             <li class="sub-menu">
                 <a href=""><i class="zmdi zmdi-settings"></i> Settings</a>
                 <ul>

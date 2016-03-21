@@ -80,7 +80,7 @@ class PurchaseInvoiceController extends Controller
             'terms'             => $terms,
             'shipping_services' => $shipping_services,
             'user'              => $user,
-            'draft_id'          => $id,
+            'draft_id'          => $purchase_invoice->id,
             'currency_list'     => $currency_list,
             'purchase_invoice'  => $purchase_invoice,
         ]);
@@ -332,16 +332,6 @@ class PurchaseInvoiceController extends Controller
             // initiate a draft po
             $draft_id = $this->savePurchaseInvoiceDraft();
         }
-
-        $purchase_invoice = PurchaseInvoice::find($draft_id);
-
-        $suppliers         = Supplier::all();
-        $branches          = Branch::all();
-        $products          = Product::all();
-        $terms             = Term::all();
-        $shipping_services = ShippingServiceProvider::all();
-        $user              = Auth::user();
-        $currency_list     = Currency::all();
 
         return redirect()->route('purchase_invoice_edit', ['id' => $draft_id]);
     }
