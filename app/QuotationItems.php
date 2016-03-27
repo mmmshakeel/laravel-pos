@@ -12,8 +12,13 @@ class QuotationItems extends Model
     protected $table = 'quotation_items';
     protected $dates = ['deleted_at'];
 
-    public function user()
+    public function quotation()
     {
         return $this->belongsTo('App\Quotation', 'quotation_id');
+    }
+
+    public function product()
+    {
+        return $this->belongsTo('App\Product', 'product_id');
     }
 }

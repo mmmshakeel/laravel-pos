@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use DB;
-use App\Category;
-use App\ProductModel;
-use App\Brand;
-use App\Product;
 use App\Branch;
-use App\ProductType;
+use App\Brand;
+use App\Category;
+use App\Http\Controllers\Controller;
 use App\Inventory;
+use App\Product;
+use App\ProductModel;
+use App\ProductType;
+use DB;
+use Illuminate\Http\Request;
 
-class ProductController extends Controller {
+class ProductController extends Controller
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('auth');
     }
 
@@ -26,7 +27,8 @@ class ProductController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         // get product categories
         $categories = Category::all();
 
@@ -40,11 +42,11 @@ class ProductController extends Controller {
 
         return view('product.product', [
             'categories' => $categories,
-            'models' => $models,
-            'brands' => $brands,
-            'products' => $products,
-            'request' => $request
-            ]);
+            'models'     => $models,
+            'brands'     => $brands,
+            'products'   => $products,
+            'request'    => $request,
+        ]);
     }
 
     /**
@@ -52,19 +54,20 @@ class ProductController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
-        $branches = Branch::all();
-        $categories = Category::all();
-        $models = ProductModel::all();
-        $brands = Brand::all();
+    public function create()
+    {
+        $branches      = Branch::all();
+        $categories    = Category::all();
+        $models        = ProductModel::all();
+        $brands        = Brand::all();
         $product_types = ProductType::all();
 
         $params = [
-            'branches' => $branches,
-            'categories' => $categories,
-            'models' => $models,
-            'brands' => $brands,
-            'product_types' => $product_types
+            'branches'      => $branches,
+            'categories'    => $categories,
+            'models'        => $models,
+            'brands'        => $brands,
+            'product_types' => $product_types,
         ];
 
         return view('product.product-addproduct', $params);
@@ -76,18 +79,19 @@ class ProductController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $this->validate($request, [
-            'code' => 'required|unique:product',
-            'branch_id' => 'required',
-            'category_id' => 'required',
-            'brand_id' => 'required',
-            'model_id' => 'required',
-            'cost' => 'required',
-            'price_level1' => 'required',
+            'code'            => 'required|unique:product',
+            'branch_id'       => 'required',
+            'category_id'     => 'required',
+            'brand_id'        => 'required',
+            'model_id'        => 'required',
+            'cost'            => 'required',
+            'price_level1'    => 'required',
             'product_type_id' => 'required',
-            'active_status' => 'required',
-            ]);
+            'active_status'   => 'required',
+        ]);
 
         try {
             DB::beginTransaction();
@@ -114,8 +118,8 @@ class ProductController extends Controller {
             $product->save();
 
             // now populate the inventory
-            $inventory = new Inventory();
-            $inventory->product_id = $product->id;
+            $inventory                = new Inventory();
+            $inventory->product_id    = $product->id;
             $inventory->minimum_stock = $request->minimum_stock;
             $inventory->save();
 
@@ -137,12 +141,13 @@ class ProductController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) {
+    public function show($id)
+    {
         $product = Product::find($id);
 
         return view('product.product-showproduct', [
-            'product' => $product
-            ]);
+            'product' => $product,
+        ]);
     }
 
     /**
@@ -151,24 +156,24 @@ class ProductController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id) {
-
-        $categories = Category::all();
-        $models = ProductModel::all();
-        $brands = Brand::all();
-        $branches = Branch::all();
+    public function edit($id)
+    {
+        $categories    = Category::all();
+        $models        = ProductModel::all();
+        $brands        = Brand::all();
+        $branches      = Branch::all();
         $product_types = ProductType::all();
 
         $product = Product::find($id);
 
         return view('product.product-editproduct', [
-            'branches' => $branches,
-            'categories' => $categories,
-            'models' => $models,
-            'brands' => $brands,
+            'branches'      => $branches,
+            'categories'    => $categories,
+            'models'        => $models,
+            'brands'        => $brands,
             'product_types' => $product_types,
-            'product' => $product
-            ]);
+            'product'       => $product,
+        ]);
     }
 
     /**
@@ -177,18 +182,19 @@ class ProductController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
         $this->validate($request, [
-            'code' => 'required|unique:product,code,' . $request->id,
-            'branch_id' => 'required',
-            'category_id' => 'required',
-            'brand_id' => 'required',
-            'model_id' => 'required',
-            'cost' => 'required',
-            'price_level1' => 'required',
+            'code'            => 'required|unique:product,code,' . $request->id,
+            'branch_id'       => 'required',
+            'category_id'     => 'required',
+            'brand_id'        => 'required',
+            'model_id'        => 'required',
+            'cost'            => 'required',
+            'price_level1'    => 'required',
             'product_type_id' => 'required',
-            'active_status' => 'required',
-            ]);
+            'active_status'   => 'required',
+        ]);
 
         try {
             DB::beginTransaction();
@@ -220,7 +226,7 @@ class ProductController extends Controller {
             if (!$inventory) {
                 $inventory = new Inventory();
             }
-            $inventory->product_id = $product->id;
+            $inventory->product_id    = $product->id;
             $inventory->minimum_stock = $request->minimum_stock;
             $inventory->save();
 
@@ -242,8 +248,8 @@ class ProductController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request) {
-
+    public function destroy(Request $request)
+    {
         try {
             $product = Product::find($request->id);
             Product::destroy($request->id);
@@ -254,7 +260,16 @@ class ProductController extends Controller {
             $request->session()->flash('fail', 'An error occured while deleting product ' . $product->code . '. Please try again!');
             return redirect()->route('product_list');
         }
+    }
 
+    public function getProductStock($id)
+    {
+        $product = Product::find($id);
+
+        echo json_encode([
+            'total_stock' => $product->inventory->total_stock,
+            'available_stock' => $product->inventory->available_stock
+        ]);
     }
 
 }

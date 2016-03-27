@@ -54,6 +54,7 @@ Route::get('product/edit/{id}', 'ProductController@edit');
 Route::post('product/update/', 'ProductController@update');
 Route::delete('product/destroy', 'ProductController@destroy');
 Route::get('product/show/{id}', 'ProductController@show');
+Route::get('product/get-product-stock/{id}', 'ProductController@getProductStock');
 
 // routes for product category
 Route::get('product/category', 'CategoryController@index')->name('product_category');
@@ -104,8 +105,16 @@ Route::get('purchase-invoice/print/{id}', 'PurchaseInvoiceController@printPurcha
 Route::get('purchase-invoice/create', 'PurchaseInvoiceController@create')->name('create_purchase_invoice');
 
 // routes for quotations
+Route::get('quotation', 'QuotationController@index')->name('quotation_list');
 Route::get('quotation/create', 'QuotationController@create');
 Route::get('quotation/edit/{id}', 'QuotationController@edit')->name('edit_quotation');
+Route::post('quotation/save-quotation-product', 'QuotationController@saveQuotationProduct');
+Route::get('quotation/get-price-level-by-product/{id}', 'QuotationController@getPriceLevelByProduct');
+Route::get('quotation/get-product-description/{id}', 'QuotationController@getProductDescription');
+Route::get('quotation/get-product-items/{id}', 'QuotationController@getProductItems');
+Route::post('quotation/update', 'QuotationController@update');
+Route::get('quotation/print/{id}', 'QuotationController@printQuotation');
+Route::delete('quotation/destroy', 'QuotationController@destroy');
 
 // routes for customers
 Route::post('customer/store', 'CustomerController@store');

@@ -100,7 +100,7 @@
                     </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" onclick="closeModal()">
+                <button type="button" class="btn btn-default" onclick="closeCustomerModal();">
                     Close & Reload
                 </button>
                 <button type="button" class="btn btn-primary save-customer-btn" onclick="saveCustomer(this.form)">
@@ -131,7 +131,7 @@
         });
     }
 
-    function closeModal() {
+    function closeCustomerModal() {
         $('#addCustomerModal').modal('hide');
         window.location.reload();
     }

@@ -211,7 +211,6 @@ class PurchaseInvoiceController extends Controller
             $request->session()->flash('success', 'Purchases invoice saved!');
             return redirect()->route('purchase_invoice_list');
         } catch (Exception $ex) {
-            echo $ex->getMessage();
             $request->session()->flash('fail', 'An error occured while saving purchase invoice. Please try again!');
             return back()->withInput();
         }

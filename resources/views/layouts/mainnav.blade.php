@@ -54,6 +54,7 @@
                 <ul>
                     <li><a class="sub-menu-supplier-add" href="/supplier/create">Add New Vendor</a></li>
                     <li><a class="sub-menu-supplier-list" href="/supplier">Vendor List</a></li>
+                    <li><a>----------------------</a></li>
                     <li><a class="sub-menu-purchase-order" href="/purchase-orders">Purchase Orders</a></li>
                     <li><a class="sub-menu-new-purchase-order" href="/purchase-orders/create">New Purchase Order</a></li>
                     <li><a>----------------------</a></li>
@@ -66,7 +67,7 @@
                 <a href=""><i class="zmdi zmdi-card-giftcard"></i> Sales</a>
                 <ul>
                     <li><a class="sub-menu-quotation-add" href="/quotation/create">Add New Quotation</a></li>
-                    <li><a class="sub-menu-quotation-list" href="/supplier">Quotations List</a></li>
+                    <li><a class="sub-menu-quotation-list" href="/quotation">Quotations List</a></li>
                 </ul>
             </li>
 

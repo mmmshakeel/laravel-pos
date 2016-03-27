@@ -36,7 +36,7 @@ class PurchaseOrderController extends Controller
     public function index()
     {
 
-        $purchase_orders = PurchaseOrder::all();
+        $purchase_orders = PurchaseOrder::where('is_draft', 0)->get();
 
         $po_amount_array = [];
         // calculate total for each po

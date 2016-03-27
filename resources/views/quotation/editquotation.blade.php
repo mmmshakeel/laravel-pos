@@ -8,7 +8,7 @@
     <h2>Sales Quotation</h2>
 </div>
 
-<form name="purchase_invoice_form" method="POST" action="/purchase-invoice/update">
+<form name="purchase_invoice_form" method="POST" action="/quotation/update">
     {!! csrf_field() !!}
     <div class="card">
         @if($quotation->is_draft)
@@ -44,7 +44,7 @@
             <div class="row">
                 <div class="col-sm-3 pull-right">
                     <div class="col-sm-6">
-                        <p class="c-black f-500">Quotaton Date: </p>
+                        <p class="c-black f-500">Quotation Date: </p>
                     </div>
                     <div class="col-sm-6">
                         <p class="c-black f-500">{{ date('d-m-Y', strtotime($quotation->created_at)) }}</p>
@@ -54,7 +54,7 @@
             <div class="row">
                 <div class="col-sm-4">
                     <p class="f-500 m-b-20 c-black">Customer: <sup class="req-star">*</sup></p>
-                    <select name="supplier" class="selectpicker" data-live-search="true" onchange="updateCustomerDetails(this.value);">
+                    <select name="customer" class="selectpicker" data-live-search="true" onchange="updateCustomerDetails(this.value);">
                         <option value=""></option>
                         @foreach ($customers as $customer)
                         <option value="{{ $customer->id }}"
@@ -65,7 +65,17 @@
                         @endforeach
                     </select>
                     <div class="col-sm-12 po-contact-details-box-bg">
-                        <div id="QoCustomerDetails" class="po-contact-details-box"></div>
+                        <div id="QoCustomerDetails" class="po-contact-details-box">
+                            @if($quotation->customer)
+                                {{ $quotation->customer->title}} {{ $quotation->customer->first_name}} {{ $quotation->customer->last_name}}<br />
+                                {{ $quotation->customer->address}}<br/>
+                                {{ $quotation->customer->city}}<br/>
+                                {{ $quotation->customer->country->country_name}}<br/><br/>
+                                {{ $quotation->customer->mobile}}<br/>
+                                {{ $quotation->customer->telphone}}<br/>
+                                {{ $quotation->customer->email}}
+                            @endif
+                        </div>
                     </div>
                     <button type="button" class="btn bgm-teal waves-effect m-5" data-toggle="modal" data-target="#addCustomerModal">Add Customer</button>
                 </div>
@@ -101,51 +111,21 @@
                                 <th>#</th>
                                 <th class="align-center">Product Code</th>
                                 <th class="align-center">Description</th>
-                                <th class="align-right">Ordered</th>
-                                <th class="align-right">Cost</th>
+                                <th class="align-right">Price</th>
+                                <th class="align-right">Discount (%)</th>
+                                <th class="align-right">Offered Price</th>
+                                <th class="align-right">Qty</th>
                                 <th class="align-right">Amount</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody class="purchase-order-table-tbody">
                             <tr class="hidden load_product_items">
-                                <td colspan="6"></td>
+                                <td colspan="9"></td>
                             </tr>
                             <tr class="add-product">
-                                <td colspan="7">
-                                    <button type="button" class="btn bgm-blue waves-effect" onclick="addProductField();">Add Product</button>
-                                </td>
-                            </tr>
-                            <tr class="product-fields hidden">
-                                <td>
-                                    <span id="product-field-count">#</span>
-                                </td>
-                                <td>
-                                    <select class="selectpicker" data-live-search="true" id="product-field-code" onchange="getProductDescription(this.value);">
-                                        <option value=""></option>
-                                        @foreach ($products as $product)
-                                        <option value="{{ $product->id }}">{{ $product->code }}</option>
-                                        @endforeach
-                                    </select>
-                                </td>
-                                <td>
-                                    <span id="product-field-description"></span>
-                                </td>
-                                <td align="right">
-                                    <input type="number" id="product-field-ordered" class="form-control w150 align-right c-black f-500" onchange="calculateAmount();" />
-                                </td>
-                                <td align="right">
-                                    <input type="number" id="product-field-eachcost" class="form-control w150 align-right c-black f-500" onchange="calculateAmount();" />
-                                </td>
-                                <td align="right">
-                                    <span id="product-field-amount" class="c-black f-500"></span>
-                                </td>
-                            </tr>
-                            <tr class="action-product hidden">
-                                <td colspan="5"></td>
-                                <td align="right">
-                                    <button class="btn bgm-green waves-effect" type="button" onclick="addProduct();">Add</button>
-                                    <button class="btn bgm-red waves-effect" type="button" onclick="cancelProduct();">Cancel</button>
+                                <td colspan="9">
+                                    <button type="button" class="btn bgm-blue waves-effect" data-toggle="modal" data-target="#addQuotationItemModal">Add Product</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -154,7 +134,36 @@
             </div>
 
             <div class="row m-t-10">
-                <div class="col-sm-offset-8 col-sm-4">
+                <div class="col-sm-4">
+                    <div class="po-big-box m-5">
+                        <p class="f-500 m-b-5 c-black">Sales Rep:</p>
+                        <p class="f-500 m-b-20">{{ $quotation->salesRep->code }}</p>
+
+                        <p class="m-b-5 c-black"><label>Currency</label></p>
+                        <select class="selectpicker" name="currency_id" data-live-search="true">
+                            @foreach ($currency_list as $currency)
+                            <option value="{{ $currency->id }}"
+                                @if ($currency->id == $quotation->currency_id)
+                                    selected="selected"
+                                @endif
+                            >{{ $currency->currency_code }} - {{ $currency->currency_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="po-big-box m-5">
+                        <p class="c-black f-500 m-b-20">Notes</p>
+
+                        <div class="">
+                            <div class="fg-line">
+                                <textarea class="form-control" rows="5" placeholder="Internal notes for the quotation...." name="quotation_notes">{{ $quotation->notes }}</textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-4">
                     <div class="po-big-box m-5 align-right">
                         <p class="f-500 c-black po-total">Total</p>
                         <p class="f-500 c-black po-total">
@@ -168,10 +177,12 @@
             </div>
         </div>
     </div>
-    <input type="hidden" name="quotation_id" id="purchaseInvoiceId" value="{{ $draft_id }}" />
+    <input type="hidden" name="quotation_id" id="quotationId" value="{{ $draft_id }}" />
 </form>
 
-@include('customer.addcustomer-model')
+@include('customer.addcustomer-modal')
+
+@include('quotation.quotation-product-modal')
 
 <script type="text/javascript">
     var totalQuotationCharge = 0;
@@ -182,7 +193,7 @@
         $(".sub-menu-quotation").addClass('toggled');
         $(".sub-menu-quotation-add").addClass('active');
 
-        // loadProductItems();
+        loadProductItems();
     });
 
     function updateCustomerDetails(customer_id) {
@@ -219,26 +230,6 @@
         });
     }
 
-    function addProductField() {
-        $(".product-fields").removeClass('hidden');
-        $(".action-product").removeClass('hidden');
-        $(".add-product").addClass('hidden');
-
-        qoRowcount = parseInt(qoRowcount) + 1;
-        $("#product-field-count").text(qoRowcount);
-    }
-
-    function removeProductfield() {
-        $("#product-field-code").val('');
-        $("#product-field-description").val('');
-        $("#product-field-ordered").val('');
-        $("#product-field-eachcost").val('');
-
-        $(".product-fields").addClass('hidden');
-        $(".action-product").addClass('hidden');
-        $(".add-product").removeClass('hidden');
-    }
-
     function getProductDescription(product_id) {
         if (product_id) {
             $.get('/purchase-orders/get-product-description/' + product_id, function(data) {
@@ -270,24 +261,33 @@
         $("#totalQuotationCharge").text(temp_total.toFixed(2));
     }
 
-    function addProduct() {
+    function saveQuotationItem() {
         // validate
-        if ($("#product-field-code").val() == ''
-            || $("#product-field-ordered").val() == ''
-            || $("#product-field-eachcost").val() == '') {
+        if ($("#productId").val() == ''
+            || $("#productPrice").val() == ''
+            || $("#productQuantity").val() == ''
+            || $("#productQuantity").val() == 0) {
             alert('Please fill the product order details');
             return;
         }
 
-        $.post('/purchase-invoice/save-invoice-product/', {
-            product_field_code: $("#product-field-code").val(),
-            product_field_ordered: $("#product-field-ordered").val(),
-            product_field_eachcost: $("#product-field-eachcost").val(),
-            pi_id: $("#purchaseInvoiceId").val()
+        var product_discount = 0;
+        if ($("#productDiscount").val()) {
+            product_discount = $("#productDiscount").val();
+        }
+
+        $.post('/quotation/save-quotation-product/', {
+            quotation_id: $("#quotationId").val(),
+            product_id: $("#productId").val(),
+            price_level: $('input[name=product_price_level]:checked').data("pricelevel"),
+            price: $("#productPrice").val(),
+            discount: product_discount,
+            sale_price: $("#productSalePrice").val(),
+            quantity: $("#productQuantity").val()
         }, function(data) {
-            if (data == '1') {
-                removeProductfield();
+            if (data == 'SUCCESS') {
                 loadProductItems();
+                $("#addQuotationItemModal").modal('hide');
             } else {
                 alert(data);
                 return;
@@ -295,53 +295,38 @@
         });
     }
 
-    function cancelProduct() {
-        removeProductfield();
-
-        qoRowcount = parseInt(qoRowcount) - 1;
-        $("#product-field-count").text(qoRowcount);
-    }
-
-    function termChange(){
-        var term = $("#poTerm option:selected");
-        var days = term.data('days');
-
-        $.get('/purchase-orders/get-term-due-date/' + days, function(data) {
-            $("#poDueDate").val(data);
-        });
-    }
-
-
     function loadProductItems() {
         qoRowcount = 0;
         totalQuotationCharge =0;
 
-        var pi_id = $("#purchaseInvoiceId").val();
+        var quotation_id = $("#quotationId").val();
 
         $(".loaded_product_items").remove();
 
         var html = '<tr class="product_items_loader">';
-        html += '<td colspan="7" class="loader"></td>';
+        html += '<td colspan="9" class="loader"></td>';
         html += '</tr>';
 
         $(".load_product_items").before(html);
 
-        $.getJSON("/purchase-invoice/get-product-items/" + pi_id, function(data){
+        $.getJSON("/quotation/get-product-items/" + quotation_id, function(data){
             if (data.length != 0) {
                 $.each(data, function(key, value) {
                     $(".product_items_loader").remove();
                     qoRowcount++;
-                    var item_cost = value.item_count * value.unit_cost;
+                    var item_cost = value.quantity * value.sale_price;
                     totalQuotationCharge = totalQuotationCharge + item_cost;
 
                     var html = '<tr class="loaded_product_items">';
                     html += '<td>' + qoRowcount + '</td>';
                     html += '<td>' + value.product_code + '</td>';
-                    html += '<td>' + value.product_description + '</td>';
-                    html += '<td align="right" class="c-black f-500">' + value.item_count + '</td>';
-                    html += '<td align="right" class="c-black f-500">' + value.unit_cost + '</td>';
+                    html += '<td>' + value.description + '</td>';
+                    html += '<td align="right" class="c-black f-500">' + value.price + '</td>';
+                    html += '<td align="right" class="c-black f-500">' + value.discount + '</td>';
+                    html += '<td align="right" class="c-black f-500">' + value.sale_price + '</td>';
+                    html += '<td align="right" class="c-black f-500">' + value.quantity + '</td>';
                     html += '<td align="right" class="c-black f-500">' + item_cost.toFixed(2) + '</td>';
-                    html += '<td width="2%" title="Remove Item" align="center" class="delete-action" onclick="deleteProductItem(\''+ value.product_item_id +'\')"><i class="zmdi zmdi-close-circle zmdi-hc-fw"></i></td>';
+                    html += '<td width="2%" title="Remove Item" align="center" class="delete-action" onclick="deleteProductItem(\''+ value.id +'\')"><i class="zmdi zmdi-close-circle zmdi-hc-fw"></i></td>';
                     html += '</tr>';
 
                     $("#totalQuotationCharge").text(totalQuotationCharge.toFixed(2));

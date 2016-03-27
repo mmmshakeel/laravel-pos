@@ -21,4 +21,19 @@ class Quotation extends Model
     {
         return $this->belongsTo('App\Branch', 'branch_id');
     }
+
+    public function salesRep()
+    {
+        return $this->belongsTo('App\Staff', 'sales_rep');
+    }
+
+    public function quotationItems()
+    {
+        return $this->hasMany('App\QuotationItems', 'quotation_id');
+    }
+
+    public function currency()
+    {
+        return $this->belongsTo('App\Currency', 'currency_id');
+    }
 }

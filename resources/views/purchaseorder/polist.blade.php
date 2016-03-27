@@ -30,7 +30,6 @@
                     <th data-column-id="id" data-type="numeric">PO #</th>
                     <th data-column-id="po_date">Date</th>
                     <th data-column-id="supplier">Supplier</th>
-                    <th data-column-id="account">Account</th>
                     <th data-column-id="ship_to_branch">Ship to Branch</th>
                     <th data-column-id="received_status">Received Status</th>
                     <th data-column-id="invoiced_status">Invoiced Status</th>
@@ -46,9 +45,8 @@
                     <tr>
                         <td>{{ $po->id }}</td>
                         <td>{{ date('Y-m-d', strtotime($po->created_at)) }}</td>
-                        <td>{{ $po->supplier->code }}</td>
-                        <td></td>
-                        <td>{{ $po->shipToBranch->code }}</td>
+                        <td>{{ ($po->supplier) ? $po->supplier->code : '' }}</td>
+                        <td>{{ ($po->shipToBranch) ? $po->shipToBranch->code : '' }}</td>
                         <td>
                             @if ($po->is_received == 'f')
                                 <span>Not Received</span>
