@@ -97,27 +97,6 @@ class QuotationController extends Controller
         ]);
     }
 
-    public function getPriceLevelByProduct($id)
-    {
-        $product = Product::find($id);
-
-        if(!$product) {
-            echo 'ERROR_PRODUCT_NOT_FOUND';
-            return;
-        }
-
-        echo json_encode([
-            'price_level1' => $product->price_level1,
-            'price_level2' => $product->price_level2,
-            'price_level3' => $product->price_level3,
-            'price_level4' => $product->price_level4,
-        ]);
-    }
-
-    public function getProductDescription($id)
-    {
-        echo Product::find($id)->description;
-    }
 
     /**
      * Save a product item for the quotaiton
@@ -177,7 +156,7 @@ class QuotationController extends Controller
     public function update(Request $request)
     {
         try {
-            $quotation = quotation::find($request->quotation_id);
+            $quotation = Quotation::find($request->quotation_id);
 
             $quotation->customer_id = $request->customer;
             $quotation->currency_id = $request->currency_id;

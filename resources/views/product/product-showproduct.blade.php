@@ -134,14 +134,14 @@
                         <div class="col-sm-4 m-b-20">
                             <div class="form-group fg-line">
                                 <label>Total Stock</label>
-                                <p>{{ $product->total_stock }}</p>
+                                <p>{{ $product->inventory->total_stock }}</p>
                             </div>
                         </div>
 
                         <div class="col-sm-3 m-b-20">
                             <div class="form-group fg-line">
                                 <label>Available Stock</label>
-                                <p>10</p>
+                                <p>{{ $product->inventory->available_stock }}</p>
                             </div>
                         </div>
                     </div>

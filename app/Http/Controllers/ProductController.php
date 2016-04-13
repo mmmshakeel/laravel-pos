@@ -272,4 +272,38 @@ class ProductController extends Controller
         ]);
     }
 
+    /**
+     * Get the price levels of a product by given product id
+     *
+     * @param  int $id Product Id
+     * @return string     Json string of price levels
+     */
+    public function getPriceLevelByProduct($id)
+    {
+        $product = Product::find($id);
+
+        if(!$product) {
+            echo 'ERROR_PRODUCT_NOT_FOUND';
+            return;
+        }
+
+        echo json_encode([
+            'price_level1' => $product->price_level1,
+            'price_level2' => $product->price_level2,
+            'price_level3' => $product->price_level3,
+            'price_level4' => $product->price_level4,
+        ]);
+    }
+
+    /**
+     * Get product description by given product id
+     *
+     * @param  int $id Product Id
+     * @return string     Product description
+     */
+    public function getProductDescription($id)
+    {
+        echo Product::find($id)->description;
+    }
+
 }

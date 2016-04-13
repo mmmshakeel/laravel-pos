@@ -55,6 +55,8 @@ Route::post('product/update/', 'ProductController@update');
 Route::delete('product/destroy', 'ProductController@destroy');
 Route::get('product/show/{id}', 'ProductController@show');
 Route::get('product/get-product-stock/{id}', 'ProductController@getProductStock');
+Route::get('product/get-price-level-by-product/{id}', 'ProductController@getPriceLevelByProduct');
+Route::get('product/get-product-description/{id}', 'ProductController@getProductDescription');
 
 // routes for product category
 Route::get('product/category', 'CategoryController@index')->name('product_category');
@@ -109,8 +111,6 @@ Route::get('quotation', 'QuotationController@index')->name('quotation_list');
 Route::get('quotation/create', 'QuotationController@create');
 Route::get('quotation/edit/{id}', 'QuotationController@edit')->name('edit_quotation');
 Route::post('quotation/save-quotation-product', 'QuotationController@saveQuotationProduct');
-Route::get('quotation/get-price-level-by-product/{id}', 'QuotationController@getPriceLevelByProduct');
-Route::get('quotation/get-product-description/{id}', 'QuotationController@getProductDescription');
 Route::get('quotation/get-product-items/{id}', 'QuotationController@getProductItems');
 Route::post('quotation/update', 'QuotationController@update');
 Route::get('quotation/print/{id}', 'QuotationController@printQuotation');
@@ -122,5 +122,9 @@ Route::post('customer/ajaxStore', 'CustomerController@ajaxStore');
 Route::get('customer/getcustomer/{id}', 'CustomerController@getCustomerDetailsById');
 
 // routes for sales invcice
+Route::get('sales-invoices/', 'SalesInvoiceController@index')->name('salesinvoice_list');
 Route::get('sales-invoice/create', 'SalesInvoiceController@create');
 Route::get('sales-invoice/edit/{id}', 'SalesInvoiceController@edit')->name('edit_salesinvoice');
+Route::post('sales-invoice/update', 'SalesInvoiceController@update');
+Route::get('sales-invoice/get-product-items/{id}', 'SalesInvoiceController@getProductItems');
+Route::post('sales-invoice/save-salesinvoice-product', 'SalesInvoiceController@saveSalesInvoiceProduct');

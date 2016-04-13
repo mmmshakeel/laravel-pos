@@ -12,5 +12,17 @@ class SalesInvoice extends Model
     protected $table = 'sales_invoice';
     protected $dates = ['deleted_at'];
 
-    
+    public function salesRep() {
+        return $this->belongsTo('App\Staff', 'sales_rep_id');
+    }
+
+    public function branch() {
+        return $this->belongsTo('App\Branch', 'branch_id');
+    }
+
+    public function salesinvoiceItems()
+    {
+        return $this->hasMany('App\SalesInvoiceProductItems', 'sales_invoice_id');
+    }
+
 }

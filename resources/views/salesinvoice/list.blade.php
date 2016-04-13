@@ -1,15 +1,15 @@
-<!-- resources/views/quotaiton/list.blade.php -->
+<!-- resources/views/salesinvoice/list.blade.php -->
 @extends('layouts.master')
 
-@section('title', 'Quotations')
+@section('title', 'Sales Invoices')
 
 @section('content')
 <div class="block-header">
-    <h2>Quotations</h2>
+    <h2>Sales Invoices</h2>
 </div>
 <div class="card">
     <div class="card-header">
-        <h2>Quotations</h2>
+        <h2>Sales Invoices</h2>
     </div>
 
     <div class="card-body card-padding">
@@ -27,10 +27,10 @@
         <table id="data-table-command" class="table table-striped table-vmiddle">
             <thead>
                 <tr>
-                    <th data-column-id="id" data-type="numeric">Quotation Id #</th>
+                    <th data-column-id="id" data-type="numeric">Invoice Id #</th>
                     <th data-column-id="qo_date">Date</th>
                     <th data-column-id="customer">Customer</th>
-                    <th data-column-id="quoted_branch">Quoted Branch</th>
+                    <th data-column-id="quoted_branch">Invoiced Branch</th>
                     <th data-column-id="sales_rep">Sales Rep</th>
                     <th data-column-id="currency">Currency</th>
                     <th data-column-id="qo_amount">Amount</th>
@@ -38,18 +38,18 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($quotations as $quotation)
+                @foreach ($salesinvoices as $salesinvoice)
                     <tr>
-                        <td>{{ $quotation->id }}</td>
-                        <td>{{ date('Y-m-d', strtotime($quotation->created_at)) }}</td>
-                        <td>{{ ($quotation->customer) ? $quotation->customer->title . ' ' . $quotation->customer->first_name : '' }}</td>
-                        <td>{{ ($quotation->branch) ? $quotation->branch->code : '' }}</td>
-                        <td>{{ ($quotation->salesRep) ? $quotation->salesRep->code : '' }}</td>
-                        <td>{{ ($quotation->currency) ? $quotation->currency->currency_code : '' }}</td>
+                        <td>{{ $salesinvoice->id }}</td>
+                        <td>{{ date('Y-m-d', strtotime($salesinvoice->created_at)) }}</td>
+                        <td>{{ ($salesinvoice->customer) ? $salesinvoice->customer->title . ' ' . $salesinvoice->customer->first_name : '' }}</td>
+                        <td>{{ ($salesinvoice->branch) ? $salesinvoice->branch->code : '' }}</td>
+                        <td>{{ ($salesinvoice->salesRep) ? $salesinvoice->salesRep->code : '' }}</td>
+                        <td>{{ ($salesinvoice->currency) ? $salesinvoice->currency->currency_code : '' }}</td>
                         <td>
                             <?php $amount = 0; ?>
-                            @foreach($quotation->quotationItems as $item)
-                                <?php $amount = $amount + ($item->sale_price * $item->quantity); ?>
+                            @foreach($salesinvoice->salesinvoiceItems as $item)
+                                <?php $amount = $amount + ($item->sale_price * $item->qty); ?>
                             @endforeach
                             {{ number_format($amount, 2) }}
                         </td>

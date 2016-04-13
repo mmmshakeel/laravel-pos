@@ -99,7 +99,7 @@
     function updateForm(product_id) {
 
         // populate price level selections
-        $.getJSON('/quotation/get-price-level-by-product/' + product_id, function(data){
+        $.getJSON('/product/get-price-level-by-product/' + product_id, function(data){
             if (data.length != 0) {
 
                 var level_count = 1;
@@ -123,7 +123,7 @@
         });
 
         // update product description
-        $.get('/quotation/get-product-description/' + product_id, function(data) {
+        $.get('/product/get-product-description/' + product_id, function(data) {
             $("#productDescription").val(data);
         });
 

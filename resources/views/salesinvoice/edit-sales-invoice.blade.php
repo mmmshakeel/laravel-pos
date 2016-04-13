@@ -125,7 +125,7 @@
                             </tr>
                             <tr class="add-product">
                                 <td colspan="9">
-                                    <button type="button" class="btn bgm-blue waves-effect" data-toggle="modal" data-target="#addQuotationItemModal">Add Product</button>
+                                    <button type="button" class="btn bgm-blue waves-effect" data-toggle="modal" data-target="#addSalesInvoiceItemModal">Add Product</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -157,7 +157,7 @@
 
                         <div class="">
                             <div class="fg-line">
-                                <textarea class="form-control" rows="5" placeholder="Internal notes for the quotation...." name="quotation_notes">{{ $sales_invoice->notes }}</textarea>
+                                <textarea class="form-control" rows="5" placeholder="Internal notes for the sales invoice...." name="quotation_notes">{{ $sales_invoice->notes }}</textarea>
                             </div>
                         </div>
 
@@ -168,30 +168,31 @@
                         <p class="f-500 c-black po-total">Total</p>
                         <p class="f-500 c-black po-total">
                             <span class="currency_code">LKR</span>
-                            <span id="totalQuotationCharge">0.00</span>
+                            <span id="totalSalesInvoiceCharge">0.00</span>
                         </p>
                     </div>
 
-                    <button class="btn btn-lg bgm-teal btn-block waves-effect m-t-20">Update Quotation</button>
+                    <button class="btn btn-lg bgm-teal btn-block waves-effect m-t-20">Update Invoice</button>
+
                 </div>
             </div>
         </div>
     </div>
-    <input type="hidden" name="quotation_id" id="quotationId" value="{{ $draft_id }}" />
+    <input type="hidden" name="sales_invoice_id" id="salesInvoiceId" value="{{ $draft_id }}" />
 </form>
 
 @include('customer.addcustomer-modal')
 
-@include('quotation.quotation-product-modal')
+@include('salesinvoice.sales-product-modal')
 
 <script type="text/javascript">
-    var totalQuotationCharge = 0;
+    var totalSalesInvoiceCharge = 0;
     var qoRowcount = 0;
 
     $(document).ready(function() {
-        $(".sub-menu-quotation").addClass('active');
-        $(".sub-menu-quotation").addClass('toggled');
-        $(".sub-menu-quotation-add").addClass('active');
+        $(".sub-menu-salesinvoice").addClass('active');
+        $(".sub-menu-salesinvoice").addClass('toggled');
+        $(".sub-menu-salesinvoice-add").addClass('active');
 
         loadProductItems();
     });
@@ -214,33 +215,6 @@
         });
     }
 
-    function updateBranchDetails(branch_id) {
-        if (!branch_id) {
-            $("#PoShipDetails").html("");
-            return;
-        }
-
-        $("#PoShipDetails").addClass("loader");
-
-        $.getJSON("/purchase-orders/getbranch/" + branch_id, function(data){
-            $("#PoShipDetails").removeClass("loader");
-
-            var html = data.code + "<br />" + data.description + "<br />" + data.address + ", " + data.city + "<br />";
-            $("#PoShipDetails").html(html);
-        });
-    }
-
-    function getProductDescription(product_id) {
-        if (product_id) {
-            $.get('/purchase-orders/get-product-description/' + product_id, function(data) {
-                $("#product-field-description").text(data);
-            });
-        } else {
-            $("#product-field-description").text('');
-        }
-
-    }
-
     function calculateAmount() {
         var ordered_value = parseInt($("#product-field-ordered").val());
         var eachcost_value = parseFloat($("#product-field-eachcost").val());
@@ -257,11 +231,12 @@
 
         $("#product-field-amount").text(amount_value.toFixed(2));
 
-        var temp_total = totalQuotationCharge + amount_value;
-        $("#totalQuotationCharge").text(temp_total.toFixed(2));
+        var temp_total = totalSalesInvoiceCharge + amount_value;
+        $("#totalSalesInvoiceCharge").text(temp_total.toFixed(2));
     }
 
-    function saveQuotationItem() {
+    function saveSalesInvoiceItem() {
+
         // validate
         if ($("#productId").val() == ''
             || $("#productPrice").val() == ''
@@ -276,8 +251,8 @@
             product_discount = $("#productDiscount").val();
         }
 
-        $.post('/quotation/save-quotation-product/', {
-            quotation_id: $("#quotationId").val(),
+        $.post('/sales-invoice/save-salesinvoice-product/', {
+            sales_invoice_id: $("#salesInvoiceId").val(),
             product_id: $("#productId").val(),
             price_level: $('input[name=product_price_level]:checked').data("pricelevel"),
             price: $("#productPrice").val(),
@@ -287,9 +262,10 @@
         }, function(data) {
             if (data == 'SUCCESS') {
                 loadProductItems();
-                $("#addQuotationItemModal").modal('hide');
+                $("#addSalesInvoiceItemModalLabel").modal('hide');
             } else {
-                alert(data);
+                alert('Error!!');
+                console.log(data);
                 return;
             }
         });
@@ -297,9 +273,9 @@
 
     function loadProductItems() {
         qoRowcount = 0;
-        totalQuotationCharge =0;
+        totalSalesInvoiceCharge =0;
 
-        var quotation_id = $("#quotationId").val();
+        var sales_invoice_id = $("#salesInvoiceId").val();
 
         $(".loaded_product_items").remove();
 
@@ -309,13 +285,13 @@
 
         $(".load_product_items").before(html);
 
-        $.getJSON("/quotation/get-product-items/" + quotation_id, function(data){
+        $.getJSON("/sales-invoice/get-product-items/" + sales_invoice_id, function(data){
             if (data.length != 0) {
                 $.each(data, function(key, value) {
                     $(".product_items_loader").remove();
                     qoRowcount++;
                     var item_cost = value.quantity * value.sale_price;
-                    totalQuotationCharge = totalQuotationCharge + item_cost;
+                    totalSalesInvoiceCharge = totalSalesInvoiceCharge + item_cost;
 
                     var html = '<tr class="loaded_product_items">';
                     html += '<td>' + qoRowcount + '</td>';
@@ -329,8 +305,7 @@
                     html += '<td width="2%" title="Remove Item" align="center" class="delete-action" onclick="deleteProductItem(\''+ value.id +'\')"><i class="zmdi zmdi-close-circle zmdi-hc-fw"></i></td>';
                     html += '</tr>';
 
-                    $("#totalQuotationCharge").text(totalQuotationCharge.toFixed(2));
-
+                    $("#totalSalesInvoiceCharge").text(totalSalesInvoiceCharge.toFixed(2));
                     $(".load_product_items").before(html);
                 });
             } else {
