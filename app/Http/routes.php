@@ -120,3 +120,7 @@ Route::delete('quotation/destroy', 'QuotationController@destroy');
 Route::post('customer/store', 'CustomerController@store');
 Route::post('customer/ajaxStore', 'CustomerController@ajaxStore');
 Route::get('customer/getcustomer/{id}', 'CustomerController@getCustomerDetailsById');
+
+// routes for sales invcice
+Route::get('sales-invoice/create', 'SalesInvoiceController@create');
+Route::get('sales-invoice/edit/{id}', 'SalesInvoiceController@edit')->name('edit_salesinvoice');

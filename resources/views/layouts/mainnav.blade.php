@@ -68,6 +68,9 @@
                 <ul>
                     <li><a class="sub-menu-quotation-add" href="/quotation/create">Add New Quotation</a></li>
                     <li><a class="sub-menu-quotation-list" href="/quotation">Quotations List</a></li>
+                    <li><a>----------------------</a></li>
+                    <li><a class="sub-menu-sales-invoice" href="/sales-invoices">Sales Invoices</a></li>
+                    <li><a class="sub-menu-new-sales-invoice" href="/sales-invoice/create">New Sales Invoice</a></li>
                 </ul>
             </li>
 

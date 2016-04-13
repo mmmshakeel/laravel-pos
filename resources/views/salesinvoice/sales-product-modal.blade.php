@@ -1,4 +1,4 @@
-<div class="modal fade" id="addQuotationItemModal" tabindex="-1" role="dialog" aria-labelledby="addQuotationItemModalLabel">
+<div class="modal fade" id="addSalesInvoiceItemModal" tabindex="-1" role="dialog" aria-labelledby="addSalesInvoiceItemModalLabel">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -7,7 +7,7 @@
                         &times;
                     </span>
                 </button>
-                <h4 class="modal-title" id="addQuotationModalLabel">
+                <h4 class="modal-title" id="addSalesInvoiceModalLabel">
                     Add Item
                 </h4>
             </div>
@@ -87,7 +87,7 @@
                 <button type="button" class="btn btn-default" onclick="closeModal()">
                     Close
                 </button>
-                <button type="button" class="btn btn-primary" onclick="saveQuotationItem();">
+                <button type="button" class="btn btn-primary" onclick="saveSalesInvoiceItem();">
                     Add Item
                 </button>
             </div>
@@ -149,6 +149,6 @@
     }
 
     function closeModal() {
-        $('#addQuotationItemModal').modal('hide');
+        $('#addSalesInvoiceItemModal').modal('hide');
     }
 </script>
