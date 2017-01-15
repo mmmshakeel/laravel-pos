@@ -171,9 +171,14 @@
                             <span id="totalSalesInvoiceCharge">0.00</span>
                         </p>
                     </div>
-
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-4">
+                    <button type="button" class="btn btn-lg btn-danger btn-block waves-effect m-t-20" onclick="deleteDraftInvoice({{ $draft_id }});">Delete Draft Invoice</button>
+                </div>
+                <div class="col-sm-4">
                     <button class="btn btn-lg bgm-teal btn-block waves-effect m-t-20">Update Invoice</button>
-
                 </div>
             </div>
         </div>
@@ -325,6 +330,30 @@
                 alert('Error removing item.');
                 return;
             }
+        });
+    }
+
+    function deleteDraftInvoice(invoice_id) {
+        swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover this draft sales invoice!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Delete",
+            closeOnConfirm: false
+        },
+        function(){
+            $.ajax({
+                url: '/sales-invoice/destroy',
+                type: 'delete',
+                data: {id: $("#salesInvoiceId").val()},
+                success: function() {
+                    swal("Deleted!", "Your draft sales invoice has been deleted.", "success");
+                    window.location.href = '/sales-invoices';
+                }
+            });
+
+            
         });
     }
 

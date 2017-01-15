@@ -5,15 +5,14 @@ namespace App\Http\Controllers;
 use App\Countries;
 use App\Currency;
 use App\Customer;
+use App\Http\Controllers\Controller;
+use App\Inventory;
 use App\Product;
 use App\SalesInvoice;
-use App\Inventory;
 use App\SalesInvoiceProductItems;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Http\Requests;
 use DB;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SalesInvoiceController extends Controller
 {
@@ -125,14 +124,14 @@ class SalesInvoiceController extends Controller
         $items_array = [];
         foreach ($quotation_items as $value) {
             array_push($items_array, [
-                'id' => $value->id,
+                'id'           => $value->id,
                 'product_code' => $value->product->code,
-                'description' => $value->product->description,
-                'quantity' => $value->qty,
-                'sale_price' => $value->sale_price,
-                'price' => $value->price,
-                'discount' => $value->discount,
-                'price_level' => $value->price_level
+                'description'  => $value->product->description,
+                'quantity'     => $value->qty,
+                'sale_price'   => $value->sale_price,
+                'price'        => $value->price,
+                'discount'     => $value->discount,
+                'price_level'  => $value->price_level,
             ]);
         }
 
@@ -182,6 +181,30 @@ class SalesInvoiceController extends Controller
             DB::rollBack();
             echo $ex->getMessage();
         }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request) 
+    {
+        try {
+            $sales_invoice = SalesInvoice::find($request->id);
+            SalesInvoice::destroy($request->id);
+
+            // now delete the sales invoice items
+            SalesInvoiceProductItems::where('sales_invoice_id', $request->id)->delete();
+
+            $request->session()->flash('success', 'Sales invoice deleted!');
+            return redirect()->route('salesinvoice_list');
+        } catch (\Exception $e) {
+            $request->session()->flash('fail', 'An error occured while deleting sales invoice. Please try again!');
+            return redirect()->route('salesinvoice_list');
+        }
+
     }
 
 }

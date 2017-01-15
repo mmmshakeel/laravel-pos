@@ -171,7 +171,13 @@
                             <span id="totalQuotationCharge">0.00</span>
                         </p>
                     </div>
-
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-4">
+                    <button type="button" class="btn btn-lg btn-danger btn-block waves-effect m-t-20" onclick="deleteDraftQuotation({{$draft_id}})">Delete Draft Quotation</button>
+                </div>
+                <div class="col-sm-4">
                     <button class="btn btn-lg bgm-teal btn-block waves-effect m-t-20">Update Quotation</button>
                 </div>
             </div>
@@ -194,6 +200,7 @@
         $(".sub-menu-quotation-add").addClass('active');
 
         loadProductItems();
+
     });
 
     function updateCustomerDetails(customer_id) {
@@ -350,6 +357,20 @@
                 alert('Error removing item.');
                 return;
             }
+        });
+    }
+
+    function deleteDraftQuotation(invoice_id) {
+        swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover this draft quotation!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Delete",
+            closeOnConfirm: false
+        },
+        function(){
+            swal("Deleted!", "Your draft quotation has been deleted.", "success");
         });
     }
 

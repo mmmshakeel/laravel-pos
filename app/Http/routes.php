@@ -128,3 +128,4 @@ Route::get('sales-invoice/edit/{id}', 'SalesInvoiceController@edit')->name('edit
 Route::post('sales-invoice/update', 'SalesInvoiceController@update');
 Route::get('sales-invoice/get-product-items/{id}', 'SalesInvoiceController@getProductItems');
 Route::post('sales-invoice/save-salesinvoice-product', 'SalesInvoiceController@saveSalesInvoiceProduct');
+Route::delete('sales-invoice/destroy', 'SalesInvoiceController@destroy');

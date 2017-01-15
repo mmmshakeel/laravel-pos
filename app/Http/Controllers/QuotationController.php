@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Company;
+use App\Countries;
+use App\Currency;
 use App\Customer;
 use App\Http\Controllers\Controller;
 use App\Product;
 use App\Quotation;
-use App\Countries;
-use App\Inventory;
 use App\QuotationItems;
-use App\Currency;
-use App\Company;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class QuotationController extends Controller
 {
@@ -26,7 +25,7 @@ class QuotationController extends Controller
         $quotations = Quotation::where('is_draft', false)->get();
 
         return view('quotation.list', [
-            'quotations' => $quotations
+            'quotations' => $quotations,
         ]);
     }
 
@@ -82,21 +81,20 @@ class QuotationController extends Controller
     {
         $quotation = Quotation::find($id);
 
-        $customers = Customer::all();
-        $products  = Product::all();
-        $countries = Countries::all();
+        $customers     = Customer::all();
+        $products      = Product::all();
+        $countries     = Countries::all();
         $currency_list = Currency::all();
 
         return view('quotation.editquotation', [
-            'customers' => $customers,
-            'products'  => $products,
-            'countries' => $countries,
-            'draft_id'  => $quotation->id,
-            'quotation' => $quotation,
-            'currency_list' => $currency_list
+            'customers'     => $customers,
+            'products'      => $products,
+            'countries'     => $countries,
+            'draft_id'      => $quotation->id,
+            'quotation'     => $quotation,
+            'currency_list' => $currency_list,
         ]);
     }
-
 
     /**
      * Save a product item for the quotaiton
@@ -108,22 +106,22 @@ class QuotationController extends Controller
     {
         // validate
         $this->validate($request, [
-            'quotation_id'     => 'required',
-            'product_id'  => 'required',
-            'price_level' => 'required',
-            'sale_price' => 'required',
-            'quantity' => 'required',
+            'quotation_id' => 'required',
+            'product_id'   => 'required',
+            'price_level'  => 'required',
+            'sale_price'   => 'required',
+            'quantity'     => 'required',
         ]);
 
         try {
-            $quotation_item = new QuotationItems();
+            $quotation_item               = new QuotationItems();
             $quotation_item->quotation_id = $request->quotation_id;
-            $quotation_item->product_id = $request->product_id;
-            $quotation_item->price_level = $request->price_level;
-            $quotation_item->price = $request->price;
-            $quotation_item->discount = $request->discount;
-            $quotation_item->sale_price = $request->sale_price;
-            $quotation_item->quantity = $request->quantity;
+            $quotation_item->product_id   = $request->product_id;
+            $quotation_item->price_level  = $request->price_level;
+            $quotation_item->price        = $request->price;
+            $quotation_item->discount     = $request->discount;
+            $quotation_item->sale_price   = $request->sale_price;
+            $quotation_item->quantity     = $request->quantity;
             $quotation_item->save();
 
             echo 'SUCCESS';
@@ -139,14 +137,14 @@ class QuotationController extends Controller
         $items_array = [];
         foreach ($quotation_items as $value) {
             array_push($items_array, [
-                'id' => $value->id,
+                'id'           => $value->id,
                 'product_code' => $value->product->code,
-                'description' => $value->product->description,
-                'quantity' => $value->quantity,
-                'sale_price' => $value->sale_price,
-                'price' => $value->price,
-                'discount' => $value->discount,
-                'price_level' => $value->price_level
+                'description'  => $value->product->description,
+                'quantity'     => $value->quantity,
+                'sale_price'   => $value->sale_price,
+                'price'        => $value->price,
+                'discount'     => $value->discount,
+                'price_level'  => $value->price_level,
             ]);
         }
 
@@ -160,8 +158,8 @@ class QuotationController extends Controller
 
             $quotation->customer_id = $request->customer;
             $quotation->currency_id = $request->currency_id;
-            $quotation->notes = $request->quotation_notes;
-            $quotation->is_draft = false;
+            $quotation->notes       = $request->quotation_notes;
+            $quotation->is_draft    = false;
             $quotation->save();
 
             $request->session()->flash('success', 'Quotation saved!');
@@ -191,12 +189,12 @@ class QuotationController extends Controller
             $qo_total += $amount;
 
             $tmp = [
-                'no'                => $i,
-                'product_code'      => $item->product->code,
-                'product_desc'      => $item->product->description,
-                'product_quantity'  => $item->quantity,
+                'no'                 => $i,
+                'product_code'       => $item->product->code,
+                'product_desc'       => $item->product->description,
+                'product_quantity'   => $item->quantity,
                 'product_sale_price' => $item->sale_price,
-                'product_amount'    => number_format($amount, 2),
+                'product_amount'     => number_format($amount, 2),
             ];
 
             $i++;
@@ -204,10 +202,10 @@ class QuotationController extends Controller
         }
 
         return view('quotation.print', [
-            'quotation'       => $quotation,
-            'product_items'    => $product_items_array,
-            'company'          => $company,
-            'qo_total'         => number_format($qo_total, 2),
+            'quotation'     => $quotation,
+            'product_items' => $product_items_array,
+            'company'       => $company,
+            'qo_total'      => number_format($qo_total, 2),
         ]);
     }
 
@@ -217,11 +215,13 @@ class QuotationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request) {
-
+    public function destroy(Request $request)
+    {
         try {
             $quotation = Quotation::find($request->id);
             Quotation::destroy($request->id);
+
+            QuotationItems::where('quotation_id', $request->id)->delete();
 
             $request->session()->flash('success', 'Quotation deleted!');
             return redirect()->route('quotation_list');
