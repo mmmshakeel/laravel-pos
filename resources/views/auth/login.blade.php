@@ -13,7 +13,7 @@
 <div class="company-logo">
     <h3>Inventory & Billing</h3>
 </div>
-<form method="POST" action="/auth/login">
+<form method="POST" action="{{ url('/login') }}">
     {!! csrf_field() !!}
     <div class="lc-block toggled hidden" id="l-login">
         <div class="input-group m-b-20">
@@ -21,6 +21,11 @@
             <div class="fg-line">
                 <input type="text" class="form-control" placeholder="Username" name="login_name" value="{{ old('login_name') }}" required>
             </div>
+            @if ($errors->has('email'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
         </div>
 
         <div class="input-group m-b-20">
