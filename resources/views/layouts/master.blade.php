@@ -178,7 +178,7 @@
                 $("#l-login").addClass('hidden');
                 var a = location.pathname.split("/");
 
-                if (a[2] == 'login') {
+                if (a[1] == 'login') {
                     $('body').addClass('login-content');
                     $("#l-login").removeClass('hidden');
 
