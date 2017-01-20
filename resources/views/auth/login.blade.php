@@ -16,23 +16,24 @@
 <form method="POST" action="{{ url('/login') }}">
     {!! csrf_field() !!}
     <div class="lc-block toggled hidden" id="l-login">
-        <div class="input-group m-b-20">
+        <div class="input-group m-b-20 @if ($errors->has('login_name')) has-error @endif">
             <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
             <div class="fg-line">
-                <input type="text" class="form-control" placeholder="Username" name="login_name" value="{{ old('login_name') }}" required>
+                <input type="text" class="form-control" placeholder="Username" name="login_name" value="{{ old('login_name') }}">
             </div>
-            @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
+            @if ($errors->has('login_name'))
+                <small class="help-block">{{ $errors->first('login_name') }}</small>
+            @endif
         </div>
-
-        <div class="input-group m-b-20">
+        
+        <div class="input-group m-b-20 @if ($errors->has('password')) has-error @endif">
             <span class="input-group-addon"><i class="zmdi zmdi-male"></i></span>
             <div class="fg-line">
-                <input type="password" class="form-control" placeholder="Password" name="password" required>
+                <input type="password" class="form-control" placeholder="Password" name="password" >
             </div>
+            @if ($errors->has('password'))
+                <small class="help-block">{{ $errors->first('password') }}</small>
+            @endif
         </div>
 
         <div class="clearfix"></div>

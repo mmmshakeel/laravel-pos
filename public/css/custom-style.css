@@ -88,3 +88,11 @@
     color: #FFFFFF;
     background: #CC0000;
 }
+#l-login .input-group-addon {
+    vertical-align: middle;
+    border-width: 0;
+}
+
+#l-login .has-error .help-block {
+    text-align: left;
+}
