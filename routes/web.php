@@ -99,6 +99,7 @@ Route::get('purchase-orders/edit/{id}', 'PurchaseOrderController@edit');
 Route::get('purchase-orders/print/{id}', 'PurchaseOrderController@printPurchaseOrder');
 Route::get('purchase-orders/makeinvoice/{id}', 'PurchaseOrderController@invoicePoView');
 Route::get('purchase-orders/doinvoice/{id}', 'PurchaseOrderController@doInvoicePurchaseOrder');
+Route::delete('purchase-orders/destroy', 'PurchaseOrderController@destroy');
 
 // routes for purchase invoices
 Route::get('purchase-invoices', 'PurchaseInvoiceController@index')->name('purchase_invoice_list');
@@ -109,6 +110,7 @@ Route::post('purchase-invoice/update', 'PurchaseInvoiceController@update');
 Route::post('purchase-invoice/delete-pi-product', 'PurchaseInvoiceController@deletePiProduct');
 Route::get('purchase-invoice/print/{id}', 'PurchaseInvoiceController@printPurchaseInvoice');
 Route::get('purchase-invoice/create', 'PurchaseInvoiceController@create')->name('create_purchase_invoice');
+Route::delete('purchase-invoice/destroy', 'PurchaseInvoiceController@destroy');
 
 // routes for quotations
 Route::get('quotation', 'QuotationController@index')->name('quotation_list');
