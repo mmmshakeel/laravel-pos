@@ -10,8 +10,7 @@ class UsersTableSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        DB::table('users')->insert([
-            'id' => 1,
+        DB::table('user')->insert([
             'branch_id' => 3,
             'login_name' => 'admin',
             'password' => bcrypt('admin1234'),

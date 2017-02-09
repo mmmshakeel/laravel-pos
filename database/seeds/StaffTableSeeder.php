@@ -11,7 +11,6 @@ class StaffTableSeeder extends Seeder {
      */
     public function run() {
         DB::table('staff')->insert([
-            'id' => 1,
             'user_id' => 1,
             'code' => 'T0001',
             'title' => 'Mr',
@@ -20,7 +19,7 @@ class StaffTableSeeder extends Seeder {
             'joined_date' => '2015-11-01',
             'address' => 'test address1',
             'city' => 'test city',
-            'country' => 'Sri Lanka',
+            'country_id' => 203,
             'mobile' => '0727505061',
             'email' => 'mmmshakeel@gmail.com'
         ]);

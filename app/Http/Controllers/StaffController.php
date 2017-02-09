@@ -6,7 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Staff;
-use App\Countries;
+use App\Country;
 use DB;
 
 class StaffController extends Controller
@@ -35,7 +35,7 @@ class StaffController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        $countries = Countries::all();
+        $countries = Country::all();
 
         return view('staff.register', ['countries' => $countries]);
     }
@@ -101,7 +101,7 @@ class StaffController extends Controller
             $staff->joined_date = $joined_date;
             $staff->address = $request->address;
             $staff->city = $request->city;
-            $staff->country = $request->country;
+            $staff->country_id = $request->country;
             $staff->telephone = $request->telephone;
             $staff->mobile = $request->mobile;
             $staff->email = $request->email;
