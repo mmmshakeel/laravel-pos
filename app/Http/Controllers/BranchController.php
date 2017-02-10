@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Countries;
+use App\Country;
 use App\Branch;
 
 class BranchController extends Controller
@@ -34,7 +34,7 @@ class BranchController extends Controller
     public function create() {
 
         // get all the countries for the countries dropdown
-        $countries = Countries::all();
+        $countries = Country::all();
 
         return view('branch.addbranch', ['countries' => $countries]);
     }
@@ -98,7 +98,7 @@ class BranchController extends Controller
     public function edit($id) {
 
         // get all the countries for the countries dropdown
-        $countries = Countries::all();
+        $countries = Country::all();
         $branch = Branch::find($id);
 
         return view('branch.editbranch', ['countries' => $countries, 'branch' => $branch]);

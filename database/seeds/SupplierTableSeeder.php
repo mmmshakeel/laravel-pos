@@ -15,7 +15,7 @@ class SupplierTableSeeder extends Seeder {
         'company_name' => 'Supplier 1',
         'address' => 'Test address 1',
         'city' => 'Test city',
-        'country' => 203,
+        'country_id' => 203,
         'contact_title' => 'Mr',
         'contact_first_name' => 'Test First Name',
         'contact_last_name' => 'Test Last Name',

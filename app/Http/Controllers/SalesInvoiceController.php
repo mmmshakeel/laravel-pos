@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Countries;
+use App\Country;
 use App\Currency;
 use App\Customer;
 use App\Http\Controllers\Controller;
@@ -85,7 +85,7 @@ class SalesInvoiceController extends Controller
 
         $customers     = Customer::all();
         $products      = Product::all();
-        $countries     = Countries::all();
+        $countries     = Country::all();
         $currency_list = Currency::all();
 
         return view('salesinvoice.edit-sales-invoice', [

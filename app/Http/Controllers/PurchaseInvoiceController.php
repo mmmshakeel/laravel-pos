@@ -334,4 +334,26 @@ class PurchaseInvoiceController extends Controller
 
         return redirect()->route('purchase_invoice_edit', ['id' => $draft_id]);
     }
+    
+    /**
+     * Delete a purchase invoice and its items
+     * 
+     * @param Request $request
+     * @return type
+     */
+    public function destroy(Request $request) {
+        try {
+            $purchase_invoice = PurchaseInvoice::find($request->id);
+            PurchaseInvoice::destroy($request->id);
+
+            // now delete the sales invoice items
+            PurchaseInvoiceProductItems::where('purchase_invoice_id', $request->id)->delete();
+
+            $request->session()->flash('success', 'Purchase Invoice deleted!');
+            return redirect()->route('purchase_invoice_list');
+        } catch (\Exception $e) {
+            $request->session()->flash('fail', 'An error occured while deleting purchase invoice. Please try again!');
+            return redirect()->route('purchase_invoice_list');
+        }
+    }
 }

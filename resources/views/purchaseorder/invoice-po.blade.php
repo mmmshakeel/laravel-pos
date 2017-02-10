@@ -10,12 +10,12 @@
 
 <div class="card">
     <div class="card-header">
-        <h2>Inovicing Purchase Order - #{{ $purchase_order->id }}</h2>
+        <h2>Invoicing Purchase Order - #{{ $purchase_order->id }}</h2>
     </div>
 
     <div class="card-body card-padding">
         <div class="alert alert-danger hidden" role="alert">Failed to invoice purchase order. Please try again later.</div>
-        <div class="row">
+        <div class="row loader-raw">
             <div class="col-sm-6">
                 <p class="f-500 c-black m-b-20">Please wait...<p>
                 <div class="progress progress-striped active">
@@ -32,11 +32,12 @@
 
     $(document).ready(function() {
         $.get('/purchase-orders/doinvoice/{{ $purchase_order->id }}', function(data) {
-            if (data != 'fail') {
+            if (data.status) {
                 // redirect to the purchase invocei edit page
-                window.location.replace("/purchase-invoice/edit/{{ $purchase_order->id }}");
+                window.location.replace("/purchase-invoice/edit/" + data.id);
             } else {
                 $(".alert-danger").removeClass('hidden');
+                $(".loader-raw").addClass('hidden');
             }
         });
     });

@@ -16,7 +16,7 @@ class BranchTableSeeder extends Seeder {
                 'description' => 'Branch Nugegoda - EDITED',
                 'address' => 'No 123, Main Road, Nugegoda - E',
                 'city' => 'Nugegoda-E',
-                'country' => '203',
+                'country_id' => '203',
                 'contact_no' => '0112256111',
                 'contact_email' => 'ngbranch@test.com'
             ],
@@ -25,7 +25,7 @@ class BranchTableSeeder extends Seeder {
                 'description ' => 'Test 2',
                 'address ' => 'Galle Road, Bambalapitiya',
                 'city ' => 'Bambalapitiya',
-                'country ' => '203',
+                'country_id ' => '203',
                 'contact_no ' => '0112256789',
                 'contact_email ' => 'bmbranch@test.com'
             ]

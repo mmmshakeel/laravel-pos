@@ -45,21 +45,23 @@ class PurchaseOrderController extends Controller
 
             $tmp_array = [];
 
-            foreach ($po->productItems as $item) {
-                $amount = $amount + ($item->item_count * $item->unit_cost);
-            }
+            if ($po->productItems) {
+                foreach ($po->productItems as $item) {
+                    $amount = $amount + ($item->item_count * $item->unit_cost);
+                }
 
-            $tmp_array = [
-                'po_id'     => $po->id,
-                'po_amount' => $amount,
-            ];
+                $tmp_array = [
+                    'po_id'     => $po->id,
+                    'po_amount' => $amount,
+                ];
+            }
 
             array_push($po_amount_array, $tmp_array);
         }
 
         return view('purchaseorder.polist', [
             'purchase_orders' => $purchase_orders,
-            'po_amounts'      => $po_amount_array,
+            'po_amounts'      => $po_amount_array
         ]);
     }
 
@@ -259,8 +261,11 @@ class PurchaseOrderController extends Controller
         // check for duplicate
         $purchase_invoice_check = PurchaseInvoice::where('purchase_order_id', $id)->count();
         if ($purchase_invoice_check) {
-            echo 'Purchase invoice already exist.';
-            exit;
+            return response()->json([
+                'status' => 0,
+                'id' => 0,
+                'message' => 'Purchase invoice already exist'
+            ]);
         }
 
         // get the purchase order
@@ -325,10 +330,16 @@ class PurchaseOrderController extends Controller
             }
 
             DB::commit();
-            echo $purchase_invoice->id;
+            return response()->json([
+                'status' => 1,
+                'id' => $purchase_invoice->id
+            ]);
         } catch (\Exception $e) {
             DB::rollback();
-            echo $e->getMessage();
+            return response()->json([
+                'status' => 0,
+                'id' => 0
+            ]);
         }
     }
 
@@ -464,6 +475,28 @@ class PurchaseOrderController extends Controller
             'company'        => $company,
             'po_total'       => number_format($po_total, 2),
         ]);
+    }
+    
+    /**
+     * Delete a purchase order and its items
+     * 
+     * @param Request $request
+     * @return type
+     */
+    public function destroy(Request $request) {
+        try {
+            $purchase_order = PurchaseOrder::find($request->id);
+            PurchaseOrder::destroy($request->id);
+
+            // now delete the sales invoice items
+            ProductItems::where('purchase_order_id', $request->id)->delete();
+
+            $request->session()->flash('success', 'Purchase Order deleted!');
+            return redirect()->route('purchase_order_list');
+        } catch (\Exception $e) {
+            $request->session()->flash('fail', 'An error occured while deleting purchase order. Please try again!');
+            return redirect()->route('purchase_order_list');
+        }
     }
 
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Countries;
+use App\Country;
 use App\Supplier;
 
 class SupplierController extends Controller
@@ -33,7 +33,7 @@ class SupplierController extends Controller
     public function create() {
 
         // get all the countries for the countries dropdown
-        $countries = Countries::all();
+        $countries = Country::all();
         return view('supplier.addsupplier', ['countries' => $countries]);
 
     }
@@ -102,7 +102,7 @@ class SupplierController extends Controller
      */
     public function edit($id) {
         // get all the countries for the countries dropdown
-        $countries = Countries::all();
+        $countries = Country::all();
         $supplier = Supplier::find($id);
 
         return view('supplier.editsupplier', ['countries' => $countries, 'supplier' => $supplier]);
