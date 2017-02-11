@@ -10,6 +10,7 @@ class ModelTableSeeder extends Seeder {
      * @return void
      */
     public function run() {
+        DB::table('model')->truncate();
         DB::table('model')->insert([
             [
                 'name' => 'model1',

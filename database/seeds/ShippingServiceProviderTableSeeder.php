@@ -10,6 +10,7 @@ class ShippingServiceProviderTableSeeder extends Seeder {
      * @return void
      */
     public function run() {
+        DB::table('shipping_service_provider')->truncate();
         DB::table('shipping_service_provider')->insert([
             [
                 'name' => 'Ship service 1'

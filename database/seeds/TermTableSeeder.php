@@ -10,6 +10,7 @@ class TermTableSeeder extends Seeder {
      * @return void
      */
     public function run() {
+        DB::table('term')->truncate();
         DB::table('term')->insert([
             [
                 'description' => 'T30',

@@ -10,6 +10,7 @@ class ProductTypeTableSeeder extends Seeder {
      * @return void
      */
     public function run() {
+        DB::table('product_type')->truncate();
         DB::table('product_type')->insert([
             [
                 'type' => 'Inventory'

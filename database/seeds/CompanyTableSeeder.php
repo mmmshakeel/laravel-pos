@@ -11,6 +11,7 @@ class CompanyTableSeeder extends Seeder {
      * @return void
      */
     public function run() {
+        DB::table('company')->truncate();
         $faker = Faker\Factory::create();
 
         DB::table('company')->insert([

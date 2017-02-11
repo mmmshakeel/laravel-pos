@@ -8,6 +8,6 @@ class Company extends Model {
     protected $table = 'company';
 
     public function country() {
-        return $this->belongsTo('App\Countries', 'country_id');
+        return $this->belongsTo('App\Country', 'country_id');
     }
 }

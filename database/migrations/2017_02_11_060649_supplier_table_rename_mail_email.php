@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class MakeStaffCodeUnique extends Migration
+class SupplierTableRenameMailEmail extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class MakeStaffCodeUnique extends Migration
      */
     public function up()
     {
-        DB::statement('ALTER TABLE staff ADD UNIQUE (code)');
+        DB::statement('ALTER TABLE supplier CHANGE mail email varchar(255)');
     }
 
     /**

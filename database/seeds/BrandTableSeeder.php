@@ -10,6 +10,7 @@ class BrandTableSeeder extends Seeder {
      * @return void
      */
     public function run() {
+        DB::table('brand')->truncate();
         DB::table('brand')->insert([
             [
                 'name' => 'brand1',
