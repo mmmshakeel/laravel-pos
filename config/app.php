@@ -95,7 +95,7 @@ return [
     |
     */
 
-    'log' => 'single',
+    'log' => 'errorlog',
 
     'env' => env('APP_ENV', 'production'),
 
