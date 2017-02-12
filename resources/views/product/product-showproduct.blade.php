@@ -58,94 +58,67 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row">
+                <p class="f-500 m-b-20 c-black">Product Other Details: </p>
+
+                <div class="col-sm-4 m-b-20">
+                    <div class="form-group fg-line">
+                        <label>Inventory Type</label>
+                        <p>{{ $product->product_type->type }}</p>
+                    </div>
+                </div>
+
+                <div class="col-sm-3 m-b-20">
+                    <div class="form-group fg-line">
+                        <label>Product Status</label>
+                        @if ($product->active_status == 'A')
+                            <p>Active</p>
+                        @elseif ($product->active_status == 'I')
+                            <p>Inactive</p>
+                        @endif
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="card">
         <div class="card-body card-padding">
             <div class="row">
-                <p class="f-500 m-b-20 c-black">Product Price Details: </p>
-
                 <div class="col-sm-3 m-b-20">
-                    <div class="form-group fg-line">
-                        <label>Cost</label>
-                        <p>{{ $product->cost }}</p>
-                    </div>
-                </div>
-
-                <div class="col-sm-3 m-b-20">
-                    <div class="form-group fg-line">
-                        <label>Price Level 1</label>
-                        <p>{{ $product->price_level1 }}</p>
-                    </div>
-                </div>
-
-                <div class="col-sm-3 m-b-20">
-                    <div class="form-group fg-line">
-                        <label>Price Level 2</label>
-                        <p>{{ $product->price_level2 }}</p>
-                    </div>
-                </div>
-
-                <div class="col-sm-3 m-b-20">
-                    <div class="form-group fg-line">
-                        <label>Price Level 3</label>
-                        <p>{{ $product->price_level3 }}</p>
-                    </div>
+                    <h3>Total Stocks</h3>
+                    <h1>40</h1>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-body card-padding">
-                    <div class="row">
-                        <p class="f-500 m-b-20 c-black">Product Other Details: </p>
-
-                        <div class="col-sm-4 m-b-20">
-                            <div class="form-group fg-line">
-                                <label>Inventory Type</label>
-                                <p>{{ $product->product_type->type }}</p>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-3 m-b-20">
-                            <div class="form-group fg-line">
-                                <label>Product Status</label>
-                                @if ($product->active_status == 'A')
-                                    <p>Active</p>
-                                @elseif ($product->active_status == 'I')
-                                    <p>Inactive</p>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-body card-padding">
-                    <div class="row">
-                        <p class="f-500 m-b-20 c-black">Stock Details: </p>
-
-                        <div class="col-sm-4 m-b-20">
-                            <div class="form-group fg-line">
-                                <label>Total Stock</label>
-                                <p>{{ $product->inventory->total_stock }}</p>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-3 m-b-20">
-                            <div class="form-group fg-line">
-                                <label>Available Stock</label>
-                                <p>{{ $product->inventory->available_stock }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="row">
+                <table class="data-table-command table table-striped table-vmiddle">
+                    <thead>
+                        <tr>
+                            <th data-column-id="batch_id">Batch Id</th>
+                            <th data-column-id="barcode">Barcode</th>
+                            <th data-column-id="expiry_date">Expiry Date</th>
+                            <th data-column-id="stock_count" data-type="numeric">Stock Count</th>
+                            <th data-column-id="cost">Cost</th>
+                            <th data-column-id="price">Price</th>
+                            <th data-column-id="commands" data-formatter="commands" data-sortable="false">Commands</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($models as $model)
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

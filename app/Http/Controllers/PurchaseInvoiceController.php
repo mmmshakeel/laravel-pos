@@ -183,6 +183,8 @@ class PurchaseInvoiceController extends Controller
         }
 
         try {
+            DB::beginTransaction();
+
             $purchase_invoice = PurchaseInvoice::find($request->purchase_invoice_id);
 
             $purchase_invoice->supplier_id              = $request->supplier;
@@ -208,9 +210,28 @@ class PurchaseInvoiceController extends Controller
 
             $purchase_invoice->save();
 
+            // populate the inventory
+            $purchase_invoice_product_items = PurchaseInvoiceProductItems::where('purchase_invoice_id', $request->purchase_invoice_id)
+                ->get();
+
+            foreach ($purchase_invoice_product_items as $item) {
+                // find the product from inventory
+                $inventory = Inventory::where('product_id', $item->product_id)->first();
+                if (!$inventory) {
+                    $inventory = new Inventory();
+                }
+
+                $inventory->product_id      = $item->product_id;
+                $inventory->available_stock = $inventory->available_stock + $item->item_count;
+                $inventory->total_stock     = $inventory->total_stock + $item->item_count;
+                $inventory->save();
+            }
+
+            DB::commit();
             $request->session()->flash('success', 'Purchases invoice saved!');
             return redirect()->route('purchase_invoice_list');
         } catch (Exception $ex) {
+            DB::rollback();
             $request->session()->flash('fail', 'An error occured while saving purchase invoice. Please try again!');
             return back()->withInput();
         }
@@ -334,10 +355,10 @@ class PurchaseInvoiceController extends Controller
 
         return redirect()->route('purchase_invoice_edit', ['id' => $draft_id]);
     }
-    
+
     /**
      * Delete a purchase invoice and its items
-     * 
+     *
      * @param Request $request
      * @return type
      */

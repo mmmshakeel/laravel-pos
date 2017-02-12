@@ -17,7 +17,7 @@ class PurchaseOrder extends Model
     }
 
     public function productItems() {
-        return $this->hasMany('App\ProductItems', 'purchase_order_id');
+        return $this->hasMany('App\PurchaseOrderProductItems', 'purchase_order_id');
     }
 
     public function currency() {

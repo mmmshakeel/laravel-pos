@@ -87,8 +87,6 @@ class ProductController extends Controller
             'category_id'     => 'required',
             'brand_id'        => 'required',
             'model_id'        => 'required',
-            'cost'            => 'required',
-            'price_level1'    => 'required',
             'product_type_id' => 'required',
             'active_status'   => 'required',
         ]);
@@ -104,24 +102,11 @@ class ProductController extends Controller
             $product->brand_id        = $request->brand_id;
             $product->model_id        = $request->model_id;
             $product->branch_id       = $request->branch_id;
-            $product->cost            = $request->cost;
             $product->average_cost    = $request->average_cost;
-            $product->price_level1    = $request->price_level1;
-            $product->price_level2    = $request->price_level2;
-            $product->price_level3    = $request->price_level3;
-            $product->price_level4    = $request->price_level4;
-            $product->total_stock     = $request->total_stock;
             $product->rack_id         = $request->rack_id;
             $product->product_type_id = $request->product_type_id;
             $product->active_status   = $request->active_status;
-
             $product->save();
-
-            // now populate the inventory
-            $inventory                = new Inventory();
-            $inventory->product_id    = $product->id;
-            $inventory->minimum_stock = $request->minimum_stock;
-            $inventory->save();
 
             DB::commit();
 
@@ -190,8 +175,6 @@ class ProductController extends Controller
             'category_id'     => 'required',
             'brand_id'        => 'required',
             'model_id'        => 'required',
-            'cost'            => 'required',
-            'price_level1'    => 'required',
             'product_type_id' => 'required',
             'active_status'   => 'required',
         ]);
@@ -207,28 +190,11 @@ class ProductController extends Controller
             $product->brand_id        = $request->brand_id;
             $product->model_id        = $request->model_id;
             $product->branch_id       = $request->branch_id;
-            $product->cost            = $request->cost;
             $product->average_cost    = $request->average_cost;
-            $product->price_level1    = $request->price_level1;
-            $product->price_level2    = $request->price_level2;
-            $product->price_level3    = $request->price_level3;
-            $product->price_level4    = $request->price_level4;
-            $product->total_stock     = $request->total_stock;
             $product->rack_id         = $request->rack_id;
             $product->product_type_id = $request->product_type_id;
             $product->active_status   = $request->active_status;
-
             $product->save();
-
-            // now populate the inventory
-            // find the product from inventory
-            $inventory = Inventory::where('product_id', $product->id)->first();
-            if (!$inventory) {
-                $inventory = new Inventory();
-            }
-            $inventory->product_id    = $product->id;
-            $inventory->minimum_stock = $request->minimum_stock;
-            $inventory->save();
 
             DB::commit();
 
@@ -272,28 +238,6 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * Get the price levels of a product by given product id
-     *
-     * @param  int $id Product Id
-     * @return string     Json string of price levels
-     */
-    public function getPriceLevelByProduct($id)
-    {
-        $product = Product::find($id);
-
-        if(!$product) {
-            echo 'ERROR_PRODUCT_NOT_FOUND';
-            return;
-        }
-
-        echo json_encode([
-            'price_level1' => $product->price_level1,
-            'price_level2' => $product->price_level2,
-            'price_level3' => $product->price_level3,
-            'price_level4' => $product->price_level4,
-        ]);
-    }
 
     /**
      * Get product description by given product id
