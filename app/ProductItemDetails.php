@@ -13,10 +13,10 @@ class ProductItemDetails extends Model
     protected $dates = ['deleted_at'];
 
     public function product() {
-        return $this->belongsTo(App\Product::class, 'product_id');
+        return $this->belongsTo(Product::class, 'product_id');
     }
 
     public function product_batch() {
-        return $this->belongsTo(App\ProductBatch::class, 'product_batch_id');
+        return $this->belongsTo(ProductBatch::class, 'product_batch_id');
     }
 }

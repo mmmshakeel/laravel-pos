@@ -88,7 +88,7 @@
             <div class="row">
                 <div class="col-sm-3 m-b-20">
                     <h3>Total Stocks</h3>
-                    <h1>40</h1>
+                    <h1>{{ $product->inventory->total_stock }}</h1>
                 </div>
             </div>
 
@@ -98,7 +98,7 @@
                         <tr>
                             <th data-column-id="batch_id">Batch Number</th>
                             <th data-column-id="barcode">Barcode</th>
-                            <th data-column-id="expiry_date">Expiry Date</th>
+                            <th data-column-id="expiry_date" data-order="desc">Expiry Date</th>
                             <th data-column-id="stock_count" data-type="numeric">Batch Count</th>
                             <th data-column-id="cost">Cost</th>
                             <th data-column-id="price">Price</th>
@@ -108,13 +108,12 @@
                     <tbody>
                         @foreach ($product_item_details as $item)
                             <tr>
-                                <td>{{ $item->batch}}</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>{{ $item->product_batch->batch_number }}</td>
+                                <td>{{ $item->barcode }}</td>
+                                <td>{{ $item->expiry_date }}</td>
+                                <td>{{ $item->item_count }}</td>
+                                <td>{{ $item->cost }}</td>
+                                <td>{{ $item->price1 }}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -126,6 +125,21 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+        $(".data-table-command").bootgrid({
+            css: {
+                icon: 'zmdi icon',
+                iconColumns: 'zmdi-view-module',
+                iconDown: 'zmdi-expand-more',
+                iconRefresh: 'zmdi-refresh',
+                iconUp: 'zmdi-expand-less'
+            },
+            formatters: {
+                "commands": function(column, row) {
+                    return '<a href="/product/model/edit/' + row.id + '"><button type="button" class="btn btn-icon command-edit m-r-5" data-row-id="' + row.id + '"><span class="zmdi zmdi-edit"></span></button></a>';
+                }
+            }
+        });
+
         $(".sub-menu-inventory").addClass('active');
         $(".sub-menu-inventory").addClass('toggled');
     });
