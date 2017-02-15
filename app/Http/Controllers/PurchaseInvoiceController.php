@@ -11,6 +11,8 @@ use App\Product;
 use App\PurchaseInvoice;
 use App\PurchaseInvoiceProductItems;
 use App\ShippingServiceProvider;
+use App\ProductBatch;
+use App\ProductItemDetails;
 use App\Supplier;
 use App\Term;
 use DB;
@@ -207,7 +209,6 @@ class PurchaseInvoiceController extends Controller
             $purchase_invoice->location_id              = $request->location_id ? $request->location_id : Auth::user()->branch_id;
             $purchase_invoice->is_received              = 't';
             $purchase_invoice->is_draft                 = 0;
-
             $purchase_invoice->save();
 
             // populate the inventory
@@ -215,6 +216,24 @@ class PurchaseInvoiceController extends Controller
                 ->get();
 
             foreach ($purchase_invoice_product_items as $item) {
+
+                // save the product batches
+                $product_batch                      = new ProductBatch();
+                $product_batch->product_id          = $item->product_id;
+                $product_batch->purchase_invoice_id = $request->purchase_invoice_id;
+                $product_batch->batch_number        = '0000';
+                $product_batch->save();
+
+                // save the product details
+                $product_item_details                   = new ProductItemDetails();
+                $product_item_details->product_id       = $item->product_id;
+                $product_item_details->product_batch_id = $product_batch->id;
+                $product_item_details->cost             = $item->unit_cost;
+                $product_item_details->price1           = 0;
+                $product_item_details->item_count       = $item->item_count;
+                $product_item_details->enabled          = 1;
+                $product_item_details->save();
+
                 // find the product from inventory
                 $inventory = Inventory::where('product_id', $item->product_id)->first();
                 if (!$inventory) {

@@ -10,6 +10,7 @@ use App\Inventory;
 use App\Product;
 use App\ProductModel;
 use App\ProductType;
+use App\ProductItemDetails;
 use DB;
 use Illuminate\Http\Request;
 
@@ -129,9 +130,11 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::find($id);
+        $product_item_details = ProductItemDetails::where('product_id', $id)->get();
 
         return view('product.product-showproduct', [
             'product' => $product,
+            'product_item_details' => $product_item_details
         ]);
     }
 

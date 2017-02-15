@@ -96,19 +96,19 @@
                 <table class="data-table-command table table-striped table-vmiddle">
                     <thead>
                         <tr>
-                            <th data-column-id="batch_id">Batch Id</th>
+                            <th data-column-id="batch_id">Batch Number</th>
                             <th data-column-id="barcode">Barcode</th>
                             <th data-column-id="expiry_date">Expiry Date</th>
-                            <th data-column-id="stock_count" data-type="numeric">Stock Count</th>
+                            <th data-column-id="stock_count" data-type="numeric">Batch Count</th>
                             <th data-column-id="cost">Cost</th>
                             <th data-column-id="price">Price</th>
                             <th data-column-id="commands" data-formatter="commands" data-sortable="false">Commands</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($models as $model)
+                        @foreach ($product_item_details as $item)
                             <tr>
-                                <td></td>
+                                <td>{{ $item->batch}}</td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
