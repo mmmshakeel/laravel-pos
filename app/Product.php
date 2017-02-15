@@ -36,6 +36,6 @@ class Product extends Model
     }
 
     public function productItems() {
-        return $this->hasMany('App\ProductItems', 'product_id');
+        return $this->hasMany('App\PurchaseOrderProductItems', 'product_id');
     }
 }

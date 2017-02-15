@@ -10,6 +10,7 @@ class StaffTableSeeder extends Seeder {
      * @return void
      */
     public function run() {
+        DB::table('staff')->truncate();
         DB::table('staff')->insert([
             'user_id' => 1,
             'code' => 'T0001',

@@ -96,7 +96,7 @@
             formatters: {
                 "commands": function(column, row) {
                     return '<a href="/product/category/edit/' + row.id + '"><button type="button" class="btn btn-icon command-edit m-r-5" data-row-id="' + row.id + '"><span class="zmdi zmdi-edit"></span></button></a>' +
-                        '<form style="display: inline-block" method="POST" action="/category/destroy">{!! csrf_field() !!}{{ method_field("DELETE") }}<input type="hidden" name="id" value="' + row.id + '"><button type="submit" class="btn btn-icon command-delete" data-row-id="' + row.id + '"><span class="zmdi zmdi-delete"></span></button></form>';
+                        '<form style="display: inline-block" method="POST" action="/category/destroy">{!! csrf_field() !!}{{ method_field("DELETE") }}<input type="hidden" name="id" value="' + row.id + '"><button type="button" onclick="confirmDelete(this.form)" class="btn btn-icon command-delete" data-row-id="' + row.id + '"><span class="zmdi zmdi-delete"></span></button></form>';
                 }
             }
         });
@@ -105,6 +105,21 @@
         $(".sub-menu-inventory").addClass('toggled');
         $(".sub-menu-product-category").addClass('active');
     });
+
+    function confirmDelete(form) {
+        swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover deleted information!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Delete",
+            closeOnConfirm: false
+        },
+        function(isConfirm){
+            if (isConfirm) {
+                form.submit();
+            }
+        });
+    }
 </script>
 @endsection
-

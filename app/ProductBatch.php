@@ -5,14 +5,14 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Branch extends Model {
-
+class ProductBatch extends Model
+{
     use SoftDeletes;
 
-    protected $table = 'branch';
+    protected $table = 'product_batch';
     protected $dates = ['deleted_at'];
 
-    public function country() {
-        return $this->belongsTo('App\Country', 'country_id');
+    public function product() {
+        return $this->belongsTo(App\Product::class, 'product_id');
     }
 }

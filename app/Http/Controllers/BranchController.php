@@ -61,14 +61,14 @@ class BranchController extends Controller
             $branch->description = $request->description;
             $branch->address = $request->address;
             $branch->city = $request->city;
-            $branch->country = $request->country;
+            $branch->country_id = $request->country;
             $branch->contact_no = $request->contact_no;
             $branch->contact_email = $request->contact_email;
 
             $branch->save();
 
             $request->session()->flash('success', 'Branch ' . $request->code . ' saved!');
-            return redirect()->action('BranchController@create');
+            return redirect()->action('BranchController@index');
         } catch (\Exception $e) {
             $request->session()->flash('fail', 'An error occured while saving branch ' . $request->code . '. Please try again!');
             return redirect()->action('BranchController@create');
@@ -127,7 +127,7 @@ class BranchController extends Controller
             $branch->description = $request->description;
             $branch->address = $request->address;
             $branch->city = $request->city;
-            $branch->country = $request->country;
+            $branch->country_id = $request->country;
             $branch->contact_no = $request->contact_no;
             $branch->contact_email = $request->contact_email;
 

@@ -10,6 +10,7 @@ class SupplierTableSeeder extends Seeder {
      * @return void
      */
     public function run() {
+        DB::table('supplier')->truncate();
         DB::table('supplier')->insert([
         'code' => 'SUP0001',
         'company_name' => 'Supplier 1',

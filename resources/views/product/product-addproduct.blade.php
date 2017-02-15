@@ -118,50 +118,7 @@
     <div class="card">
         <div class="card-body card-padding">
             <div class="row">
-                <p class="f-500 m-b-20 c-black">Product Price Details: </p>
-
-                <div class="col-sm-3 m-b-20">
-                    <div class="form-group fg-line">
-                        <label>Cost <sup class="req-star">*</sup></label>
-                        <input type="text" name="cost" class="form-control input-mask" placeholder="eg. 00.00" value="{{ old('cost') }}">
-                    </div>
-                </div>
-
-                <div class="col-sm-3 m-b-20">
-                    <div class="form-group fg-line">
-                        <label>Price Level 1 <sup class="req-star">*</sup></label>
-                        <input type="text" name="price_level1" class="form-control input-mask" placeholder="eg. 00.00" value="{{ old('price_level1') }}">
-                    </div>
-                </div>
-
-                <div class="col-sm-3 m-b-20">
-                    <div class="form-group fg-line">
-                        <label>Price Level 2</label>
-                        <input type="text" name="price_level2" class="form-control input-mask" placeholder="eg. 00.00" value="{{ old('price_level2') }}">
-                    </div>
-                </div>
-
-                <div class="col-sm-3 m-b-20">
-                    <div class="form-group fg-line">
-                        <label>Price Level 3</label>
-                        <input type="text" name="price_level3" class="form-control input-mask" placeholder="eg. 00.00" value="{{ old('price_level3') }}">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-body card-padding">
-            <div class="row">
-                <p class="f-500 m-b-20 c-black">Product Other Details: </p>
-
-                <div class="col-sm-3 m-b-20">
-                    <div class="form-group fg-line">
-                        <label>Minimum Stock</label>
-                        <input type="number" name="minimum_stock" class="form-control" value="{{ old('minimum_stock') }}">
-                    </div>
-                </div>
+                <p class="f-500 m-b-20 c-black">Product Other Details: </p>            
 
                 <div class="col-sm-4 m-b-20">
                     <div class="form-group fg-line">

@@ -10,6 +10,7 @@ class BranchTableSeeder extends Seeder {
      * @return void
      */
     public function run() {
+        DB::table('branch')->truncate();
         DB::table('branch')->insert([
             [
                 'code' => 'BR001',

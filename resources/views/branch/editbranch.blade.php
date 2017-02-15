@@ -68,7 +68,7 @@
                                 <select class="selectpicker" name="country" data-live-search="true">
                                     @foreach ($countries as $country)
                                         <option value="{{ $country->id }}"
-                                        @if ($country->id == $branch->country)
+                                        @if ($country->id == $branch->country_id)
                                             selected="selected"
                                         @endif
                                         >{{ $country->country_name }}</option>

@@ -10,6 +10,7 @@ class CategoryTableSeeder extends Seeder {
      * @return void
      */
     public function run() {
+        DB::table('category')->truncate();
         DB::table('category')->insert([
             [
                 'name' => 'cat1',

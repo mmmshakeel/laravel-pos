@@ -8,7 +8,7 @@ use App\Currency;
 use App\Http\Controllers\Controller;
 use App\Inventory;
 use App\Product;
-use App\ProductItems;
+use App\PurchaseOrderProductItems;
 use App\PurchaseInvoice;
 use App\PurchaseInvoiceProductItems;
 use App\PurchaseOrder;
@@ -304,7 +304,7 @@ class PurchaseOrderController extends Controller
             $purchase_invoice->save();
 
             // get all the products, ordered in purchase order
-            $po_product_items = ProductItems::where('purchase_order_id', $purchase_order->id)->get();
+            $po_product_items = PurchaseOrderProductItems::where('purchase_order_id', $purchase_order->id)->get();
 
             foreach ($po_product_items as $item) {
                 $purchase_invoice_product_items                       = new PurchaseInvoiceProductItems();
@@ -409,7 +409,7 @@ class PurchaseOrderController extends Controller
 
     public function getProductItems($po_id)
     {
-        $product_items = ProductItems::where('purchase_order_id', $po_id)
+        $product_items = PurchaseOrderProductItems::where('purchase_order_id', $po_id)
             ->get();
 
         $product_items_array = [];
@@ -476,10 +476,10 @@ class PurchaseOrderController extends Controller
             'po_total'       => number_format($po_total, 2),
         ]);
     }
-    
+
     /**
      * Delete a purchase order and its items
-     * 
+     *
      * @param Request $request
      * @return type
      */
