@@ -1,1 +1,0 @@
-{"virtualbox":{"/home/vagrant/inventory-com":{"type":null,"mount_options":[],"guestpath":"/home/vagrant/inventory-com","hostpath":"/home/shakeel/Workspace/inventory.com","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"/home/shakeel/Workspace/inventory.com","disabled":false,"__vagrantfile":true}}}
