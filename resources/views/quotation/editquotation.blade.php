@@ -186,6 +186,11 @@
     <input type="hidden" name="quotation_id" id="quotationId" value="{{ $draft_id }}" />
 </form>
 
+<form id="quotationDraftDeleteForm" method="POST" action="/quotation/destroy">
+    {!! csrf_field() !!}{{ method_field("DELETE") }}
+    <input type="hidden" name="id" value="{{ $draft_id }}" />
+</form>
+
 @include('customer.addcustomer-modal')
 
 @include('quotation.quotation-product-modal')
@@ -370,7 +375,7 @@
             closeOnConfirm: false
         },
         function(){
-            swal("Deleted!", "Your draft quotation has been deleted.", "success");
+            $("#quotationDraftDeleteForm").submit();
         });
     }
 

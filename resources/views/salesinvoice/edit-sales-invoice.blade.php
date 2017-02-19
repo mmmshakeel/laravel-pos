@@ -186,6 +186,11 @@
     <input type="hidden" name="sales_invoice_id" id="salesInvoiceId" value="{{ $draft_id }}" />
 </form>
 
+<form id="salesInvoiceDraftDeleteForm" method="POST" action="/sales-invoice/destroy">
+    {!! csrf_field() !!}{{ method_field("DELETE") }}
+    <input type="hidden" name="id" value="{{ $draft_id }}" />
+</form>
+
 @include('customer.addcustomer-modal')
 
 @include('salesinvoice.sales-product-modal')
@@ -343,17 +348,7 @@
             closeOnConfirm: false
         },
         function(){
-            $.ajax({
-                url: '/sales-invoice/destroy',
-                type: 'delete',
-                data: {id: $("#salesInvoiceId").val()},
-                success: function() {
-                    swal("Deleted!", "Your draft sales invoice has been deleted.", "success");
-                    window.location.href = '/sales-invoices';
-                }
-            });
-
-            
+            $("#salesInvoiceDraftDeleteForm").submit();
         });
     }
 

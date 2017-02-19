@@ -88,7 +88,7 @@
             <div class="row">
                 <div class="col-sm-3 m-b-20">
                     <h3>Total Stocks</h3>
-                    <h1>{{ $product->inventory->total_stock }}</h1>
+                    <h1>{{ $inventory_stock_total }}</h1>
                 </div>
             </div>
 
