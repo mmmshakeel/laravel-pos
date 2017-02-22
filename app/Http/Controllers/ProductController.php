@@ -8,9 +8,10 @@ use App\Category;
 use App\Http\Controllers\Controller;
 use App\Inventory;
 use App\Product;
+use App\ProductBatch;
+use App\ProductItemDetails;
 use App\ProductModel;
 use App\ProductType;
-use App\ProductItemDetails;
 use DB;
 use Illuminate\Http\Request;
 
@@ -129,12 +130,19 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::find($id);
+        $product              = Product::find($id);
         $product_item_details = ProductItemDetails::where('product_id', $id)->get();
 
+        $inventory_stock_total = 0;
+
+        if ($product->inventory) {
+            $inventory_stock_total = $product->inventory->total_stock;
+        }
+
         return view('product.product-showproduct', [
-            'product' => $product,
-            'product_item_details' => $product_item_details
+            'product'               => $product,
+            'inventory_stock_total' => $inventory_stock_total,
+            'product_item_details'  => $product_item_details,
         ]);
     }
 
@@ -236,11 +244,10 @@ class ProductController extends Controller
         $product = Product::find($id);
 
         echo json_encode([
-            'total_stock' => $product->inventory->total_stock,
-            'available_stock' => $product->inventory->available_stock
+            'total_stock'     => $product->inventory->total_stock,
+            'available_stock' => $product->inventory->available_stock,
         ]);
     }
-
 
     /**
      * Get product description by given product id
@@ -251,6 +258,68 @@ class ProductController extends Controller
     public function getProductDescription($id)
     {
         echo Product::find($id)->description;
+    }
+
+    /**
+     * Get the product item details of a product
+     *
+     * @param  int
+     * @return json
+     */
+    public function getProductItemDetails($id)
+    {
+        $product_item_details = ProductItemDetails::find($id);
+
+        if (!$product_item_details) {
+            return response('Resource not found', 401);
+        }
+
+        return response()->json([
+            'batch_number' => $product_item_details->product_batch->batch_number,
+            'barcode'      => $product_item_details->barcode,
+            'expiry_date'  => $product_item_details->expiry_date,
+            'price1'       => $product_item_details->price1,
+            'price2'       => $product_item_details->price2,
+            'price3'       => $product_item_details->price3,
+            'cost'         => $product_item_details->cost,
+            'item_count'   => $product_item_details->item_count,
+            'id'           => $product_item_details->id,
+        ]);
+    }
+
+    public function updateBatch(Request $request)
+    {
+        $product_item_details = ProductItemDetails::find($request->product_item_id);
+
+        $this->validate($request, [
+            'batch_number' => 'required|unique:product_batch,batch_number,' . $product_item_details->product_batch->id,
+            'price1'       => 'required',
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            // update product batch
+            $product_batch               = ProductBatch::find($product_item_details->product_batch->id);
+            $product_batch->batch_number = $request->batch_number;
+            $product_batch->save();
+
+            if ($request->expiry_date) {
+                $expiry_date_arr = explode('-', $request->expiry_date);
+                $expiry_date     = $expiry_date_arr[2] . '-' . $expiry_date_arr[1] . '-' . $expiry_date_arr[0];
+            }
+
+            $product_item_details->barcode     = $request->barcode;
+            $product_item_details->expiry_date = $expiry_date;
+            $product_item_details->price1      = $request->price1;
+            $product_item_details->price2      = $request->price2;
+            $product_item_details->price3      = $request->price3;
+            $product_item_details->save();
+
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollback();
+        }
     }
 
 }
