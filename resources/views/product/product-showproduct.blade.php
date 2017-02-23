@@ -106,19 +106,6 @@
                             <th data-column-id="commands" data-formatter="commands" data-sortable="false">Commands</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach ($product_item_details as $item)
-                            <tr>
-                                <td>{{ $item->id }}</td>
-                                <td>{{ $item->product_batch->batch_number }}</td>
-                                <td>{{ $item->barcode }}</td>
-                                <td>{{ $item->expiry_date }}</td>
-                                <td>{{ $item->item_count }}</td>
-                                <td>{{ $item->cost }}</td>
-                                <td>{{ $item->price1 }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
                 </table>
             </div>
         </div>
@@ -206,6 +193,8 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $(".data-table-command").bootgrid({
+            ajax: true,
+            url: '',
             css: {
                 icon: 'zmdi icon',
                 iconColumns: 'zmdi-view-module',

@@ -260,6 +260,38 @@ class ProductController extends Controller
         echo Product::find($id)->description;
     }
 
+
+    public function getAllProductItemsByProduct($id)
+    {
+        $product_items = ProductItemDetails::where('product_id', $id);
+
+        $total_item_count = $product_items->count();
+
+        $rows = [];
+
+        if ($total_item_count > 0) {
+            foreach ($product_items->get() as $item) {
+                $rows[] = [
+                    'id'          => $item->id,
+                    'batch_id'    => $item->product_batch->batch_number,
+                    'barcode'     => $item->barcode,
+                    'expiry_date' => $item->expiry_date,
+                    'stock_count' => $item->item_count,
+                    'cost'        => $item->cost,
+                    'price'       => $item->price1,
+                ];
+            }
+        }
+
+        return response()->json([
+            'current'  => 1,
+            'rowCount' => 10,
+            'rows'     => $rows,
+            'total'    => $total_item_count
+        ]);
+
+    }
+
     /**
      * Get the product item details of a product
      *
