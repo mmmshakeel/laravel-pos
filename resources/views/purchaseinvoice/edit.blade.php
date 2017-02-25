@@ -357,11 +357,17 @@
                     </div>
 
                     <button class="btn btn-lg bgm-teal btn-block waves-effect m-t-20">Update Purchase Invoice</button>
+                    <button type="button" class="btn btn-lg btn-danger btn-block waves-effect m-t-20" onclick="deleteDraftInvoice({{ $draft_id }});">Delete Draft Invoice</button>
                 </div>
             </div>
         </div>
     </div>
     <input type="hidden" name="purchase_invoice_id" id="purchaseInvoiceId" value="{{ $draft_id }}" />
+</form>
+
+<form id="purchaseInvoiceDraftDeleteForm" method="POST" action="/purchase-invoice/destroy">
+    {!! csrf_field() !!}{{ method_field("DELETE") }}
+    <input type="hidden" name="id" value="{{ $draft_id }}" />
 </form>
 
 <script type="text/javascript">
@@ -554,6 +560,20 @@
                 alert('Error removing item.');
                 return;
             }
+        });
+    }
+
+    function deleteDraftInvoice(invoice_id) {
+        swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover this draft purchase invoice!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Delete",
+            closeOnConfirm: false
+        },
+        function(){
+            $("#purchaseInvoiceDraftDeleteForm").submit();
         });
     }
 
