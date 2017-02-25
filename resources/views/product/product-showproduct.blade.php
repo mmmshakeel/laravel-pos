@@ -99,7 +99,7 @@
                             <th data-column-id="id" data-visible="false">#</th>
                             <th data-column-id="batch_id">Batch Number</th>
                             <th data-column-id="barcode">Barcode</th>
-                            <th data-column-id="expiry_date" data-order="desc">Expiry Date</th>
+                            <th data-column-id="expiry_date">Expiry Date</th>
                             <th data-column-id="stock_count" data-type="numeric">Batch Count</th>
                             <th data-column-id="cost">Cost</th>
                             <th data-column-id="price">Price</th>
@@ -194,7 +194,11 @@
     $(document).ready(function() {
         $(".data-table-command").bootgrid({
             ajax: true,
-            url: '',
+            post: {
+                id: "{{ $product->id }}",
+                _token: "{{ csrf_token() }}"
+            },
+            url: '/product/get-all-product-items',
             css: {
                 icon: 'zmdi icon',
                 iconColumns: 'zmdi-view-module',
@@ -222,7 +226,7 @@
             method: "GET",
             url: "/product/get-product-item-details/" + id,
             statusCode: {
-                401: function() {
+                404: function() {
                     growlNotify('Batch not found!', 'The selected batch of product is not found', 'danger');
                 }
             },
@@ -251,8 +255,9 @@
             url: "/product/update-batch",
             data: $(form).serialize(),
             success: function(data) {
-                
                 $("#updateProductBatchModal").modal('hide');
+                growlNotify('', 'Batch updated successfully!', 'success');
+                $(".data-table-command").bootgrid("reload");
             },
             error: function(response) {
                 var html = '<div class="alert alert-danger" role="alert">';

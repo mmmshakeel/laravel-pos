@@ -261,9 +261,9 @@ class ProductController extends Controller
     }
 
 
-    public function getAllProductItemsByProduct($id)
+    public function getAllProductItemsByProduct(Request $request)
     {
-        $product_items = ProductItemDetails::where('product_id', $id);
+        $product_items = ProductItemDetails::where('product_id', $request->id);
 
         $total_item_count = $product_items->count();
 
@@ -303,7 +303,7 @@ class ProductController extends Controller
         $product_item_details = ProductItemDetails::find($id);
 
         if (!$product_item_details) {
-            return response('Resource not found', 401);
+            return response('Resource not found', 404);
         }
 
         return response()->json([
@@ -336,6 +336,7 @@ class ProductController extends Controller
             $product_batch->batch_number = $request->batch_number;
             $product_batch->save();
 
+            $expiry_date = null;
             if ($request->expiry_date) {
                 $expiry_date_arr = explode('-', $request->expiry_date);
                 $expiry_date     = $expiry_date_arr[2] . '-' . $expiry_date_arr[1] . '-' . $expiry_date_arr[0];

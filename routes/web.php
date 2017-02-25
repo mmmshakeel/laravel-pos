@@ -65,6 +65,7 @@ Route::get('product/get-price-level-by-product/{id}', 'ProductController@getPric
 Route::get('product/get-product-description/{id}', 'ProductController@getProductDescription');
 Route::post('product/update-batch', 'ProductController@updateBatch');
 Route::get('product/get-product-item-details/{id}', 'ProductController@getProductItemDetails');
+Route::post('product/get-all-product-items', 'ProductController@getAllProductItemsByProduct');
 
 // routes for product category
 Route::get('product/category', 'CategoryController@index')->name('product_category');
