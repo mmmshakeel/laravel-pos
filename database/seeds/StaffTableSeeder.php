@@ -12,7 +12,6 @@ class StaffTableSeeder extends Seeder {
     public function run() {
         DB::table('staff')->truncate();
         DB::table('staff')->insert([
-            'user_id' => 1,
             'code' => 'T0001',
             'title' => 'Mr',
             'first_name' => 'John',

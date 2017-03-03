@@ -40,7 +40,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $hidden = ['password', 'remember_token'];
 
     public function staff() {
-        return $this->hasOne('App\Staff', 'user_id');
+        return $this->belongsTo('App\Staff', 'staff_id');
     }
 
     public function branch() {
