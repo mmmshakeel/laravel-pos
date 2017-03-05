@@ -46,6 +46,20 @@
 
                 <li class="pull-right">
                 <ul class="top-menu">
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="tm-notification" href="">
+                            <i class="tmn-counts">9</i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-lg pull-right">
+                            <div class="list-group lv-body">
+                                <div class="lv-header">
+                                        Notifications
+                                    </div>
+                            </div>
+                        </div>
+                    </li>
+
                     <li id="toggle-width">
                         <div class="toggle-switch">
                             <input id="tw-switch" type="checkbox" hidden="hidden">
