@@ -2,8 +2,6 @@
 
 namespace App\Notifications;
 
-use App\ProductItemDetails;
-use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 
@@ -11,14 +9,16 @@ class ProductExpiry extends Notification
 {
     use Queueable;
 
+    protected $product_item;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($product_item)
     {
-        //
+        $this->product_item = $product_item;
     }
 
     /**
@@ -32,6 +32,17 @@ class ProductExpiry extends Notification
         return ['database'];
     }
 
+    // public function toDatabase($notifiable)
+    // {
+
+    //     return [
+    //         'product_id'       => $this->product_item->product_id,
+    //         'product_batch_id' => $this->product_item->product_batch_id,
+    //         'expiry_date'      => $this->product_item->expiry_date,
+    //         'inventory_count'  => $this->product_item->product->inventory->total_stock,
+    //     ];
+    // }
+
     /**
      * Get the array representation of the notification.
      *
@@ -40,18 +51,11 @@ class ProductExpiry extends Notification
      */
     public function toArray($notifiable)
     {
-        // get the products that will be expire in 2 months
-
-        $date_two_months = Carbon::now()->addMonths(2);
-
-        // get the products which expires in two months
-        $product_items = ProductItemDetails::where('expiry_date', '<=', $date_two_months)->get();
-
         return [
-            'product_id'       => $product_items->product_id,
-            'product_batch_id' => $product_items->product_batch_id,
-            'expiry_date'      => $product_items->expiry_date,
-            'inventory_count'  => $product_items->product->inventory->total_stock,
+            'product_id'       => $this->product_item->product_id,
+            'product_batch_id' => $this->product_item->product_batch_id,
+            'expiry_date'      => $this->product_item->expiry_date,
+            'inventory_count'  => $this->product_item->product->inventory->total_stock,
         ];
     }
 }
