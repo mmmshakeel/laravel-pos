@@ -32,16 +32,21 @@ class ProductExpiry extends Notification
         return ['database'];
     }
 
-    // public function toDatabase($notifiable)
-    // {
+    /**
+     * Save the notification in the database
+     *
+     * @param  mixed  $notifiable
+     * @return
+     */
+    public function toDatabase($notifiable)
+    {
 
-    //     return [
-    //         'product_id'       => $this->product_item->product_id,
-    //         'product_batch_id' => $this->product_item->product_batch_id,
-    //         'expiry_date'      => $this->product_item->expiry_date,
-    //         'inventory_count'  => $this->product_item->product->inventory->total_stock,
-    //     ];
-    // }
+        return [
+            'title'           => 'Product ' . $this->product_item->product->code . ' Expires on ' . $this->product_item->expiry_date,
+            'batch_number'    => $this->product_item->product_batch->batch_number,
+            'inventory_count' => $this->product_item->product->inventory->total_stock,
+        ];
+    }
 
     /**
      * Get the array representation of the notification.
@@ -51,11 +56,6 @@ class ProductExpiry extends Notification
      */
     public function toArray($notifiable)
     {
-        return [
-            'product_id'       => $this->product_item->product_id,
-            'product_batch_id' => $this->product_item->product_batch_id,
-            'expiry_date'      => $this->product_item->expiry_date,
-            'inventory_count'  => $this->product_item->product->inventory->total_stock,
-        ];
+
     }
 }

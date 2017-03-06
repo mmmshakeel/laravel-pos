@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Notification;
 class ProductExpiryNotificationTest extends TestCase
 {
 
-    use DatabaseTransactions;
+    // use DatabaseTransactions;
 
     /**
      * A basic test example.

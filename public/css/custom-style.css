@@ -96,3 +96,12 @@
 #l-login .has-error .help-block {
     text-align: left;
 }
+
+.list-group-item {
+    border: none;
+}
+
+.expiry-warning-triangle {
+    font-size: 35px;
+    color: #FF9800;
+}
