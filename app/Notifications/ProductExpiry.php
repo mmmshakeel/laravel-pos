@@ -43,6 +43,7 @@ class ProductExpiry extends Notification
 
         return [
             'title'           => 'Product ' . $this->product_item->product->code . ' Expires on ' . $this->product_item->expiry_date,
+            'product_id'      => $this->product_item->product_id,
             'batch_number'    => $this->product_item->product_batch->batch_number,
             'inventory_count' => $this->product_item->product->inventory->total_stock,
         ];

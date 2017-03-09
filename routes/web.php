@@ -140,3 +140,7 @@ Route::post('sales-invoice/update', 'SalesInvoiceController@update');
 Route::get('sales-invoice/get-product-items/{id}', 'SalesInvoiceController@getProductItems');
 Route::post('sales-invoice/save-salesinvoice-product', 'SalesInvoiceController@saveSalesInvoiceProduct');
 Route::delete('sales-invoice/destroy', 'SalesInvoiceController@destroy');
+
+// routes for notifications
+Route::get('notifications', 'NotificationController@index');
+Route::get('notification-route-product/{product_id}/{notification_id}', 'NotificationController@routeToProduct');

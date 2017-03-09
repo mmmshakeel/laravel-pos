@@ -62,12 +62,12 @@
                                     @if (!$notifications_count)
                                         <a class="list-group-item media" href="">
                                             <div class="media-body align-center">
-                                                <small class="list-group-item-text">There are no notifications</small>
+                                                <small class="list-group-item-text">No new notifications</small>
                                             </div>
                                         </a>
                                     @else
                                         @foreach ($notifications as $notification)
-                                            <a class="list-group-item media" href="">
+                                            <a class="list-group-item media" href="/notification-route-product/{{ $notification->data['product_id'] }}/{{ $notification->id }}">
                                                 <div class="pull-left">
                                                     <i class="zmdi zmdi-alert-triangle expiry-warning-triangle"></i>
                                                 </div>
@@ -81,6 +81,13 @@
                                             </a>
                                         @endforeach
                                     @endif
+                                    <div class="lv-footer notification-footer">
+                                        <a class="list-group-item media" href="/notifications">
+                                            <div class="media-body align-center">
+                                                <small class="list-group-item-text">View all notifications</small>
+                                            </div>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -105,3 +105,9 @@
     font-size: 35px;
     color: #FF9800;
 }
+
+.notification-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
