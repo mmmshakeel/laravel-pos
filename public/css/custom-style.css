@@ -111,3 +111,7 @@
     bottom: 0;
     width: 100%;
 }
+
+.notification-unread-row {
+    background-color: #f5edd4;
+}

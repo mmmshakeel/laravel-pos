@@ -23,7 +23,8 @@
             <table class="data-table-command table table-striped table-vmiddle">
                 <thead>
                     <tr>
-                        <th data-column-id="id" data-type="numeric" data-visible="false">ID</th>
+                        <th data-column-id="id" data-visible="false">ID</th>
+                        <th data-column-id="product_id" data-type="numeric" data-visible="false">Product ID</th>
                         <th data-column-id="date" data-order="desc">Date</th>
                         <th data-column-id="notification">Notification</th>
                         <th data-column-id="commands" data-formatter="commands" data-sortable="false">Action</th>
@@ -33,8 +34,17 @@
                     @foreach ($notifications2 as $notification)
                         <tr>
                             <td>{{ $notification->id }}</td>
-                            <td>{{ $notification->created_at }}</td>
-                            <td>{{ $notification->data['title'] }}</td>
+                            <td>{{ $notification->data['product_id'] }}</td>
+                            <td>{{ date('Y-m-d', strtotime($notification->created_at)) }}</td>
+                            <td>
+                                <div>{{ $notification->data['title'] }}</div>
+                                <div>
+                                    <small>
+                                        Batch Number: {{ $notification->data['batch_number'] }} <br />
+                                        Available Count: {{ $notification->data['inventory_count']}}
+                                    </small>
+                                </div>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -55,7 +65,7 @@
             },
             formatters: {
                 "commands": function(column, row) {
-                    return '<button></button>';
+                    return '<a href="/notification-route-product/'+ row.product_id +'/'+ row.id +'"><button class="btn btn-default">View Product</button></a>';
                 }
             }
         });

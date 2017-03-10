@@ -30,6 +30,6 @@ class ProductExpiryNotificationTest extends TestCase
         foreach ($product_items as $item) {
             Notification::send($admin_users, new ProductExpiry($item));
         }
-        
+
     }
 }
