@@ -46,6 +46,53 @@
 
                 <li class="pull-right">
                 <ul class="top-menu">
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="tm-notification" href="">
+                            @if ($notifications_count)
+                                <i class="tmn-counts">{{ $notifications_count }}</i>
+                            @endif
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-lg pull-right">
+                            <div class="list-group">
+                                <div class="lv-header">
+                                        Notifications
+                                </div>
+                                <div class="lv-body">
+                                    @if (!$notifications_count)
+                                        <a class="list-group-item media" href="">
+                                            <div class="media-body align-center">
+                                                <small class="list-group-item-text">No new notifications</small>
+                                            </div>
+                                        </a>
+                                    @else
+                                        @foreach ($notifications as $notification)
+                                            <a class="list-group-item media" href="/notification-route-product/{{ $notification->data['product_id'] }}/{{ $notification->id }}">
+                                                <div class="pull-left">
+                                                    <i class="zmdi zmdi-alert-triangle expiry-warning-triangle"></i>
+                                                </div>
+                                                <div class="media-body">
+                                                    <div class="list-group-item-heading">{{ $notification->data['title'] }}</div>
+                                                    <small class="list-group-item-text">
+                                                        Batch Number: {{ $notification->data['batch_number'] }} <br />
+                                                        Available Count: {{ $notification->data['inventory_count']}}
+                                                    </small>
+                                                </div>
+                                            </a>
+                                        @endforeach
+                                    @endif
+                                    <div class="lv-footer notification-footer">
+                                        <a class="list-group-item media" href="/notifications">
+                                            <div class="media-body align-center">
+                                                <small class="list-group-item-text">View all notifications</small>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
                     <li id="toggle-width">
                         <div class="toggle-switch">
                             <input id="tw-switch" type="checkbox" hidden="hidden">

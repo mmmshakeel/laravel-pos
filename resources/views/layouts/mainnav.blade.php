@@ -7,7 +7,7 @@
                 <img src="/img/profile-pics/1.jpg" alt="">
             </div>
             <div class="profile-info">
-                Shakeel Mohamed
+                {{ $loged_user_name }}
                 <i class="zmdi zmdi-caret-down"></i>
             </div>
             </a>
