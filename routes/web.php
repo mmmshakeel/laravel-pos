@@ -29,7 +29,9 @@ Auth::routes();
 
 Route::get('staff/create', 'StaffController@create');
 Route::post('staff/store', 'StaffController@store');
+Route::post('staff/update', 'StaffController@update');
 Route::get('staff/show/{id}', 'StaffController@show');
+Route::get('staff/edit/{id}', 'StaffController@edit');
 Route::get('staff/list', 'StaffController@index')->name('staff_list');
 Route::delete('staff/destroy', 'StaffController@destroy');
 

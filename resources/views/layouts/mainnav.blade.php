@@ -16,12 +16,6 @@
                     <a href="profile-about.html"><i class="zmdi zmdi-account"></i> View Profile</a>
                 </li>
                 <li>
-                    <a href=""><i class="zmdi zmdi-input-antenna"></i> Privacy Settings</a>
-                </li>
-                <li>
-                    <a href=""><i class="zmdi zmdi-settings"></i> Settings</a>
-                </li>
-                <li>
                     <a href="/auth/logout"><i class="zmdi zmdi-time-restore"></i> Logout</a>
                 </li>
             </ul>

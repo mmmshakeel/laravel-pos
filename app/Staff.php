@@ -10,10 +10,15 @@ class Staff extends Model
     use SoftDeletes;
 
     protected $table = 'staff';
-	protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at'];
 
-
-    public function user() {
+    public function user()
+    {
         return $this->hasOne('App\User', 'staff_id');
+    }
+
+    public function country()
+    {
+    	return $this->belongsTo('App\Country', 'country_id');
     }
 }
