@@ -105,15 +105,6 @@
                             <li class="hidden-xs">
                                 <a data-action="fullscreen" href=""><i class="zmdi zmdi-fullscreen"></i> Toggle Fullscreen</a>
                             </li>
-                            <li>
-                                <a data-action="clear-localstorage" href=""><i class="zmdi zmdi-delete"></i> Clear Local Storage</a>
-                            </li>
-                            <li>
-                                <a href=""><i class="zmdi zmdi-face"></i> Privacy Settings</a>
-                            </li>
-                            <li>
-                                <a href=""><i class="zmdi zmdi-settings"></i> Other Settings</a>
-                            </li>
                         </ul>
                     </li>
 

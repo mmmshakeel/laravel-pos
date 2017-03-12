@@ -6,21 +6,7 @@
 
 @section('content')
 <div class="block-header">
-    <h2>Malinda Hollaway <small>Web/UI Developer, Dubai, United Arab Emirates</small></h2>
-
-    <ul class="actions m-t-20 hidden-xs">
-        <li class="dropdown">
-            <a href="" data-toggle="dropdown">
-            <i class="zmdi zmdi-more-vert"></i>
-            </a>
-
-            <ul class="dropdown-menu dropdown-menu-right">
-                <li>
-                    <a href="">Remove Staff</a>
-                </li>
-            </ul>
-        </li>
-    </ul>
+    <h2>{{ $staff->first_name }} {{ $staff->last_name }}<small>Employee #{{ $staff->code }}</small></h2>
 </div>
 
 <div class="card" id="profile-main">
@@ -50,162 +36,89 @@
 
 
             <div class="pmo-stat">
-                <h2 class="m-0 c-white">1562</h2>
-                Total Connections
+                <h2 class="m-0 c-white">{{ $staff->first_name }} {{ $staff->last_name }}</h2>
+                {{ $staff->code }}
             </div>
-        </div>
 
-        <div class="pmo-block pmo-contact hidden-xs">
-            <h2>Contact</h2>
+            <div class="pmo-block pmo-contact hidden-xs">
+            <h2>{{ $company->name}} <br />
+                <small>Branch: {{ $staff->user->branch->description }}</small>
+            </h2>
 
             <ul>
-                <li><i class="zmdi zmdi-phone"></i> 00971 12345678 9</li>
-                <li><i class="zmdi zmdi-email"></i> malinda-h@gmail.com</li>
-                <li><i class="zmdi zmdi-facebook-box"></i> malinda.hollaway</li>
-                <li><i class="zmdi zmdi-twitter"></i> @malinda (twitter.com/malinda)</li>
+                <li><i class="zmdi zmdi-phone"></i> {{ $company->phone }}</li>
                 <li>
                     <i class="zmdi zmdi-pin"></i>
                     <address class="m-b-0">
-                    10098 ABC Towers, <br/>
-                    Dubai Silicon Oasis, Dubai, <br/>
-                    United Arab Emirates
+                    {{ $company->streetName }}, <br/>
+                    {{ $company->streetAddress }}, <br/>
+                    {{ $company->city }}, <br/>
+                    {{ $company->postcode }}, <br/>
+                    {{ $company->country->country_name }}
                     </address>
                 </li>
             </ul>
-        </div>
 
-        
+            <div class="profile-action-bar m-t-20">
+                <div class="col-xs-6">
+                    <a href="/staff/edit/{{ $staff->id }}"><button class="btn btn-primary btn-lg btn-block bgm-teal waves-effect"><i class="zmdi zmdi-edit"></i></button></a>
+                </div>
+                <div class="col-xs-6">
+                    <form method="POST" id="deleteStaffForm" action="/staff/destroy">
+                        {!! csrf_field() !!}
+                        {{ method_field("DELETE") }}
+                        <input type="hidden" name="id" value="{{ $staff->id }}">
+                        <button type="button" class="btn btn-danger btn-lg btn-block waves-effect" onclick="deleteStaff()"><i class="zmdi zmdi-delete"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </div>
     </div>
 
     <div class="pm-body clearfix">
-        <!-- <ul class="tab-nav tn-justified">
-            <li class="active waves-effect"><a href="profile-about.html">About</a></li>
-            <li class="waves-effect"><a href="profile-timeline.html">Timeline</a></li>
-            <li class="waves-effect"><a href="profile-photos.html">Photos</a></li>
-            <li class="waves-effect"><a href="profile-connections.html">Connections</a></li>
-        </ul> -->
 
-
-        <div class="pmb-block">
-            <div class="pmbb-header">
-                <h2><i class="zmdi zmdi-equalizer m-r-5"></i> Summary</h2>
-
-                <ul class="actions">
-                    <li class="dropdown">
-                        <a href="" data-toggle="dropdown">
-                        <i class="zmdi zmdi-more-vert"></i>
-                        </a>
-
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <li>
-                                <a data-pmb-action="edit" href="">Edit</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="pmbb-body p-l-30">
-                <div class="pmbb-view">
-                    Sed eu est vulputate, fringilla ligula ac, maximus arcu. Donec sed felis vel magna mattis ornare ut non turpis. Sed id arcu elit. Sed nec sagittis tortor. Mauris ante urna, ornare sit amet mollis eu, aliquet ac ligula. Nullam dolor metus, suscipit ac imperdiet nec, consectetur sed ex. Sed cursus porttitor leo.
-                </div>
-
-                <div class="pmbb-edit">
-                    <div class="fg-line">
-                        <textarea class="form-control" rows="5" placeholder="Summary...">Sed eu est vulputate, fringilla ligula ac, maximus arcu. Donec sed felis vel magna mattis ornare ut non turpis. Sed id arcu elit. Sed nec sagittis tortor. Mauris ante urna, ornare sit amet mollis eu, aliquet ac ligula. Nullam dolor metus, suscipit ac imperdiet nec, consectetur sed ex. Sed cursus porttitor leo.</textarea>
-                    </div>
-                    <div class="m-t-10">
-                        <button class="btn btn-primary btn-sm">Save</button>
-                        <button data-pmb-action="reset" class="btn btn-link btn-sm">Cancel</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="pmb-block">
             <div class="pmbb-header">
                 <h2><i class="zmdi zmdi-account m-r-5"></i> Basic Information</h2>
-
-                <ul class="actions">
-                    <li class="dropdown">
-                        <a href="" data-toggle="dropdown">
-                        <i class="zmdi zmdi-more-vert"></i>
-                        </a>
-
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <li>
-                                <a data-pmb-action="edit" href="">Edit</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
             </div>
             <div class="pmbb-body p-l-30">
                 <div class="pmbb-view">
                     <dl class="dl-horizontal">
                         <dt>Full Name</dt>
-                        <dd>Mallinda Hollaway</dd>
+                        <dd>{{ $staff->title }} {{ $staff->first_name }} {{ $staff->last_name }}</dd>
                     </dl>
                     <dl class="dl-horizontal">
                         <dt>Gender</dt>
-                        <dd>Female</dd>
+                        <dd>
+                            @if ($staff->gender == 'M')
+                                Male
+                            @else
+                                Female
+                            @endif
+                        </dd>
                     </dl>
                     <dl class="dl-horizontal">
                         <dt>Birthday</dt>
-                        <dd>June 23, 1990</dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt>Martial Status</dt>
-                        <dd>Single</dd>
-                    </dl>
-                </div>
-
-                <div class="pmbb-edit">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Full Name</dt>
                         <dd>
-                        <div class="fg-line">
-                            <input type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
-                        </div>
-
+                            @if ($staff->date_of_birth && $staff->date_of_birth != '0000-00-00')
+                                {{ date('F d Y', strtotime($staff->date_of_birth)) }}
+                            @else
+                                --
+                            @endif
                         </dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <dt class="p-t-10">Gender</dt>
+                        <dt>Joined Date</dt>
                         <dd>
-                        <div class="fg-line">
-                            <select class="form-control">
-                                <option>Male</option>
-                                <option>Female</option>
-                                <option>Other</option>
-                            </select>
-                        </div>
+                            @if ($staff->joined_date && $staff->joined_date != '0000-00-00')
+                                {{ date('F d Y', strtotime($staff->joined_date)) }}
+                            @else
+                                --
+                            @endif
                         </dd>
                     </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Birthday</dt>
-                        <dd>
-                        <div class="dtp-container dropdown fg-line">
-                            <input type='text' class="form-control date-picker" data-toggle="dropdown" placeholder="Click here...">
-                        </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Martial Status</dt>
-                        <dd>
-                        <div class="fg-line">
-                            <select class="form-control">
-                                <option>Single</option>
-                                <option>Married</option>
-                                <option>Other</option>
-                            </select>
-                        </div>
-                        </dd>
-                    </dl>
-
-                    <div class="m-t-30">
-                        <button class="btn btn-primary btn-sm">Save</button>
-                        <button data-pmb-action="reset" class="btn btn-link btn-sm">Cancel</button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -214,82 +127,75 @@
         <div class="pmb-block">
             <div class="pmbb-header">
                 <h2><i class="zmdi zmdi-phone m-r-5"></i> Contact Information</h2>
-
-                <ul class="actions">
-                    <li class="dropdown">
-                        <a href="" data-toggle="dropdown">
-                        <i class="zmdi zmdi-more-vert"></i>
-                        </a>
-
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <li>
-                                <a data-pmb-action="edit" href="">Edit</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
             </div>
             <div class="pmbb-body p-l-30">
                 <div class="pmbb-view">
                     <dl class="dl-horizontal">
-                        <dt>Mobile Phone</dt>
-                        <dd>00971 12345678 9</dd>
+                        <dt>Email</dt>
+                        <dd>{{ $staff->email }}</dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <dt>Email Address</dt>
-                        <dd>malinda.h@gmail.com</dd>
+                        <dt>Telephone</dt>
+                        <dd>{{ ($staff->telephone) ? $staff->telephone : '--' }}</dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <dt>Twitter</dt>
-                        <dd>@malinda</dd>
+                        <dt>Mobile</dt>
+                        <dd>{{ $staff->mobile }}</dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <dt>Skype</dt>
-                        <dd>malinda.hollaway</dd>
+                        <dt>Address</dt>
+                        <dd>{{ $staff->address }}, {{ $staff->city }}, {{ $staff->country->country_name }}</dd>
                     </dl>
                 </div>
+            </div>
+        </div>
 
-                <div class="pmbb-edit">
+        <div class="pmb-block">
+            <div class="pmbb-header">
+                <h2><i class="zmdi zmdi-run m-r-5"></i> Emergency Contact Information</h2>
+            </div>
+            <div class="pmbb-body p-l-30">
+                <div class="pmbb-view">
                     <dl class="dl-horizontal">
-                        <dt class="p-t-10">Mobile Phone</dt>
-                        <dd>
-                        <div class="fg-line">
-                            <input type="text" class="form-control" placeholder="eg. 00971 12345678 9">
-                        </div>
-                        </dd>
+                        <dt>Full Name</dt>
+                        <dd>{{ $staff->contact_person_title }} {{ $staff->contact_person_first_name }} {{ $staff->contact_person_last_name }}</dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <dt class="p-t-10">Email Address</dt>
-                        <dd>
-                        <div class="fg-line">
-                            <input type="email" class="form-control" placeholder="eg. malinda.h@gmail.com">
-                        </div>
-                        </dd>
+                        <dt>Relationship</dt>
+                        <dd>{{ $staff->contact_person_relation }}</dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <dt class="p-t-10">Twitter</dt>
-                        <dd>
-                        <div class="fg-line">
-                            <input type="text" class="form-control" placeholder="eg. @malinda">
-                        </div>
-                        </dd>
+                        <dt>Telephone</dt>
+                        <dd>{{ $staff->contact_person_contact_no }}</dd>
                     </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Skype</dt>
-                        <dd>
-                        <div class="fg-line">
-                            <input type="text" class="form-control" placeholder="eg. malinda.hollaway">
-                        </div>
-                        </dd>
-                    </dl>
-
-                    <div class="m-t-30">
-                        <button class="btn btn-primary btn-sm">Save</button>
-                        <button data-pmb-action="reset" class="btn btn-link btn-sm">Cancel</button>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".sub-menu-company").addClass('active');
+        $(".sub-menu-company").addClass('toggled');
+        $(".sub-menu-staff-add").addClass('active');
+    });
+
+    function deleteStaff() {
+        swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover deleted information!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Delete",
+            closeOnConfirm: false
+        },
+        function(isConfirm){
+            if (isConfirm) {
+                $("#deleteStaffForm").submit();
+            }
+        });
+    }
+</script>
+
 @endsection

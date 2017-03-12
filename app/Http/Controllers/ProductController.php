@@ -271,11 +271,17 @@ class ProductController extends Controller
 
         if ($total_item_count > 0) {
             foreach ($product_items->get() as $item) {
+
+                $expiry_date = '';
+                if ($item->expiry_date) {
+                    $expiry_date = date('d/m/Y', strtotime($item->expiry_date));
+                }
+
                 $rows[] = [
                     'id'          => $item->id,
                     'batch_id'    => $item->product_batch->batch_number,
                     'barcode'     => $item->barcode,
-                    'expiry_date' => $item->expiry_date,
+                    'expiry_date' => $expiry_date,
                     'stock_count' => $item->item_count,
                     'cost'        => $item->cost,
                     'price'       => $item->price1,
@@ -309,7 +315,7 @@ class ProductController extends Controller
         return response()->json([
             'batch_number' => $product_item_details->product_batch->batch_number,
             'barcode'      => $product_item_details->barcode,
-            'expiry_date'  => $product_item_details->expiry_date,
+            'expiry_date'  => date('d/m/Y', strtotime($product_item_details->expiry_date)),
             'price1'       => $product_item_details->price1,
             'price2'       => $product_item_details->price2,
             'price3'       => $product_item_details->price3,
